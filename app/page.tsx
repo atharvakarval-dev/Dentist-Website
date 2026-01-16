@@ -1,14 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { Navbar } from "@/components/navbar"
+import { AppointmentForm } from "@/components/appointment-form"
 import {
-  Menu,
-  X,
   ArrowRight,
-  ChevronRight,
   Mail,
   MapPin,
   Phone,
@@ -61,120 +59,9 @@ const itemFadeIn = {
 }
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
-
   return (
     <div className="flex min-h-screen flex-col bg-slate-50">
-      {/* Header */}
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 ${scrollY > 50 ? "shadow-md" : ""}`}
-      >
-        <div className="container flex h-20 items-center justify-between px-4 md:px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <motion.div
-              whileHover={{ rotate: 5, scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground"
-            >
-              <Smile className="h-6 w-6" />
-            </motion.div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold leading-none text-primary">Dentistree</span>
-              <span className="text-xs font-medium text-muted-foreground">Dental Clinic</span>
-            </div>
-          </Link>
-          <nav className="hidden md:flex gap-6">
-            <Link href="/services" className="text-sm font-medium transition-colors hover:text-primary">
-              Services
-            </Link>
-            <Link href="#about" className="text-sm font-medium transition-colors hover:text-primary">
-              About
-            </Link>
-            <Link href="#why-us" className="text-sm font-medium transition-colors hover:text-primary">
-              Why Us
-            </Link>
-            <Link href="#contact" className="text-sm font-medium transition-colors hover:text-primary">
-              Contact
-            </Link>
-          </nav>
-          <div className="hidden md:flex items-center gap-4">
-            <Button size="sm" className="rounded-full px-6" asChild>
-              <Link href="#contact">Book Appointment</Link>
-            </Button>
-          </div>
-          <button className="flex md:hidden" onClick={toggleMenu}>
-            <Menu className="h-6 w-6" />
-            <span className="sr-only">Toggle menu</span>
-          </button>
-        </div>
-      </motion.header>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 bg-background md:hidden"
-        >
-          <div className="container flex h-20 items-center justify-between px-4">
-            <Link href="/" className="flex items-center gap-2" onClick={toggleMenu}>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                <Smile className="h-6 w-6" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-bold leading-none text-primary">Dentistree</span>
-                <span className="text-xs font-medium text-muted-foreground">Dental Clinic</span>
-              </div>
-            </Link>
-            <button onClick={toggleMenu}>
-              <X className="h-6 w-6" />
-              <span className="sr-only">Close menu</span>
-            </button>
-          </div>
-          <motion.nav
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="container grid gap-4 px-4 pb-8 pt-6"
-          >
-            {["Services", "About", "Why Us", "Contact"].map((item, index) => (
-              <motion.div key={index} variants={itemFadeIn}>
-                <Link
-                  href={item === "Services" ? "/services" : `#${item.toLowerCase().replace(" ", "-")}`}
-                  className="flex items-center justify-between rounded-md p-2 text-lg font-medium hover:bg-accent"
-                  onClick={toggleMenu}
-                >
-                  {item}
-                  <ChevronRight className="h-4 w-4" />
-                </Link>
-              </motion.div>
-            ))}
-            <motion.div variants={itemFadeIn} className="pt-4">
-              <Button className="w-full rounded-full" size="lg" asChild onClick={toggleMenu}>
-                <Link href="#contact">Book Appointment</Link>
-              </Button>
-            </motion.div>
-          </motion.nav>
-        </motion.div>
-      )}
+      <Navbar />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -483,11 +370,11 @@ export default function Home() {
         {/* Contact CTA */}
         <section id="contact" className="py-20 bg-white">
           <div className="container px-4 md:px-6">
-            <div className="rounded-[2.5rem] bg-gradient-to-r from-primary to-blue-600 overflow-hidden shadow-2xl">
+            <div className="rounded-[2.5rem] bg-slate-900 overflow-hidden shadow-2xl">
               <div className="grid lg:grid-cols-2">
                 <div className="p-8 md:p-12 lg:p-16 space-y-6 text-white">
                   <h2 className="text-3xl md:text-4xl font-bold">Ready for a Healthier, Brighter Smile?</h2>
-                  <p className="text-blue-100 text-lg">Schedule your visit today at Dentistree Dental Clinic and experience trusted dental care.</p>
+                  <p className="text-slate-400 text-lg">Schedule your visit today at Dentistree Dental Clinic and experience trusted dental care.</p>
 
                   <div className="space-y-4 pt-4">
                     <div className="flex items-center gap-3">
@@ -496,7 +383,7 @@ export default function Home() {
                       </div>
                       <div>
                         <p className="font-semibold">Visit Us</p>
-                        <p className="text-sm text-blue-100">Nanded City, Sinhagad Road, Pune</p>
+                        <p className="text-sm text-slate-400">Nanded City, Sinhagad Road, Pune</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -505,7 +392,7 @@ export default function Home() {
                       </div>
                       <div>
                         <p className="font-semibold">Call Us</p>
-                        <p className="text-sm text-blue-100">+91 (Add Number Here)</p>
+                        <p className="text-sm text-slate-400">+91 (Add Number Here)</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -514,44 +401,27 @@ export default function Home() {
                       </div>
                       <div>
                         <p className="font-semibold">Timings</p>
-                        <p className="text-sm text-blue-100">Mon - Sat: 10:00 AM - 8:00 PM</p>
+                        <p className="text-sm text-slate-400">Mon - Sat: 10:00 AM - 8:00 PM</p>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="bg-white p-8 md:p-12 lg:p-16">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-6">Request Appointment</h3>
-                  <form className="space-y-4">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-700">Full Name</label>
-                        <Input className="rounded-lg border-slate-200 bg-slate-50" placeholder="John Doe" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-700">Phone Number</label>
-                        <Input className="rounded-lg border-slate-200 bg-slate-50" placeholder="+91 98765 43210" />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-slate-700">Email Address</label>
-                      <Input className="rounded-lg border-slate-200 bg-slate-50" placeholder="john@example.com" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-slate-700">Message (Optional)</label>
-                      <Textarea className="rounded-lg border-slate-200 bg-slate-50 min-h-[100px]" placeholder="Tell us about your concern..." />
-                    </div>
-                    <Button className="w-full rounded-lg" size="lg">Send Request</Button>
-                  </form>
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-2">Request Appointment</h3>
+                    <p className="text-slate-500">Fill in your details and we will confirm your slot via WhatsApp.</p>
+                  </div>
+                  <AppointmentForm />
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-      </main>
+      </main >
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-12 md:py-16">
+      < footer className="bg-slate-900 text-slate-300 py-12 md:py-16" >
         <div className="container px-4 md:px-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="col-span-1 md:col-span-1 space-y-4">
@@ -601,8 +471,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </footer>
-    </div>
+      </footer >
+    </div >
   )
 }
 

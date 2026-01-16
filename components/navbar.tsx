@@ -46,11 +46,12 @@ export function Navbar() {
     }
 
     const getLinkHref = (item: string) => {
-        const sectionId = item.toLowerCase().replace(" ", "-")
+        if (item === "Home") return "/"
         if (item === "Services") return "/services"
         if (item === "About") return "/about"
         if (item === "Why Us") return "/why-us"
-        return isHome ? `#${sectionId}` : `/#${sectionId}`
+        if (item === "Contact") return "/contact"
+        return "/"
     }
 
     return (
@@ -77,11 +78,11 @@ export function Navbar() {
                         </div>
                     </Link>
                     <nav className="hidden md:flex gap-6">
-                        {["Services", "About", "Why Us", "Contact"].map((item) => (
+                        {["Home", "Services", "About", "Why Us", "Contact"].map((item) => (
                             <Link
                                 key={item}
                                 href={getLinkHref(item)}
-                                className={`text-sm font-medium transition-colors hover:text-primary ${pathname === "/services" && item === "Services" ? "text-primary font-semibold" : ""
+                                className={`text-sm font-medium transition-colors hover:text-primary ${pathname === getLinkHref(item) ? "text-primary font-semibold" : "text-muted-foreground"
                                     }`}
                             >
                                 {item}
@@ -90,7 +91,7 @@ export function Navbar() {
                     </nav>
                     <div className="hidden md:flex items-center gap-4">
                         <Button size="sm" className="rounded-full px-6" asChild>
-                            <Link href={isHome ? "#contact" : "/#contact"}>Book Appointment</Link>
+                            <Link href="/contact">Book Appointment</Link>
                         </Button>
                     </div>
                     <button className="flex md:hidden" onClick={toggleMenu}>
@@ -130,11 +131,12 @@ export function Navbar() {
                             animate="visible"
                             className="container grid gap-4 px-4 pb-8 pt-6"
                         >
-                            {["Services", "About", "Why Us", "Contact"].map((item, index) => (
+                            {["Home", "Services", "About", "Why Us", "Contact"].map((item, index) => (
                                 <motion.div key={index} variants={itemFadeIn}>
                                     <Link
                                         href={getLinkHref(item)}
-                                        className="flex items-center justify-between rounded-md p-2 text-lg font-medium hover:bg-accent"
+                                        className={`flex items-center justify-between rounded-md p-2 text-lg font-medium hover:bg-accent ${pathname === getLinkHref(item) ? "text-primary" : ""
+                                            }`}
                                         onClick={toggleMenu}
                                     >
                                         {item}
@@ -144,7 +146,7 @@ export function Navbar() {
                             ))}
                             <motion.div variants={itemFadeIn} className="pt-4">
                                 <Button className="w-full rounded-full" size="lg" asChild onClick={toggleMenu}>
-                                    <Link href={isHome ? "#contact" : "/#contact"}>Book Appointment</Link>
+                                    <Link href="/contact">Book Appointment</Link>
                                 </Button>
                             </motion.div>
                         </motion.nav>

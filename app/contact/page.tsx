@@ -1,65 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import React from "react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { MapPin, Phone, Mail, Send } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { motion } from "framer-motion";
+import { AppointmentForm } from "@/components/appointment-form";
 
 export default function ContactPage() {
-    const [formData, setFormData] = useState({
-        fullName: "",
-        email: "",
-        phone: "",
-        treatment: "",
-        date: "",
-        time: "",
-        notes: "",
-    });
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { id, value } = e.target;
-        setFormData((prev) => ({ ...prev, [id]: value }));
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        const whatsappNumber = "918237156777";
-
-        // Format the date if it exists
-        const formattedDate = formData.date ? new Date(formData.date).toLocaleDateString('en-GB') : 'Not specified';
-
-        const text = `*New Appointment Request* 🦷
-
-*Patient Details*
-Name: ${formData.fullName}
-Phone: ${formData.phone}
-Email: ${formData.email || "Not provided"}
-
-*Appointment Preferences*
-Treatment: ${formData.treatment}
-Date: ${formattedDate}
-Time: ${formData.time}
-
-*Notes*
-${formData.notes || "None"}`;
-
-        const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
-        window.open(url, "_blank");
-    };
-
     const fadeIn = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
     };
-
-    // Refined Input Styles for Premium Feel
-    const inputClasses = "h-14 w-full border border-slate-200 bg-slate-50 rounded-xl px-4 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400 text-slate-800 text-base shadow-sm";
-    const labelClasses = "text-sm font-semibold text-slate-600 mb-2 block ml-1";
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50">
@@ -121,127 +73,7 @@ ${formData.notes || "None"}`;
                                 <p className="text-slate-500">Fill in the form below to schedule your visit.</p>
                             </div>
 
-                            <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
-                                {/* Personal Details */}
-                                <div className="grid md:grid-cols-2 gap-5">
-                                    <div className="space-y-1">
-                                        <Label htmlFor="fullName" className={labelClasses}>Full Name *</Label>
-                                        <Input
-                                            id="fullName"
-                                            required
-                                            className={inputClasses}
-                                            placeholder="Ex: John Doe"
-                                            value={formData.fullName}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <Label htmlFor="phone" className={labelClasses}>Phone Number *</Label>
-                                        <Input
-                                            type="tel"
-                                            id="phone"
-                                            required
-                                            className={inputClasses}
-                                            placeholder="Ex: +91 98765 43210"
-                                            value={formData.phone}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="space-y-1">
-                                    <Label htmlFor="email" className={labelClasses}>Email Address (Optional)</Label>
-                                    <Input
-                                        type="email"
-                                        id="email"
-                                        className={inputClasses}
-                                        placeholder="john@example.com"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-
-                                {/* Appointment Details */}
-                                <div className="space-y-1">
-                                    <Label htmlFor="treatment" className={labelClasses}>Treatment *</Label>
-                                    <div className="relative">
-                                        <select
-                                            id="treatment"
-                                            required
-                                            className={`${inputClasses} appearance-none cursor-pointer bg-white`}
-                                            value={formData.treatment}
-                                            onChange={handleChange}
-                                        >
-                                            <option value="" disabled>Select Treatment Type</option>
-                                            <option value="General Checkup">General Checkup</option>
-                                            <option value="Teeth Cleaning">Teeth Cleaning</option>
-                                            <option value="Root Canal">Root Canal</option>
-                                            <option value="Teeth Whitening">Teeth Whitening</option>
-                                            <option value="Dental Implants">Dental Implants</option>
-                                            <option value="Braces/Invisalign">Braces / Invisalign</option>
-                                            <option value="Kids Dentistry">Kids Dentistry</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="grid md:grid-cols-2 gap-5">
-                                    <div className="space-y-1">
-                                        <Label htmlFor="date" className={labelClasses}>Preferred Date *</Label>
-                                        <Input
-                                            type="date"
-                                            id="date"
-                                            required
-                                            className={inputClasses}
-                                            value={formData.date}
-                                            onChange={handleChange}
-                                            min={new Date().toISOString().split("T")[0]}
-                                        />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <Label htmlFor="time" className={labelClasses}>Preferred Time *</Label>
-                                        <div className="relative">
-                                            <select
-                                                id="time"
-                                                required
-                                                className={`${inputClasses} appearance-none cursor-pointer bg-white`}
-                                                value={formData.time}
-                                                onChange={handleChange}
-                                            >
-                                                <option value="" disabled>Select Time Slot</option>
-                                                <option value="Morning (10AM - 1PM)">Morning (10AM - 1PM)</option>
-                                                <option value="Afternoon (1PM - 4PM)">Afternoon (1PM - 4PM)</option>
-                                                <option value="Evening (5PM - 9PM)">Evening (5PM - 9PM)</option>
-                                            </select>
-                                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="space-y-1">
-                                    <Label htmlFor="notes" className={labelClasses}>Additional Notes</Label>
-                                    <Textarea
-                                        id="notes"
-                                        className="min-h-[120px] w-full border border-slate-200 bg-slate-50 rounded-xl p-4 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-base text-slate-800 placeholder:text-slate-400"
-                                        placeholder="Any specific questions or symptoms?"
-                                        value={formData.notes}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-
-                                <Button
-                                    className="w-full h-14 bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white rounded-xl shadow-lg shadow-slate-900/10 transition-all transform active:scale-[0.98] text-lg font-bold tracking-wide flex items-center justify-center gap-2 mt-4"
-                                    type="submit"
-                                >
-                                    Confirm Appointment
-                                    <Send className="w-5 h-5 ml-1" />
-                                </Button>
-                            </form>
+                            <AppointmentForm />
                         </div>
                     </motion.div>
 
