@@ -1,56 +1,103 @@
 import Link from "next/link"
-import { Smile } from "lucide-react"
+import { Smile, Facebook, Instagram, Linkedin, MapPin, Phone, Clock } from "lucide-react"
 
 export function Footer() {
     return (
-        <footer className="bg-slate-900 text-slate-300 py-12 md:py-16">
+        <footer className="bg-slate-900 text-slate-300 pt-16 pb-8">
             <div className="container px-4 md:px-6">
-                <div className="grid md:grid-cols-4 gap-8 mb-8">
-                    <div className="col-span-1 md:col-span-1 space-y-4">
-                        <div className="flex items-center gap-2 text-white">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                                <Smile className="h-5 w-5" />
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                    {/* Brand */}
+                    <div className="lg:col-span-1 space-y-5">
+                        <div className="flex items-center gap-3">
+                            <div className="flex h-11 w-11 items-center justify-center rounded-xl gradient-primary text-white shadow-lg">
+                                <Smile className="h-6 w-6" />
                             </div>
-                            <span className="text-lg font-bold">Dentistree</span>
+                            <span className="font-display text-xl font-semibold text-white">Dentistree</span>
                         </div>
-                        <p className="text-sm text-slate-400">
-                            Comprehensive dental care for kids, adults & seniors.
-                            Prevention • Restoration • Aesthetics
+                        <p className="text-slate-400 leading-relaxed">
+                            Comprehensive dental care for kids, adults & seniors. Where every smile tells a story.
                         </p>
+                        <div className="flex gap-3">
+                            {[
+                                { icon: <Facebook className="h-4 w-4" />, href: "#" },
+                                { icon: <Instagram className="h-4 w-4" />, href: "#" },
+                                { icon: <Linkedin className="h-4 w-4" />, href: "#" },
+                            ].map((social, i) => (
+                                <Link
+                                    key={i}
+                                    href={social.href}
+                                    className="h-9 w-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-teal-500 transition-colors"
+                                >
+                                    {social.icon}
+                                </Link>
+                            ))}
+                        </div>
                     </div>
+
+                    {/* Quick Links */}
                     <div>
-                        <h4 className="font-bold text-white mb-4">Quick Links</h4>
-                        <nav className="flex flex-col gap-2 text-sm">
-                            <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
-                            <Link href="/about" className="hover:text-primary transition-colors">About Us</Link>
-                            <Link href="/why-us" className="hover:text-primary transition-colors">Why Us</Link>
-                            <Link href="/#contact" className="hover:text-primary transition-colors">Contact</Link>
-                            <Link href="/#contact" className="hover:text-primary transition-colors">Book Appointment</Link>
+                        <h4 className="font-semibold text-white mb-5">Quick Links</h4>
+                        <nav className="flex flex-col gap-3">
+                            {[
+                                { label: "Services", href: "/services" },
+                                { label: "About Us", href: "/about" },
+                                { label: "Why Choose Us", href: "/why-us" },
+                                { label: "Contact", href: "/#contact" },
+                            ].map((link, i) => (
+                                <Link
+                                    key={i}
+                                    href={link.href}
+                                    className="text-slate-400 hover:text-teal-400 transition-colors"
+                                >
+                                    {link.label}
+                                </Link>
+                            ))}
                         </nav>
                     </div>
+
+                    {/* Services */}
                     <div>
-                        <h4 className="font-bold text-white mb-4">Services</h4>
-                        <nav className="flex flex-col gap-2 text-sm">
-                            <Link href="/services" className="hover:text-primary transition-colors">Root Canal</Link>
-                            <Link href="/services" className="hover:text-primary transition-colors">Implants</Link>
-                            <Link href="/services" className="hover:text-primary transition-colors">Cosmetic Dentistry</Link>
-                            <Link href="/services" className="hover:text-primary transition-colors">Pediatric Care</Link>
+                        <h4 className="font-semibold text-white mb-5">Services</h4>
+                        <nav className="flex flex-col gap-3">
+                            {["Root Canal", "Dental Implants", "Cosmetic Dentistry", "Pediatric Care"].map((service, i) => (
+                                <Link
+                                    key={i}
+                                    href="/services"
+                                    className="text-slate-400 hover:text-teal-400 transition-colors"
+                                >
+                                    {service}
+                                </Link>
+                            ))}
                         </nav>
                     </div>
+
+                    {/* Contact Info */}
                     <div>
-                        <h4 className="font-bold text-white mb-4">Visit Us</h4>
-                        <address className="not-italic text-sm text-slate-400 space-y-2">
-                            <p>Nanded City, Sinhagad Road,</p>
-                            <p>Pune, Maharashtra</p>
-                            <p className="pt-2">Call: +91 (Add Number)</p>
+                        <h4 className="font-semibold text-white mb-5">Visit Us</h4>
+                        <address className="not-italic text-slate-400 space-y-3">
+                            <p className="flex items-start gap-2">
+                                <MapPin className="h-5 w-5 text-teal-500 shrink-0 mt-0.5" />
+                                <span>Nanded City, Sinhagad Road,<br />Pune, Maharashtra</span>
+                            </p>
+                            <p className="flex items-center gap-2">
+                                <Phone className="h-5 w-5 text-teal-500" />
+                                +91 (Add Number)
+                            </p>
+                            <p className="flex items-center gap-2">
+                                <Clock className="h-5 w-5 text-teal-500" />
+                                Mon - Sat: 10 AM - 8 PM
+                            </p>
                         </address>
                     </div>
                 </div>
-                <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-                    <p>&copy; {new Date().getFullYear()} Dentistree Dental Clinic. All rights reserved.</p>
-                    <div className="flex gap-4">
-                        <Link href="#" className="hover:text-white">Privacy Policy</Link>
-                        <Link href="#" className="hover:text-white">Terms of Service</Link>
+
+                <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-sm text-slate-500">
+                        © {new Date().getFullYear()} Dentistree Dental Clinic. All rights reserved.
+                    </p>
+                    <div className="flex gap-6 text-sm text-slate-500">
+                        <Link href="#" className="hover:text-teal-400 transition-colors">Privacy Policy</Link>
+                        <Link href="#" className="hover:text-teal-400 transition-colors">Terms of Service</Link>
                     </div>
                 </div>
             </div>
