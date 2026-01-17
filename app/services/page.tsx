@@ -2,7 +2,8 @@
 
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
+import Footer from "@/components/layout/Footer"
+
 import { FocusRail, FocusRailItem } from "@/components/focus-rail"
 import { motion } from "framer-motion"
 import {

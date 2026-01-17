@@ -3,7 +3,8 @@
 import React from "react"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
+import Footer from "@/components/layout/Footer"
+
 import { MapPin, Phone, Mail, Clock, Calendar, Sparkles, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
 import { AppointmentForm } from "@/components/appointment-form"

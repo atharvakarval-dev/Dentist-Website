@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
+import Footer from "@/components/layout/Footer"
+
 import { Button } from "@/components/ui/button"
 import Clinic1 from "../../assests/clinic1.png"
 import {

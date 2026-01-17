@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
+import Footer from "@/components/layout/Footer"
 import { StaggerTestimonials } from "@/components/stagger-testimonials"
 import { FocusRail, FocusRailItem } from "@/components/focus-rail"
 import { motion } from "framer-motion"
