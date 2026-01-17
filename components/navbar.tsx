@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronRight } from "lucide-react"
+import { Menu, X, ChevronRight, ArrowRight, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const staggerContainer = {
@@ -13,7 +13,7 @@ const staggerContainer = {
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.1,
+            staggerChildren: 0.08,
         },
     },
 }
@@ -23,19 +23,26 @@ const itemFadeIn = {
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.5 },
+        transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
     },
 }
 
+const navItems = [
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: "About", href: "/about" },
+    { name: "Why Us", href: "/why-us" },
+    { name: "Contact", href: "/contact" },
+]
+
 export function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const [scrollY, setScrollY] = useState(0)
+    const [scrolled, setScrolled] = useState(false)
     const pathname = usePathname()
-    const isHome = pathname === "/"
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrollY(window.scrollY)
+            setScrolled(window.scrollY > 20)
         }
 
         window.addEventListener("scroll", handleScroll)
@@ -46,64 +53,103 @@ export function Navbar() {
         setIsMenuOpen(!isMenuOpen)
     }
 
-    const getLinkHref = (item: string) => {
-        if (item === "Home") return "/"
-        if (item === "Services") return "/services"
-        if (item === "About") return "/about"
-        if (item === "Why Us") return "/why-us"
-        if (item === "Contact") return "/contact"
-        return "/"
-    }
-
     return (
         <>
             <motion.header
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
-                transition={{ duration: 0.5 }}
-                className={`sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 ${scrollY > 50 ? "shadow-md" : ""
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled
+                    ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100"
+                    : "bg-[#faf8f5]/80 backdrop-blur-sm"
                     }`}
             >
                 <div className="container flex h-20 items-center justify-between px-4 md:px-6">
-                    <Link href="/" className="flex items-center gap-2">
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-3 group">
                         <motion.div
                             whileHover={{ scale: 1.05 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                            className="relative h-9 w-9"
+                            transition={{ type: "spring", stiffness: 400, damping: 15 }}
                         >
                             <Image
                                 src="/assests/103386.png"
                                 alt="Dentistree Logo"
-                                width={36}
-                                height={36}
+                                width={40}
+                                height={40}
                                 className="object-contain"
                             />
                         </motion.div>
                         <div className="flex flex-col">
-                            <span className="text-xl font-bold leading-none text-primary">Dentistree</span>
-                            <span className="text-xs font-medium text-muted-foreground">Dental Clinic</span>
+                            <span className="font-display text-xl font-semibold text-slate-800 group-hover:text-teal-700 transition-colors">
+                                Dentistree
+                            </span>
+                            <span className="text-[11px] font-medium text-slate-500 tracking-wide uppercase">
+                                Dental Clinic
+                            </span>
                         </div>
                     </Link>
-                    <nav className="hidden md:flex gap-6">
-                        {["Home", "Services", "About", "Why Us", "Contact"].map((item) => (
-                            <Link
-                                key={item}
-                                href={getLinkHref(item)}
-                                className={`text-sm font-medium transition-colors hover:text-primary ${pathname === getLinkHref(item) ? "text-primary font-semibold" : "text-muted-foreground"
-                                    }`}
-                            >
-                                {item}
-                            </Link>
-                        ))}
+
+                    {/* Desktop Navigation */}
+                    <nav className="hidden lg:flex items-center gap-1">
+                        {navItems.map((item) => {
+                            const isActive = pathname === item.href
+                            return (
+                                <Link
+                                    key={item.name}
+                                    href={item.href}
+                                    className="relative px-4 py-2 group"
+                                >
+                                    <span className={`text-sm font-medium transition-colors ${isActive
+                                        ? "text-teal-700"
+                                        : "text-slate-600 group-hover:text-teal-600"
+                                        }`}>
+                                        {item.name}
+                                    </span>
+                                    {/* Active indicator */}
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="navbar-active"
+                                            className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"
+                                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                        />
+                                    )}
+                                    {/* Hover indicator */}
+                                    <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-teal-200 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-center" />
+                                </Link>
+                            )
+                        })}
                     </nav>
-                    <div className="hidden md:flex items-center gap-4">
-                        <Button size="sm" className="rounded-full px-6" asChild>
-                            <Link href="/contact">Book Appointment</Link>
+
+                    {/* Desktop CTA */}
+                    <div className="hidden lg:flex items-center gap-4">
+                        <Link
+                            href="tel:+910000000000"
+                            className="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors"
+                        >
+                            <div className="h-8 w-8 rounded-full bg-teal-50 flex items-center justify-center">
+                                <Phone className="h-4 w-4 text-teal-600" />
+                            </div>
+                            <span className="hidden xl:block">Call Us</span>
+                        </Link>
+                        <Button
+                            size="sm"
+                            className="rounded-full px-6 py-5 gradient-primary hover:opacity-90 shadow-sm hover:shadow-md transition-all"
+                            asChild
+                        >
+                            <Link href="/contact" className="flex items-center gap-2">
+                                Book Appointment
+                                <ArrowRight className="h-4 w-4" />
+                            </Link>
                         </Button>
                     </div>
-                    <button className="flex md:hidden" onClick={toggleMenu}>
-                        <Menu className="h-6 w-6" />
-                        <span className="sr-only">Toggle menu</span>
+
+                    {/* Mobile Menu Button */}
+                    <button
+                        className="flex lg:hidden p-2 rounded-xl hover:bg-slate-100 transition-colors"
+                        onClick={toggleMenu}
+                        aria-label="Toggle menu"
+                    >
+                        <Menu className="h-6 w-6 text-slate-700" />
                     </button>
                 </div>
             </motion.header>
@@ -115,11 +161,29 @@ export function Navbar() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] bg-white md:hidden"
+                        transition={{ duration: 0.2 }}
+                        className="fixed inset-0 z-[100] lg:hidden"
                     >
-                        <div className="container flex h-20 items-center justify-between px-4">
-                            <Link href="/" className="flex items-center gap-2" onClick={toggleMenu}>
-                                <div className="relative h-9 w-9">
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm"
+                            onClick={toggleMenu}
+                        />
+
+                        {/* Menu Panel */}
+                        <motion.div
+                            initial={{ x: "100%" }}
+                            animate={{ x: 0 }}
+                            exit={{ x: "100%" }}
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            className="absolute right-0 top-0 h-full w-[85%] max-w-sm bg-white shadow-2xl"
+                        >
+                            {/* Mobile Header */}
+                            <div className="flex items-center justify-between p-4 border-b border-slate-100">
+                                <Link href="/" className="flex items-center gap-2" onClick={toggleMenu}>
                                     <Image
                                         src="/assests/103386.png"
                                         alt="Dentistree Logo"
@@ -127,42 +191,80 @@ export function Navbar() {
                                         height={36}
                                         className="object-contain"
                                     />
-                                </div>
-                                <div className="flex flex-col">
-                                    <span className="text-xl font-bold leading-none text-primary">Dentistree</span>
-                                    <span className="text-xs font-medium text-muted-foreground">Dental Clinic</span>
-                                </div>
-                            </Link>
-                            <button onClick={toggleMenu}>
-                                <X className="h-6 w-6" />
-                                <span className="sr-only">Close menu</span>
-                            </button>
-                        </div>
-                        <motion.nav
-                            variants={staggerContainer}
-                            initial="hidden"
-                            animate="visible"
-                            className="container grid gap-4 px-4 pb-8 pt-6"
-                        >
-                            {["Home", "Services", "About", "Why Us", "Contact"].map((item, index) => (
-                                <motion.div key={index} variants={itemFadeIn}>
+                                    <div className="flex flex-col">
+                                        <span className="font-display text-lg font-semibold text-slate-800">
+                                            Dentistree
+                                        </span>
+                                        <span className="text-[10px] font-medium text-slate-500 uppercase tracking-wide">
+                                            Dental Clinic
+                                        </span>
+                                    </div>
+                                </Link>
+                                <button
+                                    onClick={toggleMenu}
+                                    className="p-2 rounded-xl hover:bg-slate-100 transition-colors"
+                                    aria-label="Close menu"
+                                >
+                                    <X className="h-5 w-5 text-slate-600" />
+                                </button>
+                            </div>
+
+                            {/* Mobile Navigation */}
+                            <motion.nav
+                                variants={staggerContainer}
+                                initial="hidden"
+                                animate="visible"
+                                className="p-4 space-y-1"
+                            >
+                                {navItems.map((item) => {
+                                    const isActive = pathname === item.href
+                                    return (
+                                        <motion.div key={item.name} variants={itemFadeIn}>
+                                            <Link
+                                                href={item.href}
+                                                className={`flex items-center justify-between p-4 rounded-xl transition-all ${isActive
+                                                    ? "bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-100"
+                                                    : "hover:bg-slate-50"
+                                                    }`}
+                                                onClick={toggleMenu}
+                                            >
+                                                <span className={`text-base font-medium ${isActive ? "text-teal-700" : "text-slate-700"
+                                                    }`}>
+                                                    {item.name}
+                                                </span>
+                                                <ChevronRight className={`h-4 w-4 ${isActive ? "text-teal-500" : "text-slate-400"
+                                                    }`} />
+                                            </Link>
+                                        </motion.div>
+                                    )
+                                })}
+                            </motion.nav>
+
+                            {/* Mobile CTA */}
+                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white via-white to-transparent">
+                                <div className="space-y-3">
                                     <Link
-                                        href={getLinkHref(item)}
-                                        className={`flex items-center justify-between rounded-md p-2 text-lg font-medium hover:bg-accent ${pathname === getLinkHref(item) ? "text-primary" : ""
-                                            }`}
+                                        href="tel:+910000000000"
+                                        className="flex items-center justify-center gap-2 p-4 rounded-xl border border-slate-200 text-slate-700 font-medium hover:bg-slate-50 transition-colors"
                                         onClick={toggleMenu}
                                     >
-                                        {item}
-                                        <ChevronRight className="h-4 w-4" />
+                                        <Phone className="h-4 w-4" />
+                                        Call Now
                                     </Link>
-                                </motion.div>
-                            ))}
-                            <motion.div variants={itemFadeIn} className="pt-4">
-                                <Button className="w-full rounded-full" size="lg" asChild onClick={toggleMenu}>
-                                    <Link href="/contact">Book Appointment</Link>
-                                </Button>
-                            </motion.div>
-                        </motion.nav>
+                                    <Button
+                                        className="w-full rounded-xl py-6 gradient-primary"
+                                        size="lg"
+                                        asChild
+                                        onClick={toggleMenu}
+                                    >
+                                        <Link href="/contact" className="flex items-center gap-2">
+                                            Book Appointment
+                                            <ArrowRight className="h-4 w-4" />
+                                        </Link>
+                                    </Button>
+                                </div>
+                            </div>
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>

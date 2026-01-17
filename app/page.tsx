@@ -122,7 +122,7 @@ export default function Home() {
                   <p className="max-w-[540px] text-slate-600 text-lg md:text-xl leading-relaxed">
                     Experience the art of gentle dentistry with{" "}
                     <span className="font-semibold text-slate-700">Dr. Poonam Bambarkar</span>
-                    —where 15+ years of expertise meets compassionate care for your entire family.
+                    , where 15+ years of expertise meets compassionate care for your entire family.
                   </p>
                 </motion.div>
 
