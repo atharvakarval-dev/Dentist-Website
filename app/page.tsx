@@ -13,6 +13,7 @@ import {
   Mail,
   MapPin,
   Phone,
+  MessageCircle,
   Instagram,
   Linkedin,
   Facebook,
@@ -748,9 +749,15 @@ export default function Home() {
             <p className="text-sm text-slate-500">
               © {new Date().getFullYear()} Dentistree Dental Clinic. All rights reserved.
             </p>
-            <div className="flex gap-6 text-sm text-slate-500">
-              <Link href="#" className="hover:text-teal-400 transition-colors">Privacy Policy</Link>
-              <Link href="#" className="hover:text-teal-400 transition-colors">Terms of Service</Link>
+            <div className="flex flex-wrap gap-6 text-sm text-slate-500">
+              <Link href="https://www.linkedin.com/in/atharva-karval/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors flex items-center gap-2">
+                <Linkedin className="h-4 w-4" />
+                <span>Designed by Atharva Karval</span>
+              </Link>
+              <Link href="https://wa.me/919518377949" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors flex items-center gap-2">
+                <MessageCircle className="h-4 w-4" />
+                <span>+91 95183 77949</span>
+              </Link>
             </div>
           </div>
         </div>

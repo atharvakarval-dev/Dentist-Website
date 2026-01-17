@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,6 +17,12 @@ export function AppointmentForm() {
         time: "",
         notes: "",
     });
+
+    const [minDate, setMinDate] = useState("");
+
+    useEffect(() => {
+        setMinDate(new Date().toISOString().split("T")[0]);
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { id, value } = e.target;
@@ -66,6 +72,7 @@ ${formData.notes || "None"}`;
                         placeholder="Ex: John Doe"
                         value={formData.fullName}
                         onChange={handleChange}
+                        suppressHydrationWarning
                     />
                 </div>
                 <div className="space-y-1">
@@ -78,6 +85,7 @@ ${formData.notes || "None"}`;
                         placeholder="Ex: +91 8237156777"
                         value={formData.phone}
                         onChange={handleChange}
+                        suppressHydrationWarning
                     />
                 </div>
             </div>
@@ -91,6 +99,7 @@ ${formData.notes || "None"}`;
                     placeholder="john@example.com"
                     value={formData.email}
                     onChange={handleChange}
+                    suppressHydrationWarning
                 />
             </div>
 
@@ -104,6 +113,7 @@ ${formData.notes || "None"}`;
                         className={`${inputClasses} appearance-none cursor-pointer bg-white`}
                         value={formData.treatment}
                         onChange={handleChange}
+                        suppressHydrationWarning
                     >
                         <option value="" disabled>Select Treatment Type</option>
                         <option value="General Checkup">General Checkup</option>
@@ -131,7 +141,8 @@ ${formData.notes || "None"}`;
                         className={inputClasses}
                         value={formData.date}
                         onChange={handleChange}
-                        min={new Date().toISOString().split("T")[0]}
+                        min={minDate}
+                        suppressHydrationWarning
                     />
                 </div>
                 <div className="space-y-1">
@@ -143,6 +154,7 @@ ${formData.notes || "None"}`;
                             className={`${inputClasses} appearance-none cursor-pointer bg-white`}
                             value={formData.time}
                             onChange={handleChange}
+                            suppressHydrationWarning
                         >
                             <option value="" disabled>Select Time Slot</option>
                             <option value="Morning (10AM - 1PM)">Morning (10AM - 1PM)</option>
@@ -164,6 +176,7 @@ ${formData.notes || "None"}`;
                     placeholder="Any specific questions or symptoms?"
                     value={formData.notes}
                     onChange={handleChange}
+                    suppressHydrationWarning
                 />
             </div>
 
