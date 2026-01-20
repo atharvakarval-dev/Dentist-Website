@@ -1,5 +1,6 @@
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
     return (
@@ -7,10 +8,16 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                     <div className="col-span-1 md:col-span-1">
-                        <h3 className="text-2xl font-bold mb-4">
-                            <span className="text-primary">Dentis</span>
-                            <span className="text-emerald-400">tree</span>
-                        </h3>
+                        <Link href="/" className="inline-block mb-4">
+                            <div className="relative h-16 w-48">
+                                <Image
+                                    src="/assests/logo.png"
+                                    alt="Dentistree Logo"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                        </Link>
                         <p className="text-slate-400 mb-4">
                             Comprehensive Dental Care for Kids, Adults & Seniors. Prevention • Restoration • Aesthetics • Implants • Orthodontics
                         </p>

@@ -116,13 +116,14 @@ ${formData.notes || "None"}`;
                         suppressHydrationWarning
                     >
                         <option value="" disabled>Select Treatment Type</option>
-                        <option value="General Checkup">General Checkup</option>
-                        <option value="Teeth Cleaning">Teeth Cleaning</option>
-                        <option value="Root Canal">Root Canal</option>
-                        <option value="Teeth Whitening">Teeth Whitening</option>
-                        <option value="Dental Implants">Dental Implants</option>
-                        <option value="Braces/Invisalign">Braces / Invisalign</option>
-                        <option value="Kids Dentistry">Kids Dentistry</option>
+                        <option value="Tooth cleaning & Whitening">Tooth cleaning & Whitening</option>
+                        <option value="Extraction and Replacement">Extraction and Replacement</option>
+                        <option value="Fillings , Crowns & Bridges">Fillings , Crowns & Bridges</option>
+                        <option value="Root Canal Treatment">Root Canal Treatment</option>
+                        <option value="Full / Partial Denture">Full / Partial Denture</option>
+                        <option value="Dental Implant">Dental Implant</option>
+                        <option value="Braces Treatment">Braces Treatment</option>
+                        <option value="Pediatric (Children) Dental Treatments">Pediatric (Children) Dental Treatments</option>
                         <option value="Other">Other</option>
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
@@ -183,6 +184,7 @@ ${formData.notes || "None"}`;
             <Button
                 className="w-full h-14 bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white rounded-xl shadow-lg shadow-slate-900/10 transition-all transform active:scale-[0.98] text-lg font-bold tracking-wide flex items-center justify-center gap-2 mt-4"
                 type="submit"
+                suppressHydrationWarning
             >
                 Confirm Appointment
                 <Send className="w-5 h-5 ml-1" />

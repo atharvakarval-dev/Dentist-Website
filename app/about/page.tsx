@@ -6,6 +6,7 @@ import { Navbar } from "@/components/navbar"
 import Footer from "@/components/layout/Footer"
 import { StaggerTestimonials } from "@/components/stagger-testimonials"
 import { FocusRail, FocusRailItem } from "@/components/focus-rail"
+import { VideoShowcase } from "@/components/video-showcase"
 import { motion } from "framer-motion"
 const Clinic2 = "/assests/Clinic2.png"
 import {
@@ -125,7 +126,7 @@ export default function AboutPage() {
 
                                 <div className="relative h-[450px] md:h-[550px] rounded-[2rem] overflow-hidden shadow-2xl">
                                     <Image
-                                        src={Clinic2}
+                                        src="/assests/doctor.png"
                                         alt="Dr. Poonam Bambarkar"
                                         fill
                                         className="object-cover"
@@ -136,7 +137,7 @@ export default function AboutPage() {
                                         <h3 className="font-display text-2xl md:text-3xl font-semibold text-white mb-1">
                                             Dr. Poonam Bambarkar
                                         </h3>
-                                        <p className="text-teal-300 font-medium">Clinical Director & Chief Dentist (BDS)</p>
+                                        <p className="text-teal-300 font-medium">15+ Years of Excellence</p>
                                     </div>
                                 </div>
 
@@ -304,6 +305,8 @@ export default function AboutPage() {
                     </div>
                 </section>
 
+                <VideoShowcase />
+
                 {/* Testimonials Section */}
                 <section className="py-16 md:py-24 bg-[#faf8f5]">
                     <div className="container px-4 md:px-6 text-center mb-12">
@@ -354,6 +357,103 @@ export default function AboutPage() {
                                     <span>See Real Testimonials on Google Maps</span>
                                 </Link>
                             </Button>
+                        </div>
+                    </div>
+                </section>
+
+
+
+                {/* Community Impact Section */}
+                <section className="py-16 md:py-24 bg-white">
+                    <div className="container px-4 md:px-6">
+                        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                            <motion.div
+                                initial={{ opacity: 0, x: -30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                className="relative pr-6 pb-12 md:pb-6"
+                            >
+                                {/* Main Image (Campaign) */}
+                                <div className="relative rounded-[2rem] overflow-hidden shadow-2xl w-[90%] md:w-[85%] z-10">
+                                    <Image
+                                        src="/assests/WhatsApp Image 2026-01-20 at 12.43.45 AM (1).jpeg"
+                                        alt="Community Dental Awareness Campaign"
+                                        width={800}
+                                        height={600}
+                                        className="object-cover w-full h-auto"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
+                                </div>
+
+                                {/* Secondary Image (Children) */}
+                                <div className="absolute bottom-0 right-0 w-[60%] md:w-[55%] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white z-20">
+                                    <Image
+                                        src="/assests/children-1.png"
+                                        alt="Teaching Children Oral Hygiene"
+                                        width={600}
+                                        height={400}
+                                        className="object-cover w-full h-auto"
+                                    />
+                                </div>
+
+                                {/* Floating Badge */}
+                                <div className="absolute top-10 -right-4 bg-white p-3 rounded-2xl shadow-xl flex items-center gap-3 animate-float z-30 hidden lg:flex">
+                                    <div className="h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600">
+                                        <Heart className="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-slate-800 text-sm">Giving Back</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, x: 30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                className="space-y-6"
+                            >
+                                <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-4 py-2 border border-teal-100">
+                                    <Users className="h-4 w-4 text-teal-600" />
+                                    <span className="text-sm font-medium text-teal-700">Community Outreach</span>
+                                </div>
+                                <h2 className="font-display text-3xl md:text-4xl font-semibold text-slate-800">
+                                    Smiles Beyond the Clinic
+                                </h2>
+                                <p className="text-lg text-slate-600 leading-relaxed">
+                                    At Dentistree, we believe that quality dental care should be accessible to everyone.
+                                    Dr. Poonam Bambarkar is dedicated to raising oral health awareness through active community engagement.
+                                </p>
+                                <div className="space-y-4 pt-2">
+                                    <div className="flex gap-4">
+                                        <div className="mt-1 h-10 w-10 rounded-full bg-teal-50 flex items-center justify-center shrink-0">
+                                            <CheckCircle2 className="h-5 w-5 text-teal-600" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-semibold text-slate-800">Free Dental Checkup Camps</h3>
+                                            <p className="text-slate-600 text-sm">Regular camps to provide screenings and advice to those in need.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4">
+                                        <div className="mt-1 h-10 w-10 rounded-full bg-teal-50 flex items-center justify-center shrink-0">
+                                            <CheckCircle2 className="h-5 w-5 text-teal-600" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-semibold text-slate-800">Oral Health Awareness</h3>
+                                            <p className="text-slate-600 text-sm">Educational sessions to promote better hygiene habits in the community.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4">
+                                        <div className="mt-1 h-10 w-10 rounded-full bg-teal-50 flex items-center justify-center shrink-0">
+                                            <CheckCircle2 className="h-5 w-5 text-teal-600" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-semibold text-slate-800">School Health Education</h3>
+                                            <p className="text-slate-600 text-sm">Teaching children the importance of oral health early on.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
                         </div>
                     </div>
                 </section>
@@ -425,6 +525,6 @@ export default function AboutPage() {
             </main>
 
             <Footer />
-        </div>
+        </div >
     )
 }

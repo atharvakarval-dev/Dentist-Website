@@ -474,6 +474,86 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Personalized Care - New Section for doctor-2.png */}
+        <section className="py-20 md:py-28 bg-[#faf8f5]">
+          <div className="container px-4 md:px-6">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={slideInLeft}
+                className="space-y-8"
+              >
+                <motion.div variants={fadeInUp} className="space-y-4">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-4 py-2 border border-teal-100">
+                    <Heart className="h-4 w-4 text-teal-600" />
+                    <span className="text-sm font-medium text-teal-700">Patient-First Approach</span>
+                  </div>
+                  <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-slate-800">
+                    Dedicated to <br />
+                    <span className="text-gradient-primary">Your Unique Smile</span>
+                  </h2>
+                </motion.div>
+
+                <motion.div variants={fadeInUp} className="space-y-6 text-slate-600 leading-relaxed">
+                  <p className="text-lg">
+                    We understand that visiting the dentist can be personal. That's why Dr. Poonam Bambarkar takes the time to listen to your concerns, explain your options, and creates a treatment plan that fits <i>your</i> needs.
+                  </p>
+                  <p>
+                    From the moment you walk in, our goal is to ensure you feel heard, valued, and comfortable. We don't just treat teeth; we care for people.
+                  </p>
+                </motion.div>
+
+                <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  <div className="flex items-center gap-3 bg-white px-5 py-4 rounded-2xl shadow-sm border border-slate-100 h-full">
+                    <div className="h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center shrink-0">
+                      <MessageCircle className="h-5 w-5 text-teal-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-slate-800">Open Communication</p>
+                      <p className="text-xs text-slate-500">We explain every step</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white px-5 py-4 rounded-2xl shadow-sm border border-slate-100 h-full">
+                    <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
+                      <Smile className="h-5 w-5 text-amber-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-slate-800">Stress-Free Visits</p>
+                      <p className="text-xs text-slate-500">Your comfort matters</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={slideInRight}
+                className="relative mx-auto w-full max-w-md lg:max-w-none"
+              >
+                <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
+                  <Image
+                    src="/assests/doctor-2.png"
+                    alt="Dr. Poonam Bambarkar Consulting"
+                    width={600}
+                    height={800}
+                    className="object-cover w-full h-auto"
+                  />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-teal-900/40 to-transparent" />
+                </div>
+
+                {/* Decorative Elements */}
+                <div className="absolute -z-10 top-10 -right-10 w-32 h-32 bg-amber-200/50 rounded-full blur-3xl" />
+                <div className="absolute -z-10 bottom-10 -left-10 w-32 h-32 bg-teal-200/50 rounded-full blur-3xl" />
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* Why Choose Us - Premium Section */}
         <section id="why-us" className="py-20 md:py-28 bg-gradient-to-br from-teal-50/50 via-white to-amber-50/30">
           <div className="container px-4 md:px-6">

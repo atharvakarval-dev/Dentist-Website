@@ -98,9 +98,9 @@ export default function ContactPage() {
                                         alt="Welcome to Dentistree"
                                         width={800}
                                         height={600}
-                                        className="object-cover w-full h-[300px] md:h-[400px]"
+                                        className="w-full h-auto"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent flex items-end p-8">
+                                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/80 to-transparent p-6">
                                         <div className="text-white">
                                             <h3 className="text-2xl font-display font-semibold mb-2">Welcome to Dentistree</h3>
                                             <p className="text-white/90">A warm, relaxing environment designed for your comfort.</p>

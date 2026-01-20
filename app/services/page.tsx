@@ -1,12 +1,14 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import Footer from "@/components/layout/Footer"
 
 import { FocusRail, FocusRailItem } from "@/components/focus-rail"
-import { motion } from "framer-motion"
+import { ResultGallery } from "@/components/result-gallery"
+import { motion, AnimatePresence } from "framer-motion"
 import {
     ShieldCheck,
     Activity,
@@ -159,90 +161,81 @@ function ServiceCard({ title, description, features, icon, gradient }: ServiceCa
 export default function ServicesPage() {
     const services = [
         {
-            title: "Preventive Dental Care",
-            description: "Preventive dentistry forms the foundation of long-term oral health. Services include routine examinations, prophylaxis (cleaning), digital X-rays, and oral hygiene instructions.",
-            icon: <ShieldCheck className="w-7 h-7" />,
-            features: ["Routine Exams", "Cleanings", "Digital X-Rays"],
+            title: "Tooth cleaning & Whitening",
+            description: "Complete professional cleaning (scaling) to remove plaque and tartar, combined with safe whitening treatments for a brighter, healthier smile.",
+            icon: <Sparkles className="w-7 h-7" />,
+            features: ["Scale & Polish", "Stain Removal", "Safe Whitening"],
             gradient: "from-teal-500 to-emerald-500"
         },
         {
-            title: "Root Canal Treatment",
-            description: "Root Canal Therapy treats infected or inflamed tooth pulp and preserves the natural tooth structure. We use advanced rotary endodontic systems for higher precision.",
-            icon: <Activity className="w-7 h-7" />,
-            features: ["Painless Procedures", "Single Sitting", "Rotary Endo"],
-            gradient: "from-rose-500 to-pink-500"
-        },
-        {
-            title: "Dental Implants",
-            description: "Dental Implants serve as a superior replacement for missing teeth and help restore both aesthetics and oral function. We use biocompatible titanium implants.",
-            icon: <Zap className="w-7 h-7" />,
-            features: ["Titanium Implants", "Natural Look", "Lifetime Warranty"],
-            gradient: "from-violet-500 to-purple-500"
-        },
-        {
-            title: "Crowns & Bridges",
-            description: "We offer a full range of fixed and removable prosthetic solutions including ceramic crowns, bridges, partial dentures, and full dentures.",
-            icon: <Crown className="w-7 h-7" />,
-            features: ["Zirconia Crowns", "Ceramic Bridges", "Durable Fit"],
-            gradient: "from-amber-500 to-orange-500"
-        },
-        {
-            title: "Cosmetic Dentistry",
-            description: "Our cosmetic dentistry services include veneers, composite bonding, aesthetic restorations, and whitening procedures using digital smile designing.",
-            icon: <Sparkles className="w-7 h-7" />,
-            features: ["Veneers", "Smile Makeover", "Bonding"],
-            gradient: "from-sky-500 to-blue-500"
-        },
-        {
-            title: "Orthodontics",
-            description: "We provide conventional braces and clear aligner systems to correct malocclusion, crowding, spacing, and bite discrepancies.",
-            icon: <Smile className="w-7 h-7" />,
-            features: ["Metal Braces", "Clear Aligners", "Retainers"],
-            gradient: "from-indigo-500 to-violet-500"
-        },
-        {
-            title: "Periodontal Treatment",
-            description: "Gum disease management including scaling, root planing, and maintenance to control inflammation and prevent bone loss.",
-            icon: <Layers className="w-7 h-7" />,
-            features: ["Deep Cleaning", "Gum Surgery", "Maintenance"],
-            gradient: "from-cyan-500 to-teal-500"
-        },
-        {
-            title: "Oral Surgery",
-            description: "Perform routine and surgical extractions with meticulous care. Services also include impacted tooth removal and pre-prosthetic surgery.",
+            title: "Extraction and Replacement",
+            description: "Safe tooth extractions when necessary, followed by effective replacement options to restore function and aesthetics.",
             icon: <Shield className="w-7 h-7" />,
-            features: ["Wisdom Teeth", "Extractions", "Safe Protocol"],
+            features: ["Painless Extraction", "Socket Preservation", "Tooth Replacement"],
             gradient: "from-slate-600 to-slate-700"
         },
         {
-            title: "Teeth Whitening",
-            description: "Professional whitening treatments safely remove stains caused by food, beverages, or aging resulting in visibly brighter teeth.",
-            icon: <Sun className="w-7 h-7" />,
-            features: ["Instant Results", "Safe", "Enamel Friendly"],
-            gradient: "from-yellow-500 to-amber-500"
+            title: "Fillings , Crowns & Bridges",
+            description: "Restorative solutions for damaged teeth. We use tooth-colored fillings, high-strength zirconia crowns, and bridges to restore functionality.",
+            icon: <Crown className="w-7 h-7" />,
+            features: ["Composite Fillings", "Zirconia Crowns", "Ceramic Bridges"],
+            gradient: "from-amber-500 to-orange-500"
         },
         {
-            title: "Dentures",
-            description: "Complete and partial denture solutions for tooth replacement. Full-mouth rehabilitation combines multiple treatments for comprehensive restoration.",
+            title: "Root Canal Treatment",
+            description: "Advanced endodontic therapy to save infected teeth. We use modern rotary systems for precise, single-visit root canal treatments.",
+            icon: <Activity className="w-7 h-7" />,
+            features: ["Pain Relief", "Single Sitting", "Rotary Endo"],
+            gradient: "from-rose-500 to-pink-500"
+        },
+        {
+            title: "Full / Partial Denture",
+            description: "Custom-crafted dentures to replace some or all missing teeth. We offer flexible and rigid options for maximum comfort and stability.",
             icon: <Puzzle className="w-7 h-7" />,
-            features: ["Custom Fit", "Flexible", "Natural Feel"],
+            features: ["Custom Fit", "Natural Look", "Comfortable Bite"],
             gradient: "from-fuchsia-500 to-pink-500"
         },
         {
-            title: "Emergency Care",
-            description: "Immediate attention for dental emergencies to relieve pain and prevent further damage. We prioritize same-day appointments.",
-            icon: <Phone className="w-7 h-7" />,
-            features: ["Same Day", "Pain Relief", "Broken Teeth"],
-            gradient: "from-red-500 to-rose-500"
+            title: "Dental Implant",
+            description: "The gold standard for tooth replacement. Titanium implants provide a permanent, natural-feeling foundation for replacement teeth.",
+            icon: <Zap className="w-7 h-7" />,
+            features: ["Titanium Implants", "Permanent Solution", "Bone Preservation"],
+            gradient: "from-violet-500 to-purple-500"
         },
         {
-            title: "Pediatric Dentistry",
-            description: "Our goal is to ensure positive early dental experiences for kids. We specialize in child psychology and painless management.",
+            title: "Braces Treatment",
+            description: "Orthodontic corrections for aligning teeth. We offer metal braces, ceramic braces, and clear aligners for all age groups.",
+            icon: <Smile className="w-7 h-7" />,
+            features: ["Teeth Alignment", "Bite Correction", "Invisible Options"],
+            gradient: "from-indigo-500 to-violet-500"
+        },
+        {
+            title: "Pediatric (Children) Dental Treatments",
+            description: "Specialized care for children in a friendly environment. We focus on prevention, fluoride treatments, and habit breaking.",
             icon: <Baby className="w-7 h-7" />,
-            features: ["Fluoride Treatments", "Dental Sealants", "Habit Counseling"],
+            features: ["Cavity Prevention", "Fluoride", "Gentle Care"],
             gradient: "from-amber-400 to-yellow-500"
         },
     ]
+
+    const [currentImageIndex, setCurrentImageIndex] = useState(0)
+    const carouselImages = [
+        {
+            src: "/assests/invisible braces the right choice_page-0001.jpg",
+            aspect: "aspect-[3/4] max-w-sm" // Portrait poster
+        },
+        {
+            src: "/assests/invisible-braces.jpeg",
+            aspect: "aspect-[4/3] max-w-2xl" // Landscape photo
+        }
+    ]
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length)
+        }, 4000)
+        return () => clearInterval(timer)
+    }, [])
 
     return (
         <div className="bg-[#faf8f5] min-h-screen flex flex-col">
@@ -302,6 +295,65 @@ export default function ServicesPage() {
                     </div>
                 </section>
 
+                {/* Feature Spotlight - Invisible Braces */}
+                <section className="py-20 bg-[#faf8f5]">
+                    <div className="container px-4 md:px-6 text-center">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="max-w-4xl mx-auto"
+                        >
+                            <div className="inline-flex items-center gap-2 rounded-full bg-violet-50 px-4 py-2 border border-violet-100 mb-6">
+                                <Sparkles className="h-4 w-4 text-violet-600" />
+                                <span className="text-sm font-medium text-violet-700">Recommended Treatment</span>
+                            </div>
+                            <h2 className="font-display text-3xl md:text-4xl font-semibold text-slate-800 mb-8">
+                                Why Choose Invisible Braces?
+                            </h2>
+
+                            <motion.div
+                                layout
+                                className={`relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white bg-white mx-auto transition-all duration-500 ease-in-out ${carouselImages[currentImageIndex].aspect}`}
+                            >
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={currentImageIndex}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.5 }}
+                                        className="absolute inset-0 bg-white"
+                                    >
+                                        <Image
+                                            src={carouselImages[currentImageIndex].src}
+                                            alt="Invisible Braces - The Right Choice"
+                                            fill
+                                            className="object-contain"
+                                            priority
+                                        />
+                                    </motion.div>
+                                </AnimatePresence>
+
+                                {/* Carousel Indicators */}
+                                <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+                                    {carouselImages.map((_, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => setCurrentImageIndex(index)}
+                                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 shadow-sm ${currentImageIndex === index
+                                                ? "bg-teal-600 w-6"
+                                                : "bg-white/70 hover:bg-white"
+                                                }`}
+                                            aria-label={`Go to slide ${index + 1}`}
+                                        />
+                                    ))}
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    </div>
+                </section>
+
                 {/* Services Grid */}
                 <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
                     <motion.div
@@ -331,6 +383,11 @@ export default function ServicesPage() {
                         ))}
                     </motion.div>
                 </section>
+
+                {/* Real Results Gallery */}
+                <ResultGallery />
+
+
 
                 {/* Modern Technology Section */}
                 <section className="py-20 md:py-28 bg-white overflow-hidden">

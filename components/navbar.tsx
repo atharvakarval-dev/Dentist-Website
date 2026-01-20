@@ -91,11 +91,12 @@ export function Navbar() {
                             transition={{ type: "spring", stiffness: 400, damping: 15 }}
                         >
                             <Image
-                                src="/assests/103386.png"
+                                src="/assests/logo.png"
                                 alt="Dentistree Logo"
-                                width={40}
-                                height={40}
+                                width={50}
+                                height={50}
                                 className="object-contain"
+                                priority
                             />
                         </motion.div>
                         <div className="flex flex-col">
@@ -204,10 +205,10 @@ export function Navbar() {
                             <div className="flex items-center justify-between p-4 border-b border-slate-100">
                                 <Link href="/" className="flex items-center gap-2" onClick={toggleMenu}>
                                     <Image
-                                        src="/assests/103386.png"
+                                        src="/assests/logo.png"
                                         alt="Dentistree Logo"
-                                        width={36}
-                                        height={36}
+                                        width={40}
+                                        height={40}
                                         className="object-contain"
                                     />
                                     <div className="flex flex-col">
