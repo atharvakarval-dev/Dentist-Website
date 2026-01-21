@@ -39,7 +39,7 @@ export default function Footer() {
                             <li><span className="text-slate-400">Preventive Dentistry</span></li>
                             <li><span className="text-slate-400">Root Canal Treatment</span></li>
                             <li><span className="text-slate-400">Dental Implants</span></li>
-                            <li><span className="text-slate-400">Orthodontics & Braces</span></li>
+                            <li><span className="text-slate-400">Orthodontics Braces and Aligners</span></li>
                             <li><span className="text-slate-400">Pediatric Dentistry</span></li>
                         </ul>
                     </div>
@@ -47,8 +47,8 @@ export default function Footer() {
                     <div>
                         <h4 className="text-lg font-semibold mb-4 text-white">Contact Us</h4>
                         <ul className="space-y-2 text-slate-400">
-                            <li>Nanded City, Sinhagad Road</li>
-                            <li>Pune, Maharashtra</li>
+                            <li>R B Ingale Plaza, Ground Floor 5, Next to Uttam Sweets, Near Nanded City Circle</li>
+                            <li>Sinhagad Road, Pune 411041</li>
                             <li className="pt-2">
                                 <a href="tel:+918237156777" className="hover:text-primary transition-colors">+91 82371 56777</a>
                             </li>

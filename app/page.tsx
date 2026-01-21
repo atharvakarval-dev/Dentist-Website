@@ -2,52 +2,37 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { Navbar } from "@/components/navbar"
 import { AppointmentForm } from "@/components/appointment-form"
-const HeroImage = "/assests/doctor.png"
-const AboutImage = "/assests/AboutUs.png"
-const Clinic1 = "/assests/clinic1.png"
+import { Accordion } from "@/components/ui/accordion"
+import Footer from "@/components/layout/Footer"
 import {
   ArrowRight,
-  Mail,
   MapPin,
   Phone,
-  MessageCircle,
-  Instagram,
-  Linkedin,
-  Facebook,
   Sparkles,
-  Activity,
   Heart,
-  Smile,
   Clock,
   Shield,
   Star,
   Users,
   Award,
   CheckCircle2,
-  Stethoscope,
-  Gem,
+  Calendar,
+  Zap,
+  Microscope,
+  Baby
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-// Premium animation variants
+// --- Animation Variants ---
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
-  },
-}
-
-const fadeInScale = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
 
@@ -81,227 +66,234 @@ const slideInRight = {
 }
 
 export default function Home() {
+  const { scrollYProgress } = useScroll()
+  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1])
+
   return (
-    <div className="flex min-h-screen flex-col bg-[#faf8f5]">
+    <div className="bg-white min-h-screen flex flex-col font-sans selection:bg-teal-100 selection:text-teal-900">
+      <motion.div
+        style={{ scaleX }}
+        className="fixed top-0 left-0 right-0 h-1 bg-dental-teal origin-left z-[100]"
+      />
+
+      {/* Navbar now includes Announcement Bar and fixed positioning */}
       <Navbar />
 
-      <main className="flex-1">
-        {/* Hero Section - Premium Elegant Design */}
-        <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32 gradient-hero">
-          {/* Decorative elements */}
-          <div className="absolute top-20 left-10 w-72 h-72 bg-teal-200/30 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-amber-100/40 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-teal-50/50 to-transparent rounded-full" />
+      <main className="flex-1 pt-24 md:pt-32"> {/* Increased padding to clear fixed headers */}
 
-          <div className="container px-4 md:px-6 relative z-10">
-            <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
+        {/* 
+                  === HERO SECTION: EMOTIONAL HOOK ===
+                  Strategy: Promise -> Vibe -> Action
+                */}
+        <section className="relative min-h-[85vh] flex items-center bg-gradient-to-b from-dental-cream via-white to-white overflow-hidden pb-12">
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230d9488' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+            }}
+          />
+
+          <div className="container px-4 md:px-6 relative z-10 pt-4 md:pt-10">
+            <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-20 items-center">
+
+              {/* Text Content - ORDER 1 ON MOBILE NOW */}
               <motion.div
                 initial="hidden"
                 animate="visible"
                 variants={staggerContainer}
-                className="flex flex-col justify-center space-y-6"
+                className="order-1 lg:order-1 space-y-6 md:space-y-8 pt-4"
               >
-                {/* Premium Badge */}
-                <motion.div
-                  variants={fadeInUp}
-                  className="inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-r from-teal-50 to-emerald-50 px-4 py-2 border border-teal-100 shadow-sm"
-                >
-                  <div className="h-2 w-2 rounded-full bg-teal-500 animate-pulse" />
-                  <span className="text-sm font-medium text-teal-700 tracking-wide">
-                    Premium Dental Care Since 2009
-                  </span>
+                <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-50 border border-teal-100 text-dental-teal font-semibold text-xs tracking-widest uppercase">
+                  <Star className="w-3 h-3 fill-dental-teal" />
+                  Voted Top Dentist in Pune
                 </motion.div>
 
-                {/* Main Heading */}
-                <motion.div variants={fadeInUp} className="space-y-4">
-                  <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl xl:text-6xl text-slate-800 leading-[1.1]">
-                    Where Every Smile
-                    <br />
-                    <span className="text-gradient-primary">Tells a Story</span>
-                  </h1>
-                  <p className="max-w-[540px] text-slate-600 text-lg md:text-xl leading-relaxed">
-                    Experience the art of gentle dentistry with{" "}
-                    <span className="font-semibold text-slate-700">Dr. Poonam Bambarkar</span>
-                    , where 15+ years of expertise meets compassionate care for your entire family.
-                  </p>
-                </motion.div>
+                <motion.h1 variants={fadeInUp} className="font-display text-4xl md:text-5xl lg:text-7xl font-medium text-dental-charcoal leading-[1.15] md:leading-[1.1]">
+                  Your Smile Deserves <br />
+                  More Than Just <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-dental-teal to-teal-600 italic">Dental Work.</span>
+                </motion.h1>
 
-                {/* CTAs */}
-                <motion.div
-                  variants={fadeInUp}
-                  className="flex flex-col gap-4 sm:flex-row pt-2"
-                >
-                  <Button
-                    size="lg"
-                    className="rounded-full px-8 py-6 text-base font-medium gradient-primary hover:opacity-90 transition-all duration-300 shadow-premium-lg hover:shadow-xl"
-                    asChild
-                  >
-                    <Link href="#contact">
-                      <span>Book Your Consultation</span>
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                <motion.p variants={fadeInUp} className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-xl font-light">
+                  Experience the difference of 15+ years of precision dentistry, combined with the gentle care of a doctor who treats you like family.
+                </motion.p>
+
+                <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 pt-2">
+                  <Button size="lg" className="h-14 md:h-16 rounded-full px-8 text-lg bg-dental-teal text-white hover:bg-teal-600 shadow-xl shadow-teal-900/10" asChild>
+                    <Link href="/contact">Book Your Consultation</Link>
+                  </Button>
+                  <Button variant="outline" size="lg" className="h-14 md:h-16 rounded-full px-8 text-lg border-stone-200 text-slate-600 hover:bg-stone-50 gap-3" asChild>
+                    <Link href="/services">
+                      <Zap className="w-5 h-5 text-amber-400 fill-amber-400" />
+                      Virtual Tour
                     </Link>
                   </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="rounded-full px-8 py-6 text-base font-medium border-2 border-teal-200 text-teal-700 hover:bg-teal-50 hover:border-teal-300 transition-all duration-300"
-                    asChild
-                  >
-                    <Link href="/services">Explore Services</Link>
-                  </Button>
                 </motion.div>
 
-                {/* Trust Indicators */}
-                <motion.div
-                  variants={fadeInUp}
-                  className="pt-6 flex flex-wrap items-center gap-6"
-                >
-                  <div className="flex items-center gap-3 px-4 py-3 bg-white/80 rounded-2xl shadow-sm border border-slate-100">
-                    <div className="flex -space-x-3">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div
-                          key={i}
-                          className="h-10 w-10 rounded-full border-2 border-white bg-gradient-to-br from-teal-100 to-emerald-100 flex items-center justify-center"
-                        >
-                          <Smile className="h-5 w-5 text-teal-600" />
+                <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 md:gap-6 pt-4 text-sm text-slate-400 font-medium">
+                  <div className="flex items-center gap-2">
+                    <div className="flex -space-x-2">
+                      {[1, 2, 3].map(i => (
+                        <div key={i} className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-[10px] overflow-hidden">
+                          <Image src={`/assests/doctor.png`} alt="Reviewer" width={32} height={32} className="object-cover" />
                         </div>
                       ))}
                     </div>
-                    <div>
-                      <p className="font-semibold text-slate-800">1000+</p>
-                      <p className="text-sm text-slate-500">Happy Families</p>
-                    </div>
+                    <span>5.0 Stars (200+ Reviews)</span>
                   </div>
-                  <div className="flex items-center gap-2 px-4 py-3 bg-white/80 rounded-2xl shadow-sm border border-slate-100">
-                    <div className="flex gap-1">
-                      {[1, 2, 3, 4, 5].map((i) => (
-                        <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    <span className="font-semibold text-slate-700">4.9</span>
-                    <span className="text-slate-500">Rating</span>
-                  </div>
+                  <span className="hidden md:block w-1 h-1 rounded-full bg-slate-300" />
+                  <span>Accepting New Patients</span>
                 </motion.div>
               </motion.div>
 
-              {/* Hero Image */}
+              {/* Hero Image - ORDER 2 ON MOBILE */}
               <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={slideInRight}
-                className="relative lg:h-[620px] xl:h-[700px] w-full hidden lg:block"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="order-2 lg:order-2 relative mt-8 lg:mt-0"
               >
-                <div className="relative h-full w-full">
-                  {/* Main Image Container */}
-                  <div className="relative h-full w-full rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/50">
-                    <Image
-                      src={AboutImage}
-                      alt="Dr. Poonam Bambarkar at Dentistree Clinic"
-                      fill
-                      className="object-cover"
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                    {/* Subtle overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-teal-100 to-amber-50 rounded-[3rem] rotate-3 transform" />
+                <div className="relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl shadow-teal-900/10 border-4 border-white">
+                  <Image
+                    src="/assests/doctor-2.png"
+                    alt="Dr. Poonam Bambarkar at work"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
+
+                  {/* Floating Trust Badge */}
+                  <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 bg-white/95 backdrop-blur-md p-3 md:p-4 rounded-2xl shadow-lg flex items-center gap-3 md:gap-4 max-w-[200px] md:max-w-[240px]">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-dental-teal/10 rounded-xl flex items-center justify-center shrink-0">
+                      <Shield className="w-5 h-5 md:w-6 md:h-6 text-dental-teal" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-slate-800 text-xs md:text-sm">100% Sterile</div>
+                      <div className="text-[10px] md:text-xs text-slate-500">Exceeds Safety Standards</div>
+                    </div>
                   </div>
-
-                  {/* Floating Stats Card */}
-                  <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 1, duration: 0.6 }}
-                    className="absolute -bottom-6 -left-8 glass rounded-2xl p-5 shadow-xl border border-white/30"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="h-14 w-14 rounded-2xl gradient-primary flex items-center justify-center text-white shadow-lg">
-                        <Award className="h-7 w-7" />
-                      </div>
-                      <div>
-                        <p className="font-display text-2xl font-bold text-slate-800">15+</p>
-                        <p className="text-sm text-slate-600">Years of Excellence</p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Floating Badge */}
-                  <motion.div
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 1.2, duration: 0.5, type: "spring" }}
-                    className="absolute top-8 -right-4 glass rounded-2xl px-5 py-3 shadow-xl border border-white/30"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Shield className="h-5 w-5 text-teal-600" />
-                      <span className="font-medium text-slate-700">100% Sterilized</span>
-                    </div>
-                  </motion.div>
                 </div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Premium Features Strip */}
-        <section className="py-6 bg-white border-y border-slate-100">
-          <div className="container px-4 md:px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+
+        {/* 
+                  === TRUST STRIP ===
+                  Purpose: Immediate Authority
+                */}
+        <section className="py-12 bg-white border-b border-stone-100">
+          <div className="container px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
               {[
-                { icon: <Heart className="h-5 w-5" />, label: "Family Focused Care", color: "text-rose-500", bg: "bg-rose-50" },
-                { icon: <Shield className="h-5 w-5" />, label: "100% Sterilized", color: "text-teal-600", bg: "bg-teal-50" },
-                { icon: <Gem className="h-5 w-5" />, label: "Premium Technology", color: "text-amber-500", bg: "bg-amber-50" },
-                { icon: <Users className="h-5 w-5" />, label: "Expert Specialists", color: "text-indigo-500", bg: "bg-indigo-50" },
+                { label: "15+ Years Experience", icon: Award },
+                { label: "12,000+ Happy Smiles", icon: Users },
+                { label: "Advanced Technology", icon: Microscope },
+                { label: "Certified Specialists", icon: CheckCircle2 }
+              ].map((item, i) => (
+                <div key={i} className="flex items-center justify-center gap-3">
+                  <item.icon className="w-6 h-6 text-dental-teal" />
+                  <span className="font-display font-bold text-slate-800 text-lg">{item.label.split(' ')[0]}</span>
+                  <span className="hidden lg:inline text-sm font-medium text-slate-500">{item.label.split(' ').slice(1).join(' ')}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+
+        {/* 
+                  === OUTCOME-FOCUSED SERVICES ===
+                  Strategy: Benefit > Feature
+                  Ref: "Outcome-focus the copy"
+                */}
+        <section className="py-24 md:py-32 bg-stone-50">
+          <div className="container px-4 md:px-6">
+            <SectionHeader
+              label="Our Expertise"
+              title="Transforming Lives, One Smile at a Time"
+              subtitle="We don't just treat teeth. We restore confidence, function, and health using minimally invasive dentistry."
+              center
+            />
+
+            <div className="grid md:grid-cols-3 gap-6 mt-16">
+              {[
+                {
+                  title: "Smile Makeovers",
+                  desc: "Veneers, whitening, and design for the smile you've always wanted.",
+                  icon: Sparkles,
+                  for: "Cosmetic Dentistry"
+                },
+                {
+                  title: "Permanent Replacements",
+                  desc: "Advanced implants that look, feel, and function exactly like natural teeth.",
+                  icon: Award,
+                  for: "Dental Implants"
+                },
+                {
+                  title: "Pain-Free Root Canals",
+                  desc: "Save your natural tooth with our advanced rotary technology and comfort protocols.",
+                  icon: CheckCircle2,
+                  for: "Endodontics"
+                }
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.5 }}
-                  className="flex items-center gap-3 px-4 py-3"
+                  transition={{ delay: i * 0.1 }}
+                  className="group relative bg-white rounded-3xl p-8 border border-stone-100 hover:shadow-2xl hover:border-teal-100 transition-all duration-300 overflow-hidden"
                 >
-                  <div className={`h-11 w-11 rounded-xl ${item.bg} ${item.color} flex items-center justify-center shrink-0`}>
-                    {item.icon}
+                  <div className="w-14 h-14 bg-dental-cream rounded-2xl flex items-center justify-center mb-6 group-hover:bg-dental-teal transition-colors duration-300">
+                    <item.icon className="w-7 h-7 text-amber-600 group-hover:text-white transition-colors" />
                   </div>
-                  <span className="font-medium text-slate-700 text-sm md:text-base">{item.label}</span>
+                  <h3 className="font-display text-2xl font-bold text-dental-charcoal mb-2">{item.title}</h3>
+                  <p className="text-slate-600 mb-6 leading-relaxed">{item.desc}</p>
+
+                  <div className="pt-6 border-t border-slate-50 flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{item.for}</span>
+                    <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-dental-teal group-hover:text-white transition-all">
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
                 </motion.div>
               ))}
+            </div>
+
+            <div className="text-center mt-12">
+              <Link href="/services" className="inline-flex items-center gap-2 text-dental-teal font-semibold hover:text-teal-700 transition-colors border-b border-dental-teal/30 hover:border-dental-teal pb-0.5">
+                View Full Service Menu <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* About Section - Elegant Design */}
-        <section id="about" className="py-20 md:py-28 bg-[#faf8f5]">
-          <div className="container px-4 md:px-6">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+        {/* 
+                  === RISK REVERSAL: THE FIRST VISIT ===
+                  Strategy: Walkthrough to reduce anxiety
+                */}
+        <section className="py-24 bg-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-dental-cream rounded-full blur-[100px] opacity-50" />
+
+          <div className="container px-4 md:px-6 relative z-10">
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={slideInLeft}
-                className="relative"
+                className="order-2 lg:order-1"
               >
-                <div className="relative">
-                  {/* Decorative frame */}
-                  <div className="absolute -top-4 -left-4 w-full h-full border-2 border-teal-200 rounded-[2rem]" />
-
-                  <div className="relative h-[450px] md:h-[550px] rounded-[2rem] overflow-hidden shadow-2xl">
-                    <Image
-                      src={HeroImage}
-                      alt="Dr. Poonam Bambarkar"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent" />
-                  </div>
-
-                  {/* Experience Badge */}
-                  <div className="absolute -bottom-6 -right-6 h-36 w-36 rounded-3xl gradient-primary flex items-center justify-center text-white shadow-2xl border-4 border-white hidden md:flex animate-float">
-                    <div className="text-center">
-                      <span className="block text-4xl font-display font-bold">15+</span>
-                      <span className="text-sm opacity-90">Years Exp.</span>
+                <div className="relative aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl">
+                  <Image src="/assests/clinic1.png" alt="Clinic Interior" fill className="object-cover" />
+                  <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent text-white">
+                    <p className="font-display text-2xl">"The most relaxing dental experience I've ever had."</p>
+                    <div className="flex gap-1 mt-2 text-amber-400">
+                      {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-4 h-4 fill-current" />)}
                     </div>
                   </div>
                 </div>
@@ -312,536 +304,216 @@ export default function Home() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={staggerContainer}
-                className="space-y-6"
+                className="order-1 lg:order-2 space-y-10"
               >
-                <motion.div variants={fadeInUp} className="space-y-4">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-4 py-2 border border-teal-100">
-                    <Stethoscope className="h-4 w-4 text-teal-600" />
-                    <span className="text-sm font-medium text-teal-700">Meet Your Doctor</span>
-                  </div>
-                  <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-slate-800">
-                    Dr. Poonam Bambarkar
-                  </h2>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="space-y-4 text-slate-600 leading-relaxed">
-                  <p className="text-lg">
-                    With over a decade and a half of expertise in dentistry, Dr. Poonam Bambarkar combines{" "}
-                    <span className="text-teal-700 font-medium">professional excellence</span> with a deeply{" "}
-                    <span className="text-teal-700 font-medium">compassionate approach</span>.
-                  </p>
-                  <p>
-                    Her focus is on delivering personalized treatments using advanced techniques and modern
-                    dental technology. Whether you're visiting for a routine cleaning or a complete smile
-                    makeover, you are in expert hands.
-                  </p>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                  {[
-                    { icon: <CheckCircle2 className="h-5 w-5 text-teal-600" />, text: "Accurate Diagnosis" },
-                    { icon: <CheckCircle2 className="h-5 w-5 text-teal-600" />, text: "Painless Treatments" },
-                    { icon: <CheckCircle2 className="h-5 w-5 text-teal-600" />, text: "Preventive Focus" },
-                    { icon: <CheckCircle2 className="h-5 w-5 text-teal-600" />, text: "Ethical Practice" },
-                  ].map((feat, i) => (
-                    <div key={i} className="flex items-center gap-3 bg-white rounded-xl px-4 py-3 shadow-sm border border-slate-100">
-                      {feat.icon}
-                      <span className="font-medium text-slate-700">{feat.text}</span>
-                    </div>
-                  ))}
-                </motion.div>
-
-                <motion.div variants={fadeInUp}>
-                  <Button
-                    className="rounded-full px-8 py-6 text-base gradient-primary hover:opacity-90 transition-all shadow-premium-lg mt-4"
-                    asChild
-                  >
-                    <Link href="#contact">
-                      Book Consultation
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                </motion.div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Services Section - Premium Cards */}
-        <section id="services" className="py-20 md:py-28 bg-white">
-          <div className="container px-4 md:px-6">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-              className="text-center max-w-3xl mx-auto mb-16"
-            >
-              <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-4 py-2 border border-teal-100 mb-6">
-                <Sparkles className="h-4 w-4 text-teal-600" />
-                <span className="text-sm font-medium text-teal-700">Our Expertise</span>
-              </div>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-slate-800 mb-4">
-                Comprehensive Dental Care
-              </h2>
-              <p className="text-lg text-slate-600">
-                From preventive care to advanced restorative procedures, we offer a full spectrum of premium dental treatments.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {[
-                {
-                  title: "Root Canal Treatment",
-                  desc: "Advanced rotary endodontics for precise, painless infection removal and tooth preservation.",
-                  icon: <Activity className="h-6 w-6" />,
-                  gradient: "from-rose-500 to-pink-500"
-                },
-                {
-                  title: "Dental Implants",
-                  desc: "Permanent, natural-looking replacements for missing teeth using biocompatible materials.",
-                  icon: <Gem className="h-6 w-6" />,
-                  gradient: "from-teal-500 to-emerald-500"
-                },
-                {
-                  title: "Orthodontics & Braces",
-                  desc: "Metal braces and clear aligners to correct misaligned teeth and bite issues.",
-                  icon: <Smile className="h-6 w-6" />,
-                  gradient: "from-violet-500 to-purple-500"
-                },
-                {
-                  title: "Cosmetic Dentistry",
-                  desc: "Smile designing, veneers, and whitening for a brighter, more confident smile.",
-                  icon: <Sparkles className="h-6 w-6" />,
-                  gradient: "from-amber-500 to-orange-500"
-                },
-                {
-                  title: "Pediatric Dentistry",
-                  desc: "Gentle, preventive care for children to ensure healthy oral development.",
-                  icon: <Heart className="h-6 w-6" />,
-                  gradient: "from-sky-500 to-blue-500"
-                },
-                {
-                  title: "Oral Surgery",
-                  desc: "Safe extractions and minor surgical procedures with strict sterilization protocols.",
-                  icon: <Shield className="h-6 w-6" />,
-                  gradient: "from-slate-600 to-slate-700"
-                }
-              ].map((service, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={fadeInUp}
-                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                  className="group relative p-6 rounded-2xl bg-[#faf8f5] border border-slate-100 hover:bg-white hover:shadow-xl hover:border-transparent transition-all duration-500"
-                >
-                  {/* Hover gradient border effect */}
-                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl`} />
-
-                  <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center text-white mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    {service.icon}
-                  </div>
-                  <h3 className="font-display text-xl font-semibold text-slate-800 mb-3">{service.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">{service.desc}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="text-center mt-12"
-            >
-              <Button
-                variant="outline"
-                size="lg"
-                className="rounded-full px-8 py-6 text-base border-2 border-teal-200 text-teal-700 hover:bg-teal-50 hover:border-teal-300"
-                asChild
-              >
-                <Link href="/services">
-                  View All Services
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Personalized Care - New Section for doctor-2.png */}
-        <section className="py-20 md:py-28 bg-[#faf8f5]">
-          <div className="container px-4 md:px-6">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={slideInLeft}
-                className="space-y-8"
-              >
-                <motion.div variants={fadeInUp} className="space-y-4">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-4 py-2 border border-teal-100">
-                    <Heart className="h-4 w-4 text-teal-600" />
-                    <span className="text-sm font-medium text-teal-700">Patient-First Approach</span>
-                  </div>
-                  <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-slate-800">
-                    Dedicated to <br />
-                    <span className="text-gradient-primary">Your Unique Smile</span>
-                  </h2>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="space-y-6 text-slate-600 leading-relaxed">
-                  <p className="text-lg">
-                    We understand that visiting the dentist can be personal. That's why Dr. Poonam Bambarkar takes the time to listen to your concerns, explain your options, and creates a treatment plan that fits <i>your</i> needs.
-                  </p>
-                  <p>
-                    From the moment you walk in, our goal is to ensure you feel heard, valued, and comfortable. We don't just treat teeth; we care for people.
-                  </p>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                  <div className="flex items-center gap-3 bg-white px-5 py-4 rounded-2xl shadow-sm border border-slate-100 h-full">
-                    <div className="h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center shrink-0">
-                      <MessageCircle className="h-5 w-5 text-teal-600" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-slate-800">Open Communication</p>
-                      <p className="text-xs text-slate-500">We explain every step</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 bg-white px-5 py-4 rounded-2xl shadow-sm border border-slate-100 h-full">
-                    <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
-                      <Smile className="h-5 w-5 text-amber-600" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-slate-800">Stress-Free Visits</p>
-                      <p className="text-xs text-slate-500">Your comfort matters</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={slideInRight}
-                className="relative mx-auto w-full max-w-md lg:max-w-none"
-              >
-                <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
-                  <Image
-                    src="/assests/doctor-2.png"
-                    alt="Dr. Poonam Bambarkar Consulting"
-                    width={600}
-                    height={800}
-                    className="object-cover w-full h-auto"
+                <div>
+                  <SectionHeader
+                    label="Your First Visit"
+                    title="Anxiety-Free Dentistry Starts Here"
+                    subtitle="No judgment. No pressure. Just a simple 3-step process to get to know you and your health."
                   />
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-teal-900/40 to-transparent" />
                 </div>
 
-                {/* Decorative Elements */}
-                <div className="absolute -z-10 top-10 -right-10 w-32 h-32 bg-amber-200/50 rounded-full blur-3xl" />
-                <div className="absolute -z-10 bottom-10 -left-10 w-32 h-32 bg-teal-200/50 rounded-full blur-3xl" />
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Why Choose Us - Premium Section */}
-        <section id="why-us" className="py-20 md:py-28 bg-gradient-to-br from-teal-50/50 via-white to-amber-50/30">
-          <div className="container px-4 md:px-6">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={staggerContainer}
-                className="order-2 lg:order-1 space-y-8"
-              >
-                <motion.div variants={fadeInUp} className="space-y-4">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-4 py-2 border border-teal-100">
-                    <Award className="h-4 w-4 text-teal-600" />
-                    <span className="text-sm font-medium text-teal-700">Why Choose Us</span>
-                  </div>
-                  <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-slate-800">
-                    Why Choose Dentistree?
-                  </h2>
-                </motion.div>
-
-                <motion.div variants={staggerContainer} className="space-y-5">
+                <div className="space-y-8">
                   {[
                     {
-                      title: "15+ Years of Trusted Experience",
-                      desc: "Clinical expertise backed by thousands of successful treatments and happy patients.",
-                      icon: <Award className="h-5 w-5" />
+                      step: "01",
+                      title: "Warm Welcome, No Waiting",
+                      desc: "We value your time. Walk in and get settled immediately—no long lobby waits."
                     },
                     {
-                      title: "Modern Sterilization Protocols",
-                      desc: "World-class hygiene standards with autoclave sterilization ensuring 100% safety.",
-                      icon: <Shield className="h-5 w-5" />
+                      step: "02",
+                      title: "Digital Scan & Diagnosis",
+                      desc: "We use advanced cameras to show you exactly what's going on. No guessing."
                     },
                     {
-                      title: "Family-Friendly Environment",
-                      desc: "A warm, welcoming space designed for comfortable visits for all ages.",
-                      icon: <Heart className="h-5 w-5" />
-                    },
-                    {
-                      title: "Transparent & Ethical Pricing",
-                      desc: "Clear diagnosis and treatment costs upfront with no hidden charges.",
-                      icon: <CheckCircle2 className="h-5 w-5" />
+                      step: "03",
+                      title: "Honest Conversation",
+                      desc: "We discuss options that fit your budget and goals. You're in control."
                     }
                   ].map((item, i) => (
-                    <motion.div
-                      key={i}
-                      variants={fadeInUp}
-                      className="flex gap-4 p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
-                    >
-                      <div className="mt-1 h-11 w-11 rounded-xl gradient-primary flex items-center justify-center text-white shrink-0">
-                        {item.icon}
-                      </div>
+                    <motion.div key={i} variants={fadeInUp} className="flex gap-6">
+                      <div className="font-display text-4xl text-dental-teal/20 font-bold leading-none shrink-0">{item.step}</div>
                       <div>
-                        <h3 className="font-semibold text-slate-800 mb-1">{item.title}</h3>
-                        <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+                        <h4 className="font-display text-xl font-bold text-slate-800 mb-2">{item.title}</h4>
+                        <p className="text-slate-600 leading-relaxed">{item.desc}</p>
                       </div>
                     </motion.div>
                   ))}
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={slideInRight}
-                className="order-1 lg:order-2 relative"
-              >
-                <div className="relative h-[450px] md:h-[550px] rounded-[2rem] overflow-hidden shadow-2xl">
-                  {/* Decorative border */}
-                  <div className="absolute -inset-1 bg-gradient-to-br from-teal-300 to-amber-300 rounded-[2.2rem] blur-sm opacity-50" />
-                  <div className="relative h-full w-full rounded-[2rem] overflow-hidden border-4 border-white">
-                    <Image
-                      src={Clinic1}
-                      alt="Dentistree Clinic Interior"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </div>
                 </div>
-
-                {/* Floating card */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 }}
-                  className="absolute bottom-4 left-4 sm:-bottom-6 sm:-left-6 md:-bottom-8 md:-left-8 glass rounded-2xl p-3 sm:p-4 md:p-5 shadow-xl backdrop-blur-sm"
-                >
-                  <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-                    <div className="flex gap-0.5 sm:gap-1">
-                      {[1, 2, 3, 4, 5].map((i) => (
-                        <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    <div className="text-left">
-                      <p className="font-bold text-slate-800 text-sm sm:text-base">Exceptional Care</p>
-                      <p className="text-xs sm:text-sm text-slate-500">4.9 Patient Rating</p>
-                    </div>
-                  </div>
-                </motion.div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Contact CTA Section - Premium Dark Design */}
-        <section id="contact" className="py-20 md:py-28 bg-white">
-          <div className="container px-4 md:px-6">
-            <div className="rounded-[2.5rem] overflow-hidden shadow-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-              <div className="grid lg:grid-cols-2">
-                {/* Left Info Panel */}
-                <div className="p-8 md:p-12 lg:p-16 space-y-8 text-white relative overflow-hidden">
-                  {/* Decorative elements */}
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />
-                  <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl" />
 
-                  <div className="relative z-10 space-y-6">
-                    <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 border border-white/10 backdrop-blur-sm">
-                      <Sparkles className="h-4 w-4 text-amber-400" />
-                      <span className="text-sm font-medium text-white/90">Book Your Visit</span>
-                    </div>
+        {/* 
+                  === COMPARISON / WHY US TEASER ===
+                  Strategy: Differentiation
+                */}
+        <section className="py-24 bg-dental-charcoal text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-teal-900/10" />
+          <div className="container px-4 md:px-6 relative z-10">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="font-display text-3xl md:text-5xl mb-6">Experience the Upgrade</h2>
+              <p className="text-slate-300 text-lg">Why thousands of families across Pune have switched to Dentistree.</p>
+            </div>
 
-                    <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
-                      Ready for a<br />
-                      <span className="text-gradient-gold">Healthier Smile?</span>
-                    </h2>
-                    <p className="text-slate-300 text-lg max-w-md">
-                      Schedule your visit today at Dentistree Dental Clinic and experience trusted, premium dental care.
-                    </p>
-                  </div>
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm">
+                <h3 className="text-xl font-bold mb-6 text-slate-400">Typical Dental Visit</h3>
+                <ul className="space-y-4 text-slate-400">
+                  <li className="flex gap-3"><span className="text-red-400 font-bold">×</span> Long wait times</li>
+                  <li className="flex gap-3"><span className="text-red-400 font-bold">×</span> Confusing medical jargon</li>
+                  <li className="flex gap-3"><span className="text-red-400 font-bold">×</span> Pushing expensive treatments</li>
+                  <li className="flex gap-3"><span className="text-red-400 font-bold">×</span> Rushed appointments</li>
+                </ul>
+              </div>
+              <div className="bg-dental-teal p-8 rounded-3xl shadow-xl transform md:scale-105 border border-teal-400/30">
+                <h3 className="text-xl font-bold mb-6 text-white">The Dentistree Way</h3>
+                <ul className="space-y-4 text-teal-50 font-medium">
+                  <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 text-white" /> Zero-wait policy</li>
+                  <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 text-white" /> Visual explainers & photos</li>
+                  <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 text-white" /> Conservative, ethical care</li>
+                  <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 text-white" /> 45-minute dedicated slots</li>
+                </ul>
+              </div>
+            </div>
 
-                  <div className="relative z-10 space-y-4 pt-4">
-                    {[
-                      { icon: <MapPin className="h-5 w-5" />, title: "Visit Us", info: "Nanded City, Sinhagad Road, Pune" },
-                      { icon: <Phone className="h-5 w-5" />, title: "Call Us", info: "+91 82371 56777" },
-                      { icon: <Clock className="h-5 w-5" />, title: "Timings", info: "Mon - Sat: 10:00 AM - 8:00 PM" },
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors">
-                        <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center">
-                          {item.icon}
-                        </div>
-                        <div>
-                          <p className="font-semibold">{item.title}</p>
-                          <p className="text-sm text-slate-300">{item.info}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+            <div className="text-center mt-16">
+              <Button variant="link" className="text-white text-lg hover:text-teal-200" asChild>
+                <Link href="/why-us">Read Our Full Promise &rarr;</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
 
-                  {/* Social links */}
-                  <div className="relative z-10 flex gap-3 pt-4">
-                    {[
-                      { icon: <Facebook className="h-5 w-5" />, href: "#" },
-                      { icon: <Instagram className="h-5 w-5" />, href: "#" },
-                      { icon: <Linkedin className="h-5 w-5" />, href: "#" },
-                    ].map((social, i) => (
-                      <Link
-                        key={i}
-                        href={social.href}
-                        className="h-11 w-11 rounded-xl bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors border border-white/10"
-                      >
-                        {social.icon}
-                      </Link>
-                    ))}
-                  </div>
+
+        {/* 
+                  === FAQ / OBJECTION HANDLING ===
+                  Strategy: Pre-empt doubts
+                */}
+        <section className="py-24 bg-dental-cream">
+          <div className="container px-4 max-w-3xl mx-auto">
+            <SectionHeader
+              label="FAQ"
+              title="Common Questions"
+              subtitle="Got questions? We have answers. If you can't find what you're looking for, just give us a call."
+              center
+            />
+
+            <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-stone-100">
+              <Accordion items={[
+                {
+                  id: "1",
+                  trigger: "Do you accept new patients?",
+                  content: "Yes! We are currently welcoming new patients and families. You can often get an appointment within 24-48 hours."
+                },
+                {
+                  id: "2",
+                  trigger: "What about dental anxiety?",
+                  content: "We specialize in anxious patients. From our non-clinical environment to painless injection techniques and calming music, we do everything to make you comfortable."
+                },
+                {
+                  id: "3",
+                  trigger: "Are your prices transparent?",
+                  content: "Absolutely. We provide a full cost breakdown before any treatment begins. No hidden fees, ever."
+                },
+                {
+                  id: "4",
+                  trigger: "Do you treat children?",
+                  content: "Yes, Dr. Poonam loves treating kids! We make their first visits fun and educational to build a lifetime of good habits."
+                }
+              ]} />
+            </div>
+          </div>
+        </section>
+
+
+        {/* 
+                  === FINAL CTA: DUAL PATH ===
+                  Strategy: Split funnel
+                */}
+        <section className="py-20 bg-white">
+          <div className="container px-4 text-center pb-20">
+            <h2 className="font-display text-4xl md:text-5xl text-dental-charcoal mb-6">Ready for a Healthier Smile?</h2>
+            <p className="text-slate-500 text-lg mb-12 max-w-2xl mx-auto">Don't put off your health. Schedule your visit today and experience the difference.</p>
+
+            <div className="flex flex-col sm:flex-row gap-8 justify-center max-w-4xl mx-auto">
+              <div className="flex-1 p-8 rounded-3xl bg-teal-50 border border-teal-100 flex flex-col items-center hover:shadow-lg transition-all">
+                <div className="w-12 h-12 bg-dental-teal rounded-full flex items-center justify-center text-white mb-4">
+                  <Sparkles className="w-6 h-6" />
                 </div>
+                <h3 className="font-bold text-xl text-dental-charcoal mb-2">New Patient?</h3>
+                <p className="text-sm text-slate-500 mb-6">Start your journey with a comprehensive consultation.</p>
+                <Button size="lg" className="w-full rounded-full bg-dental-teal hover:bg-teal-600" asChild>
+                  <Link href="/contact">Book First Visit</Link>
+                </Button>
+              </div>
 
-                {/* Right Form Panel */}
-                <div className="bg-white p-8 md:p-12 lg:p-16">
-                  <div className="mb-8">
-                    <h3 className="font-display text-2xl md:text-3xl font-semibold text-slate-800 mb-3">
-                      Request Appointment
-                    </h3>
-                    <p className="text-slate-500">
-                      Fill in your details and we will confirm your slot via WhatsApp.
-                    </p>
-                  </div>
-                  <AppointmentForm />
+              <div className="flex-1 p-8 rounded-3xl bg-white border border-slate-100 flex flex-col items-center hover:shadow-lg transition-all">
+                <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 mb-4">
+                  <Phone className="w-6 h-6" />
                 </div>
+                <h3 className="font-bold text-xl text-dental-charcoal mb-2">Have Questions?</h3>
+                <p className="text-sm text-slate-500 mb-6">Speak directly with our front desk team.</p>
+                <Button variant="outline" size="lg" className="w-full rounded-full" asChild>
+                  <Link href="tel:+918237156777">Call +91 82371 56777</Link>
+                </Button>
               </div>
             </div>
           </div>
         </section>
+
       </main>
+      <Footer />
+    </div>
+  )
+}
 
-      {/* Footer - Premium Design */}
-      <footer className="bg-slate-900 text-slate-300 pt-16 pb-8">
-        <div className="container px-4 md:px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-            {/* Brand */}
-            <div className="lg:col-span-1 space-y-5">
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl gradient-primary text-white shadow-lg">
-                  <Smile className="h-6 w-6" />
-                </div>
-                <span className="font-display text-xl font-semibold text-white">Dentistree</span>
-              </div>
-              <p className="text-slate-400 leading-relaxed">
-                Comprehensive dental care for kids, adults & seniors. Where every smile tells a story.
-              </p>
-              <div className="flex gap-3">
-                {[
-                  { icon: <Facebook className="h-4 w-4" />, href: "#" },
-                  { icon: <Instagram className="h-4 w-4" />, href: "#" },
-                  { icon: <Linkedin className="h-4 w-4" />, href: "#" },
-                ].map((social, i) => (
-                  <Link
-                    key={i}
-                    href={social.href}
-                    className="h-9 w-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-teal-500 transition-colors"
-                  >
-                    {social.icon}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h4 className="font-semibold text-white mb-5">Quick Links</h4>
-              <nav className="flex flex-col gap-3">
-                {["Services", "About Us", "Contact", "Book Appointment"].map((link, i) => (
-                  <Link
-                    key={i}
-                    href={link === "Services" ? "/services" : `#${link.toLowerCase().replace(" ", "-")}`}
-                    className="text-slate-400 hover:text-teal-400 transition-colors"
-                  >
-                    {link}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-
-            {/* Services */}
-            <div>
-              <h4 className="font-semibold text-white mb-5">Services</h4>
-              <nav className="flex flex-col gap-3">
-                {["Root Canal", "Dental Implants", "Cosmetic Dentistry", "Pediatric Care"].map((service, i) => (
-                  <Link
-                    key={i}
-                    href="/services"
-                    className="text-slate-400 hover:text-teal-400 transition-colors"
-                  >
-                    {service}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-
-            {/* Contact Info */}
-            <div>
-              <h4 className="font-semibold text-white mb-5">Visit Us</h4>
-              <address className="not-italic text-slate-400 space-y-3">
-                <p className="flex items-start gap-2">
-                  <MapPin className="h-5 w-5 text-teal-500 shrink-0 mt-0.5" />
-                  <span>Nanded City, Sinhagad Road,<br />Pune, Maharashtra</span>
-                </p>
-                <p className="flex items-center gap-2">
-                  <Phone className="h-5 w-5 text-teal-500" />
-                  +91 8237156777
-                </p>
-                <p className="flex items-center gap-2">
-                  <Clock className="h-5 w-5 text-teal-500" />
-                  Mon - Sat: 10:00 AM - 8:00 PM
-                </p>
-              </address>
-            </div>
-          </div>
-
-          <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-slate-500">
-              © {new Date().getFullYear()} Dentistree Dental Clinic. All rights reserved.
-            </p>
-            <div className="flex flex-wrap gap-6 text-sm text-slate-500">
-              <Link href="https://www.linkedin.com/in/atharva-karval/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors flex items-center gap-2">
-                <Linkedin className="h-4 w-4" />
-                <span>Designed by Atharva Karval</span>
-              </Link>
-              <Link href="https://wa.me/919518377949" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 transition-colors flex items-center gap-2">
-                <MessageCircle className="h-4 w-4" />
-                <span>+91 95183 77949</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+// Reuse SectionHeader
+function SectionHeader({
+  label,
+  title,
+  subtitle,
+  center = false,
+}: {
+  label: string,
+  title: React.ReactNode,
+  subtitle?: string,
+  center?: boolean,
+}) {
+  return (
+    <div className={`mb-12 ${center ? "text-center mx-auto max-w-3xl" : "max-w-2xl"}`}>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase mb-6 bg-teal-50 text-dental-teal border border-teal-100 ${center ? "mx-auto" : ""}`}
+      >
+        <Sparkles className="w-3 h-3" />
+        {label}
+      </motion.div>
+      <motion.h2
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1 }}
+        className="font-display text-4xl md:text-5xl font-medium leading-[1.1] mb-6 text-dental-charcoal"
+      >
+        {title}
+      </motion.h2>
+      {subtitle && (
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-lg leading-relaxed text-slate-600"
+        >
+          {subtitle}
+        </motion.p>
+      )}
     </div>
   )
 }

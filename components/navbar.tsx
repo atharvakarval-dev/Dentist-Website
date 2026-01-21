@@ -68,113 +68,126 @@ export function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
+    // Lock body scroll when menu is open
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = "unset"
+        }
+        return () => {
+            document.body.style.overflow = "unset"
+        }
+    }, [isMenuOpen])
+
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
 
     return (
         <>
-            <motion.header
-                initial={{ y: 0 }}
-                animate={{ y: isVisible ? 0 : -100 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className={`fixed top-0 left-0 right-0 z-50 w-full transition-colors duration-300 ${scrolled
-                    ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100"
-                    : "bg-[#faf8f5]/80 backdrop-blur-sm"
-                    }`}
-            >
-                <div className="container flex h-20 items-center justify-between px-4 md:px-6">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-3 group">
-                        <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                        >
-                            <Image
-                                src="/assests/logo.png"
-                                alt="Dentistree Logo"
-                                width={50}
-                                height={50}
-                                className="object-contain"
-                                priority
-                            />
-                        </motion.div>
-                        <div className="flex flex-col">
-                            <span className="font-display text-xl font-semibold text-slate-800 group-hover:text-teal-700 transition-colors">
-                                Dentistree
-                            </span>
-                            <span className="text-[11px] font-medium text-slate-500 tracking-wide uppercase">
-                                Dental Clinic
-                            </span>
-                        </div>
-                    </Link>
+            <div className={`fixed top-0 left-0 right-0 z-50 flex flex-col transition-transform duration-300 ${isVisible || isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
 
-                    {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center gap-1">
-                        {navItems.map((item) => {
-                            const isActive = pathname === item.href
-                            return (
-                                <Link
-                                    key={item.name}
-                                    href={item.href}
-                                    className="relative px-4 py-2 group"
-                                >
-                                    <span className={`text-sm font-medium transition-colors ${isActive
-                                        ? "text-teal-700"
-                                        : "text-slate-600 group-hover:text-teal-600"
-                                        }`}>
-                                        {item.name}
-                                    </span>
-                                    {/* Active indicator */}
-                                    {isActive && (
-                                        <motion.div
-                                            layoutId="navbar-active"
-                                            className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"
-                                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                        />
-                                    )}
-                                    {/* Hover indicator */}
-                                    <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-teal-200 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-center" />
-                                </Link>
-                            )
-                        })}
-                    </nav>
-
-                    {/* Desktop CTA */}
-                    <div className="hidden lg:flex items-center gap-4">
-                        <Link
-                            href="tel:+918237156777"
-                            className="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors"
-                        >
-                            <div className="h-8 w-8 rounded-full bg-teal-50 flex items-center justify-center">
-                                <Phone className="h-4 w-4 text-teal-600" />
+                {/* Main Navbar */}
+                <header
+                    className={`w-full transition-colors duration-300 ${scrolled
+                        ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100"
+                        : "bg-[#faf8f5]/80 backdrop-blur-sm"
+                        }`}
+                >
+                    <div className="container flex h-20 items-center justify-between px-4 md:px-6">
+                        {/* Logo */}
+                        <Link href="/" className="flex items-center gap-3 group">
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                            >
+                                <Image
+                                    src="/assests/logo.png"
+                                    alt="Dentistree Logo"
+                                    width={50}
+                                    height={50}
+                                    className="object-contain"
+                                    priority
+                                />
+                            </motion.div>
+                            <div className="flex flex-col">
+                                <span className="font-display text-xl font-semibold text-slate-800 group-hover:text-teal-700 transition-colors">
+                                    Dentistree
+                                </span>
+                                <span className="text-[11px] font-medium text-slate-500 tracking-wide uppercase">
+                                    Dental Clinic
+                                </span>
                             </div>
-                            <span className="hidden xl:block">Call Us</span>
                         </Link>
-                        <Button
-                            size="sm"
-                            className="rounded-full px-6 py-5 gradient-primary hover:opacity-90 shadow-sm hover:shadow-md transition-all"
-                            asChild
-                        >
-                            <Link href="/contact" className="flex items-center gap-2">
-                                Book Appointment
-                                <ArrowRight className="h-4 w-4" />
+
+                        {/* Desktop Navigation */}
+                        <nav className="hidden lg:flex items-center gap-1">
+                            {navItems.map((item) => {
+                                const isActive = pathname === item.href
+                                return (
+                                    <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        className="relative px-4 py-2 group"
+                                    >
+                                        <span className={`text-sm font-medium transition-colors ${isActive
+                                            ? "text-teal-700"
+                                            : "text-slate-600 group-hover:text-teal-600"
+                                            }`}>
+                                            {item.name}
+                                        </span>
+                                        {/* Active indicator */}
+                                        {isActive && (
+                                            <motion.div
+                                                layoutId="navbar-active"
+                                                className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"
+                                                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                            />
+                                        )}
+                                        {/* Hover indicator */}
+                                        <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-teal-200 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-center" />
+                                    </Link>
+                                )
+                            })}
+                        </nav>
+
+                        {/* Desktop CTA */}
+                        <div className="hidden lg:flex items-center gap-4">
+                            <Link
+                                href="tel:+918237156777"
+                                className="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors"
+                            >
+                                <div className="h-8 w-8 rounded-full bg-teal-50 flex items-center justify-center">
+                                    <Phone className="h-4 w-4 text-teal-600" />
+                                </div>
+                                <span className="hidden xl:block">Call Us</span>
                             </Link>
-                        </Button>
+                            <Button
+                                size="sm"
+                                className="rounded-full px-6 py-5 gradient-primary hover:opacity-90 shadow-sm hover:shadow-md transition-all"
+                                asChild
+                            >
+                                <Link href="/contact" className="flex items-center gap-2">
+                                    Book Appointment
+                                    <ArrowRight className="h-4 w-4" />
+                                </Link>
+                            </Button>
+                        </div>
+
+                        {/* Mobile Menu Button */}
+                        <button
+                            className="flex lg:hidden p-2 rounded-xl hover:bg-slate-100 transition-colors"
+                            onClick={toggleMenu}
+                            aria-label="Toggle menu"
+                        >
+                            <Menu className="h-6 w-6 text-slate-700" />
+                        </button>
                     </div>
+                </header>
+            </div>
 
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="flex lg:hidden p-2 rounded-xl hover:bg-slate-100 transition-colors"
-                        onClick={toggleMenu}
-                        aria-label="Toggle menu"
-                    >
-                        <Menu className="h-6 w-6 text-slate-700" />
-                    </button>
-                </div>
-            </motion.header>
-
-            {/* Mobile Menu */}
+            {/* Mobile Menu - Moved OUTSIDE the transformed container to correct stacking context */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div
@@ -189,7 +202,7 @@ export function Navbar() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm"
+                            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
                             onClick={toggleMenu}
                         />
 
@@ -199,10 +212,10 @@ export function Navbar() {
                             animate={{ x: 0 }}
                             exit={{ x: "100%" }}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            className="absolute right-0 top-0 h-full w-[85%] max-w-sm bg-white shadow-2xl"
+                            className="absolute right-0 top-0 h-full w-[85%] max-w-sm bg-white shadow-2xl flex flex-col"
                         >
                             {/* Mobile Header */}
-                            <div className="flex items-center justify-between p-4 border-b border-slate-100">
+                            <div className="flex items-center justify-between p-4 border-b border-slate-100 flex-shrink-0">
                                 <Link href="/" className="flex items-center gap-2" onClick={toggleMenu}>
                                     <Image
                                         src="/assests/logo.png"
@@ -229,12 +242,12 @@ export function Navbar() {
                                 </button>
                             </div>
 
-                            {/* Mobile Navigation */}
+                            {/* Mobile Navigation - Scrollable */}
                             <motion.nav
                                 variants={staggerContainer}
                                 initial="hidden"
                                 animate="visible"
-                                className="p-4 space-y-1"
+                                className="p-4 space-y-1 flex-1 overflow-y-auto"
                             >
                                 {navItems.map((item) => {
                                     const isActive = pathname === item.href
@@ -260,8 +273,8 @@ export function Navbar() {
                                 })}
                             </motion.nav>
 
-                            {/* Mobile CTA */}
-                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white via-white to-transparent">
+                            {/* Mobile CTA - Fixed at bottom of menu */}
+                            <div className="p-4 bg-gradient-to-t from-white via-white to-transparent flex-shrink-0 border-t border-slate-50">
                                 <div className="space-y-3">
                                     <Link
                                         href="tel:+918237156777"

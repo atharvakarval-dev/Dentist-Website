@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Send } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 
 export function AppointmentForm() {
     const [formData, setFormData] = useState({
@@ -19,6 +19,7 @@ export function AppointmentForm() {
     });
 
     const [minDate, setMinDate] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         setMinDate(new Date().toISOString().split("T")[0]);
@@ -29,8 +30,13 @@ export function AppointmentForm() {
         setFormData((prev) => ({ ...prev, [id]: value }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsSubmitting(true);
+
+        // Simulate a brief delay for better UX
+        await new Promise(resolve => setTimeout(resolve, 800));
+
         const whatsappNumber = "918237156777";
 
         // Format the date if it exists
@@ -53,11 +59,12 @@ ${formData.notes || "None"}`;
 
         const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
         window.open(url, "_blank");
+        setIsSubmitting(false);
     };
 
-    // Refined Input Styles for Premium Feel
-    const inputClasses = "h-14 w-full border border-slate-200 bg-slate-50 rounded-xl px-4 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400 text-slate-800 text-base shadow-sm";
-    const labelClasses = "text-sm font-semibold text-slate-600 mb-2 block ml-1";
+    // Refined Input Styles for Premium Feel - Teal Focused
+    const inputClasses = "h-14 w-full border-2 border-slate-100 bg-slate-50/50 rounded-xl px-4 focus:ring-4 focus:ring-teal-500/10 focus:border-teal-500 transition-all placeholder:text-slate-400 text-slate-800 text-base shadow-sm hover:border-teal-200";
+    const labelClasses = "text-sm font-semibold text-slate-700 mb-2 block ml-1 tracking-wide";
 
     return (
         <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
@@ -173,7 +180,7 @@ ${formData.notes || "None"}`;
                 <Label htmlFor="notes" className={labelClasses}>Additional Notes</Label>
                 <Textarea
                     id="notes"
-                    className="min-h-[120px] w-full border border-slate-200 bg-slate-50 rounded-xl p-4 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-base text-slate-800 placeholder:text-slate-400"
+                    className="min-h-[120px] w-full border-2 border-slate-100 bg-slate-50/50 rounded-xl p-4 focus:ring-4 focus:ring-teal-500/10 focus:border-teal-500 transition-all text-base text-slate-800 placeholder:text-slate-400 hover:border-teal-200"
                     placeholder="Any specific questions or symptoms?"
                     value={formData.notes}
                     onChange={handleChange}
@@ -182,13 +189,27 @@ ${formData.notes || "None"}`;
             </div>
 
             <Button
-                className="w-full h-14 bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white rounded-xl shadow-lg shadow-slate-900/10 transition-all transform active:scale-[0.98] text-lg font-bold tracking-wide flex items-center justify-center gap-2 mt-4"
+                className="w-full h-14 bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white rounded-xl shadow-lg shadow-teal-700/20 transition-all transform hover:-translate-y-0.5 active:scale-[0.98] text-lg font-bold tracking-wide flex items-center justify-center gap-2 mt-2"
                 type="submit"
+                disabled={isSubmitting}
                 suppressHydrationWarning
             >
-                Confirm Appointment
-                <Send className="w-5 h-5 ml-1" />
+                {isSubmitting ? (
+                    <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Processing...
+                    </>
+                ) : (
+                    <>
+                        Confirm Appointment
+                        <Send className="w-5 h-5 ml-1" />
+                    </>
+                )}
             </Button>
+
+            <p className="text-center text-xs text-slate-400 mt-4">
+                We'll confirm your appointment via WhatsApp immediately.
+            </p>
         </form>
     );
 }
