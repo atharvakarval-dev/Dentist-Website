@@ -134,11 +134,11 @@ export default function Home() {
                     <div className="flex -space-x-2">
                       {[1, 2, 3].map(i => (
                         <div key={i} className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-[10px] overflow-hidden">
-                          <Image src={`/assests/doctor.png`} alt="Reviewer" width={32} height={32} className="object-cover" />
+                          <Image src={`/assests/review-${i}.png`} alt="Reviewer" width={32} height={32} className="object-cover" />
                         </div>
                       ))}
                     </div>
-                    <span>5.0 Stars (200+ Reviews)</span>
+                    <span>5.0 Stars (30+ Reviews)</span>
                   </div>
                   <span className="hidden md:block w-1 h-1 rounded-full bg-slate-300" />
                   <span>Accepting New Patients</span>
