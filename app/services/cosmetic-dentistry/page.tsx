@@ -1,51 +1,103 @@
-"use client"
-
 import { ServicePageLayout } from "../layout-template"
+import { Metadata } from "next"
+import { generateServiceSchema, generateFaqSchema, generateBreadcrumbSchema } from "@/components/seo/schema-config"
+
+export const metadata: Metadata = {
+    title: "Expert Cosmetic Dentistry in Pune | Smile Design & Whitening | Dentistree",
+    description: "Achieve the smile of your dreams with expert cosmetic dentistry. Veneers, teeth whitening, and complete smile makeovers in Pune. Book your consultation.",
+    keywords: ["cosmetic dentist Pune", "smile makeover cost", "porcelain veneers", "teeth whitening near me", "dental bonding", "composite veneers cost"],
+    openGraph: {
+        title: "Design Your Perfect Smile | Cosmetic Excellence",
+        description: "Your smile is your signature. Let us help you make it unforgettable with our custom aesthetic treatments.",
+        images: ["/assests/client-10.jpeg"]
+    }
+}
 
 export default function CosmeticPage() {
+    const serviceSchema = generateServiceSchema(
+        "Cosmetic Dentistry",
+        "Aesthetic dental treatments including whitening, veneers, and smile makeovers.",
+        "/services/cosmetic-dentistry",
+        "/assests/client-10.jpeg"
+    )
+
+    const faqSchema = generateFaqSchema([
+        {
+            question: "How long do veneers last?",
+            answer: "High-quality porcelain veneers can last 10-15 years or more with proper care. We use durable, stain-resistant materials for long-lasting beauty."
+        },
+        {
+            question: "Is teeth whitening safe for my enamel?",
+            answer: "Yes. Professional whitening supervised by a dentist is completely safe. We use pH-balanced gels that brighten your teeth without damaging the enamel structure."
+        },
+        {
+            question: "What if I have a chipped tooth?",
+            answer: "We can fix chips easily with 'Cosmetic Bonding'—a quick, painless procedure using tooth-colored resin that is shaped and polished to match your natural tooth perfectly."
+        }
+    ])
+
+    const breadcrumbSchema = generateBreadcrumbSchema([
+        { name: "Home", item: "/" },
+        { name: "Services", item: "/services" },
+        { name: "Cosmetic Dentistry", item: "/services/cosmetic-dentistry" }
+    ])
+
+    const combinedSchema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            serviceSchema,
+            faqSchema,
+            breadcrumbSchema
+        ]
+    }
+
     return (
         <ServicePageLayout
             title="Cosmetic Dentistry"
-            subtitle="Transform your smile and boost your confidence with our custom aesthetic treatments."
+            subtitle="Art meets science. Transform your smile with treatments designed uniquely for you."
             heroImage="/assests/client-10.jpeg"
-            overview="Cosmetic dentistry is art meeting science. Whether you want to fix a chipped tooth, close a gap, or get a complete smile makeover, Dr. Poonam Bambarkar specializes in designing smiles that look naturally beautiful, not fake. We offer a range of treatments from professional whitening to porcelain veneers."
+            jsonLd={combinedSchema}
+            overview="Your smile is often the first thing people notice about you. If you find yourself hiding your teeth in photos or covering your mouth when you laugh, **Cosmetic Dentistry** can change your life. At Dentistree, we don't just fix teeth; we design smiles that harmonize with your face and personality. Using Digital Smile Design (DSD) technology, we plan every detail—from the shape and shade of your veneers to the symmetry of your gums—ensuring a result that looks stunningly natural, never fake."
             benefits={[
-                "Custom Smile Design based on your facial features",
-                "Minimally invasive options available",
-                "Long-lasting, stain-resistant materials",
-                "Boost your self-esteem instantly"
+                "**Digital Smile Design**: Preview your new smile before we start",
+                "**Porcelain Veneers**: Permanent correction for shape and color",
+                "**Professional Whitening**: Safe, effective brightening up to 8 shades",
+                "**Composite Bonding**: Quick fix for chips and gaps",
+                "**Gum Contouring**: Correct 'gummy' smiles for better balance"
             ]}
             process={[
                 {
-                    title: "Consultation",
-                    desc: "We discuss your goals and take digital photos/scans to analyze your current smile."
+                    title: "Consultation & Photos",
+                    desc: "We listen to your desires and take high-resolution photos and videos to analyze your smile dynamics."
                 },
                 {
-                    title: "Digital Design",
-                    desc: "We plan your new smile digitally so you can see the potential result before we touch your teeth."
+                    title: "Digital Mockup",
+                    desc: "We create a digital simulation of your new smile. You can see the 'After' photo and give feedback."
                 },
                 {
                     title: "Transformation",
-                    desc: "We carefully execute the treatment plan, often in just 1-2 visits, revealing your new smile."
+                    desc: "Whether it's one visit for whitening or two for veneers, we execute the plan with artistic precision."
                 }
             ]}
             faqs={[
                 {
                     id: "1",
-                    trigger: "What is a Smile Makeover?",
-                    content: "A smile makeover is a combination of cosmetic procedures (like veneers, whitening, or bonding) tailored to give you your dream smile."
+                    trigger: "Will my new smile look natural?",
+                    content: "Absolutely. We customize the translucency, texture, and shade of veneers to mimic natural enamel. No one will know you've had work done—they'll just see a great smile."
                 },
                 {
                     id: "2",
-                    trigger: "How long does teeth whitening last?",
-                    content: "Professional whitening can last from 6 months to 2 years, depending on your diet and oral hygiene. We provide maintenance tips to keep it bright."
+                    trigger: "Does insurance cover cosmetic work?",
+                    content: "Typically, cosmetic procedures are elective and not covered. However, if a procedure also restores health (like a crown on a broken tooth), partial coverage may apply."
                 },
                 {
                     id: "3",
-                    trigger: "Are veneers permanent?",
-                    content: "Veneers are a long-term solution that can last 10-15 years or more with proper care. They are resistant to staining and very durable."
+                    trigger: "Is the process painful?",
+                    content: "Most cosmetic procedures are non-invasive or minimally invasive. We ensure your comfort with local anesthesia whenever necessary."
                 }
             ]}
+            ctaTitle="Love Your Smile Again"
+            ctaDesc="Confidence is just an appointment away. Let's design the smile you've always wanted."
         />
     )
 }

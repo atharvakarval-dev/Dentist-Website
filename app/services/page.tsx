@@ -85,7 +85,7 @@ const services = [
         description: "Restore damaged teeth with durable, natural-looking materials for long-lasting function.",
         icon: Shield,
         features: ["Zirconia Crowns", "Composite Fillings", "5-Year Warranty"],
-        href: "/services" // Placeholder or create specific page if needed
+        href: "/services/restorative"
     },
     {
         id: "cosmetic",
@@ -125,7 +125,7 @@ const services = [
         description: "Gentle extractions and immediate replacement options when necessary.",
         icon: Heart,
         features: ["Wisdom Teeth", "Painless Extraction", "Socket Preservation"],
-        href: "/services" // Placeholder
+        href: "/services/extraction-replacement"
     },
     {
         id: "prosthodontics",
@@ -133,7 +133,7 @@ const services = [
         description: "Comfortable, custom-fitted dentures to restore your smile and function.",
         icon: Users,
         features: ["BPS Dentures", "Flexible partials", "Implant-supported"],
-        href: "/services" // Placeholder
+        href: "/services/full-partial-dentures"
     },
     {
         id: "diagnostics",
@@ -141,7 +141,7 @@ const services = [
         description: "Low-radiation, high-precision imaging for accurate diagnosis.",
         icon: Microscope,
         features: ["RVG Sensors", "OPG", "Instant Results"],
-        href: "/services" // Placeholder
+        href: "/services/digital-diagnostics"
     }
 ]
 

@@ -1,52 +1,108 @@
-"use client"
-
 import { ServicePageLayout } from "../layout-template"
+import { Metadata } from "next"
+import { generateServiceSchema, generateFaqSchema, generateBreadcrumbSchema } from "@/components/seo/schema-config"
+
+export const metadata: Metadata = {
+    title: "Best Pediatric Dentist in Pune | Kids Dental Care | Dentistree",
+    description: "Gentle, fear-free dental care for children in Pune. From first visits to sealants, we build healthy smiles for a lifetime. Book an appointment today.",
+    keywords: ["pediatric dentist Pune", "childrens dentist near me", "kids teeth cleaning", "fluoride treatment cost", "baby tooth extraction", "dental sealants for kids"],
+    openGraph: {
+        title: "Happy Smiles Start Here | Pediatric Dentistry",
+        description: "We make dental visits fun! Discover our gentle, child-focused approach to oral health.",
+        images: ["/assests/children-1.png"]
+    }
+}
 
 export default function PediatricPage() {
+    const serviceSchema = generateServiceSchema(
+        "Pediatric Dentistry",
+        "Dental care specializing in children from infancy through the teen years.",
+        "/services/pediatric-dentistry",
+        "/assests/children-1.png"
+    )
+
+    const faqSchema = generateFaqSchema([
+        {
+            question: "When should I bring my child for their first visit?",
+            answer: "The American Academy of Pediatric Dentistry recommends the first visit by age 1 or within 6 months of the first tooth appearing. Early visits help prevent cavities and fear."
+        },
+        {
+            question: "How do you handle scared children?",
+            answer: "We use 'Tell-Show-Do' techniques, positive reinforcement, and a playful environment. We never force a child. Patience and building trust are our top priorities."
+        },
+        {
+            question: "Are baby teeth really important?",
+            answer: "Yes! They hold space for permanent teeth and are crucial for chewing and speech development. Premature loss can cause crowding issues later."
+        },
+        {
+            question: "What are dental sealants?",
+            answer: "Sealants are a quick, painless coating applied to the chewing surfaces of back teeth to prevent cavities by sealing out food and bacteria."
+        }
+    ])
+
+    const breadcrumbSchema = generateBreadcrumbSchema([
+        { name: "Home", item: "/" },
+        { name: "Services", item: "/services" },
+        { name: "Pediatric Dentistry", item: "/services/pediatric-dentistry" }
+    ])
+
+    const combinedSchema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            serviceSchema,
+            faqSchema,
+            breadcrumbSchema
+        ]
+    }
+
     return (
         <ServicePageLayout
             title="Pediatric Dentistry"
-            subtitle="Gentle, fun, and fear-free dental care for your little ones. Building healthy habits for a lifetime."
+            subtitle="Building a foundation of trust and healthy habits for your child's smile."
             heroImage="/assests/children-1.png"
             imageAspect="aspect-square"
-            overview="We specialize in treating children from infancy through adolescence. Dr. Poonam is trained in pediatric behavior management, meaning she knows how to make kids feel safe and even excited about the dentist. We focus on prevention, interceptive orthodontics, and creating a positive association with oral health."
+            jsonLd={combinedSchema}
+            overview="We understand that a child's first experiences with the dentist can shape their attitude towards oral health for life. That's why at Dentistree, we have created a **dental home** designed specifically for kids. From our welcoming environment to our gentle, patient team, everything is focused on making your child feel safe, comfortable, and special. We don't just treat teeth; we treat children."
             benefits={[
-                "Fear-Free Environment designed for kids",
-                "Focus on preventive care (Sealants, Fluoride)",
-                "Habit breaking (Thumb sucking, Mouth breathing)",
-                "Emergency care for dental trauma"
+                "**Special Needs Care**: Experienced in treating children with anxiety or special needs",
+                "**Preventive Focus**: Fluoride, Sealants, and Diet Counseling",
+                "**Trauma Management**: Immediate care for chipped or knocked-out teeth",
+                "**Habit Correction**: Thumb sucking and pacifier guidance",
+                "**Orthodontic Screening**: Early detection of bite issues"
             ]}
             process={[
                 {
-                    title: "Meet & Greet",
-                    desc: "We introduce your child to the team and the 'cool tools' in a non-threatening way."
+                    title: "First Visit Fun",
+                    desc: "We introduce your child to the dental chair as a 'pilot's seat' and show them our 'magic' tools."
                 },
                 {
-                    title: "Gentle Exam",
-                    desc: "We count their teeth and check for any early signs of cavities or alignment issues."
+                    title: "Examinaton",
+                    desc: "Dr. Poonam gently counts their teeth and checks for any soft tissue issues or decay."
                 },
                 {
-                    title: "Fun Education",
-                    desc: "We teach them (and you) proper brushing techniques and diet tips for strong teeth."
+                    title: "Parent Partnership",
+                    desc: "We teach you how to care for your child's teeth at home and discuss nutrition for a cavity-free smile."
                 }
             ]}
             faqs={[
                 {
                     id: "1",
-                    trigger: "When should I bring my child for their first visit?",
-                    content: "The ADA recommends the first visit by their first birthday or within 6 months of the first tooth erupting."
+                    trigger: "My child has a cavity. Does it need a filling?",
+                    content: "Yes. Cavities in baby teeth can spread quickly and cause pain or infection. We offer tooth-colored fillings and stainless steel crowns for severe decay."
                 },
                 {
                     id: "2",
-                    trigger: "How do you handle scared children?",
-                    content: "We use the 'Tell-Show-Do' technique and positive reinforcement. We never force a child. Patience is our superpower."
+                    trigger: "Is fluoride safe?",
+                    content: "Yes, when used appropriately. Fluoride strengthens enamel and is essential for preventing cavities."
                 },
                 {
                     id: "3",
-                    trigger: "Are baby teeth really important?",
-                    content: "Yes! They hold space for adult teeth and are crucial for chewing and speech development. Neglected baby teeth can cause pain and damage permanent teeth."
+                    trigger: "Do you offer sedation?",
+                    content: "For very anxious children or extensive treatment, we can discuss conscious sedation options to ensure a safe and positive experience."
                 }
             ]}
+            ctaTitle="Start Their Smile Journey Right"
+            ctaDesc="Give your child the gift of a healthy smile. Schedule their fun, fear-free visit today."
         />
     )
 }
