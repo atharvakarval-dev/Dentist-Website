@@ -331,6 +331,18 @@ export const StaggerTestimonials: React.FC = () => {
                     <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
             </div>
+
+            <div className="absolute bottom-4 right-4 z-30 hidden md:block">
+                <a
+                    href="/reviews"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3 bg-white/90 backdrop-blur-sm border border-slate-200 shadow-xl rounded-full text-slate-700 font-medium text-sm hover:scale-105 hover:bg-white transition-all group"
+                >
+                    <Star className="w-4 h-4 text-yellow-400 fill-current group-hover:rotate-180 transition-transform duration-500" />
+                    Share Your Experience
+                </a>
+            </div>
         </div>
     );
 };

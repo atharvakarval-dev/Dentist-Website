@@ -5,14 +5,14 @@
 
 export const SITE_URL = "https://dentistreedental.com";
 
-export const CLINIC_NAME = "Dentistree Dental Clinic";
+export const CLINIC_NAME = "Dentistree Clinic";
 
 export const CLINIC_ADDRESS = {
     "@type": "PostalAddress",
-    streetAddress: "Shop No. 1, Nanded City, Near Sinhagad Road",
-    addressLocality: "Nanded City",
-    addressRegion: "Pune",
-    postalCode: "411041",
+    streetAddress: "Ingale Plaza, Shop No. 1, near Uttam Sweets, Nanded City Road, Sinhagad Road",
+    addressLocality: "Nanded, Pune",
+    addressRegion: "Maharashtra",
+    postalCode: "411068",
     addressCountry: "IN",
 };
 
@@ -32,8 +32,8 @@ export const AREA_SERVED = [
 export const SOCIAL_PROFILES = [
     "https://www.facebook.com/dentistreedental",
     "https://www.instagram.com/dentistreedental",
-    // Add Google Business Profile URL here when available:
-    // "https://g.page/dentistreedental"
+    "https://www.justdial.com/Pune/Dentistree-Dental-Clinic-Near-By-Nanded-City-Destination-Centre-And-Besides-Uttam-Sweets-Hotel-Aura-Celestia-Nanded-City/020PXX20-XX20-231224220432-B3L8_BZDET",
+    "https://www.google.com/maps/place/Dentistree+Clinic/@18.4605837,73.7864175,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc29580a5c8612f:0xd16cce358b8cabfd!8m2!3d18.4605837!4d73.7864175!16s%2Fg%2F11w_z2txhd?entry=ttu",
 ];
 
 export const GOOGLE_MAPS_LINK =
@@ -54,7 +54,7 @@ export function generateLocalBusinessSchema() {
         image: `${SITE_URL}/clinic-photo.jpg`,
 
         // ── Contact ────────────────────────────────────────────────
-        telephone: "+91-XXXXXXXXXX", // ← Replace with real number
+        telephone: "+918237156777",
         email: "info@dentistreedental.com",
 
         // ── Location ───────────────────────────────────────────────

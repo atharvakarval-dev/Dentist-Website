@@ -34,6 +34,16 @@ export default function Footer() {
                             <li><Link href="/about" className="text-slate-400 hover:text-dental-teal transition-colors">About Us</Link></li>
                             <li><Link href="/contact" className="text-slate-400 hover:text-dental-teal transition-colors">Contact</Link></li>
                         </ul>
+                        <div className="mt-6">
+                            <Link
+                                href="/reviews"
+                                target="_blank"
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium rounded-lg transition-colors border border-slate-700 hover:border-dental-teal"
+                            >
+                                <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" /></svg>
+                                Review us on Google
+                            </Link>
+                        </div>
                     </div>
 
                     <div>
@@ -50,9 +60,9 @@ export default function Footer() {
                         <h4 className="text-lg font-semibold mb-4 text-white">Contact Us</h4>
                         <address className="not-italic text-slate-400 space-y-3">
                             <p>
-                                Shop No. 1, Nanded City,<br />
-                                Next to Uttam Sweets,<br />
-                                Sinhagad Road, Pune 411041
+                                Ingale Plaza, Shop No. 1,<br />
+                                Next to Uttam Sweets, Nanded City Road,<br />
+                                Sinhagad Road, Pune 411068
                             </p>
                             <div className="flex flex-col gap-1">
                                 <a href="tel:+918237156777" className="hover:text-dental-teal transition-colors font-medium text-white block">
