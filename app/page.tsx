@@ -236,7 +236,7 @@ export default function Home() {
                   desc: "Restore damaged teeth with durable, natural-looking materials for long-lasting function.",
                   icon: Shield,
                   for: "Restorative Dentistry",
-                  href: "/services"
+                  href: "/services/restorative"
                 },
                 {
                   title: "Pediatric (children) Dental Treatments",

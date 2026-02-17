@@ -59,7 +59,7 @@ export default function ImplantsPage() {
         <ServicePageLayout
             title="Dental Implants"
             subtitle="The next best thing to your natural teeth. Eat, speak, and smile with confidence again."
-            heroImage="/assests/client-6.png"
+            heroImage="/assests/client-8.png"
             jsonLd={combinedSchema}
             overview="Missing teeth can affect more than just your smile—they can impact your ability to chew, your speech, and even cause bone loss in your jaw. At Dentistree, we provide **state-of-the-art dental implants** that are the gold standard for tooth replacement. Unlike dentures that can slip or bridges that require grinding down healthy teeth, implants are anchored directly into your jawbone, stimulating it just like a natural tooth root. The result is a replacement that looks, feels, and functions exactly like your own tooth."
             benefits={[

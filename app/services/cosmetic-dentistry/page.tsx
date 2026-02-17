@@ -55,7 +55,7 @@ export default function CosmeticPage() {
         <ServicePageLayout
             title="Cosmetic Dentistry"
             subtitle="Art meets science. Transform your smile with treatments designed uniquely for you."
-            heroImage="/assests/client-10.jpeg"
+            heroImage="/assests/client3.png"
             jsonLd={combinedSchema}
             overview="Your smile is often the first thing people notice about you. If you find yourself hiding your teeth in photos or covering your mouth when you laugh, **Cosmetic Dentistry** can change your life. At Dentistree, we don't just fix teeth; we design smiles that harmonize with your face and personality. Using Digital Smile Design (DSD) technology, we plan every detail—from the shape and shade of your veneers to the symmetry of your gums—ensuring a result that looks stunningly natural, never fake."
             benefits={[

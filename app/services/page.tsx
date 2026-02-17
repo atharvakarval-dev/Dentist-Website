@@ -556,7 +556,7 @@ export default function ServicesPage() {
                             subtitle="We understand that treating children requires a special touch. Our protocols are designed to build confidence from the very first visit."
                         />
 
-                        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mt-12">
                             {[
                                 {
                                     title: "First Visit Magic",
@@ -565,9 +565,9 @@ export default function ServicesPage() {
                                     color: "bg-[#F4A261]/10 text-[#F4A261]"
                                 },
                                 {
-                                    title: "Parent Partnership",
-                                    desc: "We invite you into the treatment room. We explain everything to you and your child in age-appropriate language.",
-                                    icon: Users,
+                                    title: "Class B Sterilization",
+                                    desc: "We use the highest standard Class B Autoclave to ensure 100% sterile instruments for your child's safety.",
+                                    icon: Shield,
                                     color: "bg-[#A8DADC]/20 text-[#264653]"
                                 },
                                 {
@@ -575,6 +575,12 @@ export default function ServicesPage() {
                                     desc: "We track jaw development and alignment from age 1, catching potential issues early before they become problems.",
                                     icon: Activity,
                                     color: "bg-[#0d9488]/10 text-[#0d9488]"
+                                },
+                                {
+                                    title: "Intra-oral Camera",
+                                    desc: "We use tiny cameras to show you and your child exactly what's happening inside their mouth, building trust.",
+                                    icon: Microscope,
+                                    color: "bg-purple-100 text-purple-600"
                                 }
                             ].map((item, i) => (
                                 <motion.div
@@ -648,7 +654,7 @@ export default function ServicesPage() {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-8 mt-12">
                                     {[
                                         { name: "Digital X-Rays", desc: "Instant, low-radiation imaging." },
-                                        { name: "Rotary Endodontics", desc: "Faster, better root canals." },
+                                        { name: "Microscopic Precision", desc: "Root canals performed under high magnification." },
                                         { name: "Intraoral Cameras", desc: "Transparent diagnosis you can see." },
                                         { name: "Class B Autoclave", desc: "100% Sterilization guarantee." }
                                     ].map((tech, i) => (
