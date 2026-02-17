@@ -108,13 +108,12 @@ export default function Home() {
                 </motion.div>
 
                 <motion.h1 variants={fadeInUp} className="font-display text-4xl md:text-5xl lg:text-7xl font-medium text-dental-charcoal leading-[1.15] md:leading-[1.1]">
-                  Your Smile Deserves <br />
-                  More Than Just <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-dental-teal to-teal-600 italic">Dental Work.</span>
+                  Best Dentist in <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-dental-teal to-teal-600 italic">Nanded City, Pune.</span>
                 </motion.h1>
 
                 <motion.p variants={fadeInUp} className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-xl font-light">
-                  Experience the difference of 15+ years of precision dentistry, combined with the gentle care of a doctor who treats you like family.
+                  Your smile deserves more than just dental work. Experience 15+ years of precision dentistry and gentle care at our top-rated dental clinic.
                 </motion.p>
 
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 pt-2">
@@ -134,7 +133,7 @@ export default function Home() {
                     <div className="flex -space-x-2">
                       {[1, 2, 3].map(i => (
                         <div key={i} className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-[10px] overflow-hidden">
-                          <Image src={`/assests/review-${i}.png`} alt="Reviewer" width={32} height={32} className="object-cover" />
+                          <Image src={`/assets/review-${i}.png`} alt="Reviewer" width={32} height={32} className="object-cover" />
                         </div>
                       ))}
                     </div>
@@ -155,7 +154,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-teal-100 to-amber-50 rounded-[3rem] rotate-3 transform" />
                 <div className="relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl shadow-teal-900/10 border-4 border-white">
                   <Image
-                    src="/assests/doctor-2.png"
+                    src="/assets/doctor-2.png"
                     alt="Dr. Poonam Bambarkar at work"
                     fill
                     className="object-cover"
@@ -304,7 +303,7 @@ export default function Home() {
                 className="order-2 lg:order-1"
               >
                 <div className="relative aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl">
-                  <Image src="/assests/clinic1.png" alt="Clinic Interior" fill className="object-cover" />
+                  <Image src="/assets/clinic1.png" alt="Clinic Interior" fill className="object-cover" />
                   <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent text-white">
                     <p className="font-display text-2xl">"The most relaxing dental experience I've ever had."</p>
                     <div className="flex gap-1 mt-2 text-amber-400">

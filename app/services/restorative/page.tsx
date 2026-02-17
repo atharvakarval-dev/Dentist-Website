@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Expert Restorative Dentistry | Save Your Natural Smile",
         description: "Don't let damaged teeth hold you back. Our advanced restorative treatments bring back function and aesthetics seamlessly.",
-        images: ["/assests/client-5.png"]
+        images: ["/assets/client-5.png"]
     }
 }
 
@@ -18,7 +18,7 @@ export default function RestorativePage() {
         "Restorative Dentistry",
         "Comprehensive restorative dental treatments including fillings, crowns, and bridges to restore oral health and function.",
         "/services/restorative",
-        "/assests/client-5.png"
+        "/assets/client-5.png"
     )
 
     const faqSchema = generateFaqSchema([
@@ -53,9 +53,9 @@ export default function RestorativePage() {
 
     return (
         <ServicePageLayout
-            title="Restorative Dentistry"
+            title="Restorative Dentistry in Nanded City, Pune"
             subtitle="Regain the strength and beauty of your natural smile with our advanced restorative solutions."
-            heroImage="/assests/client-5.png"
+            heroImage="/assets/client-5.png"
             jsonLd={combinedSchema}
             overview="Restorative dentistry is the art and science of bringing your teeth back to their full health and function. Whether you have a simple cavity, a chipped tooth, or more extensive damage, our goal is to preserve your natural tooth structure whenever possible. We strictly treat using **biomimetic principles**—meaning we use materials that mimic the properties of natural teeth, ensuring your restoration treats the tooth like it was never damaged."
             benefits={[

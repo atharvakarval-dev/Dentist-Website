@@ -213,7 +213,7 @@ export default function WhyUsPage() {
                                 <div className="absolute inset-0 bg-dental-cream rounded-[2.5rem] transform rotate-3" />
                                 <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-teal-900/10 bg-white">
                                     <Image
-                                        src="/assests/clinic1.png"
+                                        src="/assets/clinic1.png"
                                         alt="Dentistree Advanced Equipment"
                                         fill
                                         className="object-cover"

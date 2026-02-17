@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Gentle Tooth Extraction & Replacement | Dentistree",
         description: "Experience anxiety-free extractions with our specialized preservation techniques. Your comfort is our priority.",
-        images: ["/assests/client-6.png"]
+        images: ["/assets/client-6.png"]
     }
 }
 
@@ -18,7 +18,7 @@ export default function ExtractionPage() {
         "Tooth Extraction",
         "Surgical and non-surgical removal of teeth with socket preservation techniques.",
         "/services/extraction-replacement",
-        "/assests/client-6.png"
+        "/assets/client-6.png"
     )
 
     const faqSchema = generateFaqSchema([
@@ -53,9 +53,9 @@ export default function ExtractionPage() {
 
     return (
         <ServicePageLayout
-            title="Extraction & Replacement"
+            title="Extraction & Replacement in Nanded City, Pune"
             subtitle="Gentle, precise removal of problematic teeth with a focus on future restoration."
-            heroImage="/assests/client-6.png"
+            heroImage="/assets/client-6.png"
             jsonLd={combinedSchema}
             overview="We believe that **extraction is the first step of rehabilitation**, not the end of a tooth. Our approach is 'Preservation-First'. When a tooth must be removed—due to severe decay, infection, or impaction (wisdom teeth)—we perform the procedure with extreme gentleness to preserve the surrounding bone and gum tissue. This 'atraumatic' technique is critical for ensuring that you can easily replace the tooth with an implant or bridge later."
             benefits={[

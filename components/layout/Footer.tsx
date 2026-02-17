@@ -6,60 +6,63 @@ export default function Footer() {
     return (
         <footer className="bg-slate-900 text-white pt-16 pb-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                    <div className="col-span-1 md:col-span-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+                    <div className="col-span-1 md:col-span-2">
                         <Link href="/" className="inline-block mb-4">
                             <div className="relative h-16 w-48">
                                 <Image
                                     src="/assests/logo.png"
-                                    alt="Dentistree Logo"
+                                    alt="Dentistree Dental Clinic - Best Dentist in Nanded City"
                                     fill
                                     className="object-contain"
                                 />
                             </div>
                         </Link>
-                        <p className="text-slate-400 mb-4">
+                        <p className="text-slate-400 mb-6 max-w-sm">
                             Comprehensive Dental Care for Kids, Adults & Seniors. Prevention • Restoration • Aesthetics • Implants • Orthodontics
                         </p>
+                        <div className="flex gap-4">
+                            {/* Social Links placeholders? */}
+                        </div>
                     </div>
 
                     <div>
                         <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
                         <ul className="space-y-2">
-                            <li><Link href="/" className="text-slate-400 hover:text-primary transition-colors">Home</Link></li>
-                            <li><Link href="/services" className="text-slate-400 hover:text-primary transition-colors">Services</Link></li>
-                            <li><Link href="/about" className="text-slate-400 hover:text-primary transition-colors">About Us</Link></li>
-                            <li><Link href="/contact" className="text-slate-400 hover:text-primary transition-colors">Contact</Link></li>
+                            <li><Link href="/" className="text-slate-400 hover:text-dental-teal transition-colors">Home</Link></li>
+                            <li><Link href="/services" className="text-slate-400 hover:text-dental-teal transition-colors">Services</Link></li>
+                            <li><Link href="/about" className="text-slate-400 hover:text-dental-teal transition-colors">About Us</Link></li>
+                            <li><Link href="/contact" className="text-slate-400 hover:text-dental-teal transition-colors">Contact</Link></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4 className="text-lg font-semibold mb-4 text-white">Services</h4>
+                        <h4 className="text-lg font-semibold mb-4 text-white">Areas We Serve</h4>
                         <ul className="space-y-2">
-                            <li><Link href="/services/root-canal-treatment" className="text-slate-400 hover:text-primary transition-colors">Root Canal Treatment</Link></li>
-                            <li><Link href="/services/restorative" className="text-slate-400 hover:text-primary transition-colors">Fillings, Crowns & Bridges</Link></li>
-                            <li><Link href="/services/cosmetic-dentistry" className="text-slate-400 hover:text-primary transition-colors">Cosmetic Dentistry</Link></li>
-                            <li><Link href="/services/dental-implants" className="text-slate-400 hover:text-primary transition-colors">Dental Implants</Link></li>
-                            <li><Link href="/services/orthodontics" className="text-slate-400 hover:text-primary transition-colors">Orthodontics & Braces</Link></li>
-                            <li><Link href="/services/pediatric-dentistry" className="text-slate-400 hover:text-primary transition-colors">Pediatric Dentistry</Link></li>
-                            <li><Link href="/services/extraction-replacement" className="text-slate-400 hover:text-primary transition-colors">Extraction & Replacement</Link></li>
-                            <li><Link href="/services/full-partial-dentures" className="text-slate-400 hover:text-primary transition-colors">Full / Partial Denture</Link></li>
-                            <li><Link href="/services/digital-diagnostics" className="text-slate-400 hover:text-primary transition-colors">Digital X-Ray</Link></li>
+                            <li><Link href="/dentist-in-nanded-city" className="text-slate-400 hover:text-dental-teal transition-colors">Dentist in Nanded City</Link></li>
+                            <li><Link href="/dentist-in-sinhagad-road" className="text-slate-400 hover:text-dental-teal transition-colors">Dentist on Sinhagad Road</Link></li>
+                            <li><Link href="/dentist-in-shivne" className="text-slate-400 hover:text-dental-teal transition-colors">Dentist in Shivne</Link></li>
+                            <li><Link href="/dentist-in-dhayari" className="text-slate-400 hover:text-dental-teal transition-colors">Dentist in Dhayari</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="text-lg font-semibold mb-4 text-white">Contact Us</h4>
-                        <ul className="space-y-2 text-slate-400">
-                            <li>R B Ingale Plaza, Ground Floor 5, Next to Uttam Sweets, Near Nanded City Circle</li>
-                            <li>Sinhagad Road, Pune 411041</li>
-                            <li className="pt-2">
-                                <a href="tel:+918237156777" className="hover:text-primary transition-colors">+91 82371 56777</a>
-                            </li>
-                            <li>
-                                <a href="mailto:info@dentistreedental.com" className="hover:text-primary transition-colors">info@dentistreedental.com</a>
-                            </li>
-                        </ul>
+                        <address className="not-italic text-slate-400 space-y-3">
+                            <p>
+                                Shop No. 1, Nanded City,<br />
+                                Next to Uttam Sweets,<br />
+                                Sinhagad Road, Pune 411041
+                            </p>
+                            <div className="flex flex-col gap-1">
+                                <a href="tel:+918237156777" className="hover:text-dental-teal transition-colors font-medium text-white block">
+                                    +91 82371 56777
+                                </a>
+                                <a href="mailto:info@dentistreedental.com" className="hover:text-dental-teal transition-colors block">
+                                    info@dentistreedental.com
+                                </a>
+                            </div>
+                        </address>
                     </div>
                 </div>
 

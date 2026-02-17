@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Design Your Perfect Smile | Cosmetic Excellence",
         description: "Your smile is your signature. Let us help you make it unforgettable with our custom aesthetic treatments.",
-        images: ["/assests/client-10.jpeg"]
+        images: ["/assets/client-10.jpeg"]
     }
 }
 
@@ -18,7 +18,7 @@ export default function CosmeticPage() {
         "Cosmetic Dentistry",
         "Aesthetic dental treatments including whitening, veneers, and smile makeovers.",
         "/services/cosmetic-dentistry",
-        "/assests/client-10.jpeg"
+        "/assets/client-10.jpeg"
     )
 
     const faqSchema = generateFaqSchema([
@@ -53,9 +53,9 @@ export default function CosmeticPage() {
 
     return (
         <ServicePageLayout
-            title="Cosmetic Dentistry"
+            title="Cosmetic Dentistry in Nanded City, Pune"
             subtitle="Art meets science. Transform your smile with treatments designed uniquely for you."
-            heroImage="/assests/client3.png"
+            heroImage="/assets/client3.png"
             jsonLd={combinedSchema}
             overview="Your smile is often the first thing people notice about you. If you find yourself hiding your teeth in photos or covering your mouth when you laugh, **Cosmetic Dentistry** can change your life. At Dentistree, we don't just fix teeth; we design smiles that harmonize with your face and personality. Using Digital Smile Design (DSD) technology, we plan every detail—from the shape and shade of your veneers to the symmetry of your gums—ensuring a result that looks stunningly natural, never fake."
             benefits={[

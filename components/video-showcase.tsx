@@ -26,19 +26,19 @@ const staggerContainer = {
 const videos = [
     {
         order: 1,
-        src: "/assests/clinic-video-1.mp4",
+        src: "/assets/clinic-video-1.mp4",
         title: "Advanced Facilities",
         description: "State-of-the-art equipment for precise treatments."
     },
     {
         order: 2,
-        src: "/assests/clinic-video-2.mp4",
+        src: "/assets/clinic-video-2.mp4",
         title: "Patient Comfort",
         description: "Designed for a relaxing and anxiety-free experience."
     },
     {
         order: 3,
-        src: "/assests/clinic-video-3.mp4",
+        src: "/assets/clinic-video-3.mp4",
         title: "Modern Clinic Tour",
         description: "A walk through our hygiene-focused treatment areas."
     }

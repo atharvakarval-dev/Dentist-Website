@@ -112,21 +112,13 @@ export function ServicePageLayout({
                                         <span className="text-xs font-semibold tracking-wider text-slate-700 uppercase">Advanced Dental Solutions</span>
                                     </div>
 
-                                    {/* SEO: H1 with proper structure */}
                                     <h1
                                         id="hero-title"
-                                        className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-dental-charcoal mb-6 leading-[0.95] tracking-tight"
+                                        className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-dental-charcoal mb-6 leading-[1.1] md:leading-[1.1] tracking-tight"
                                         itemProp="name"
                                     >
-                                        {title.split(' ').map((word, i) => (
-                                            <span key={i} className="block">
-                                                {word}
-                                                {/* Add subtle accent to last word */}
-                                                {i === title.split(' ').length - 1 && (
-                                                    <span className="inline-block w-3 h-3 ml-2 bg-dental-gold rounded-full" aria-hidden="true" />
-                                                )}
-                                            </span>
-                                        ))}
+                                        {title}
+                                        <span className="inline-block w-3 h-3 md:w-4 md:h-4 ml-2 md:ml-4 bg-dental-gold rounded-full mb-1 md:mb-2 align-baseline" aria-hidden="true" />
                                     </h1>
 
                                     <p

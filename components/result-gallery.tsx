@@ -14,27 +14,27 @@ interface ResultItem {
 
 const results: ResultItem[] = [
     {
-        imageSrc: "/assests/client-5.png",
+        imageSrc: "/assets/client-5.png",
         description: "Teeth cleaning result",
         category: "Hygiene",
     },
     {
-        imageSrc: "/assests/client-6.png",
+        imageSrc: "/assets/client-6.png",
         description: "Teeth cleaning result",
         category: "Hygiene",
     },
     {
-        imageSrc: "/assests/client-7.png",
+        imageSrc: "/assets/client-7.png",
         description: "Front teeth spacing Treatment",
         category: "Cosmetic",
     },
     {
-        imageSrc: "/assests/client-8.png",
+        imageSrc: "/assets/client-8.png",
         description: "Front teeth spacing Treatment",
         category: "Cosmetic",
     },
     {
-        imageSrc: "/assests/client-9.jpeg",
+        imageSrc: "/assets/client-9.jpeg",
         description: "Front teeth spacing Treatment",
         category: "Cosmetic",
     },

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Painless Root Canal Therapy | Save Your Tooth",
         description: "Stop the pain, keep your tooth. Discover our advanced, anxiety-free root canal treatments.",
-        images: ["/assests/root-canal.png"]
+        images: ["/assets/root-canal.png"]
     }
 }
 
@@ -18,7 +18,7 @@ export default function RootCanalPage() {
         "Root Canal Treatment",
         "Endodontic therapy to save an infected tooth.",
         "/services/root-canal-treatment",
-        "/assests/root-canal.png"
+        "/assets/root-canal.png"
     )
 
     const faqSchema = generateFaqSchema([
@@ -57,9 +57,9 @@ export default function RootCanalPage() {
 
     return (
         <ServicePageLayout
-            title="Root Canal Treatment"
+            title="Root Canal Treatment in Nanded City, Pune"
             subtitle="Don't lose your tooth. Save it with our gentle, advanced microscopic care."
-            heroImage="/assests/root-canal.png"
+            heroImage="/assets/root-canal.png"
             jsonLd={combinedSchema}
             overview="When the nerve inside a tooth becomes infected due to deep decay or a crack, it can cause severe pain. **Root Canal Treatment (RCT)** is the only way to remove that infection and save your natural tooth from extraction. At Dentistree, we use **Microscopic Endodontics**—a high-tech approach that allows us to see inside the tiny canals clearly. This precision ensures we clean 100% of the infection, making the procedure faster, cleaner, and virtually painless."
             benefits={[

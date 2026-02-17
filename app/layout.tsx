@@ -1,142 +1,194 @@
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// ============================================================
+//  app/layout.tsx  –  Root Layout with Full SEO Metadata
+//  Domain: dentistreedental.com
+// ============================================================
+
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { JsonLd } from "@/components/seo/json-ld";
+import {
+  generateLocalBusinessSchema,
+  generateFAQSchema,
+  SITE_URL,
+} from "@/components/seo/schema-config";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const viewport: Viewport = {
-  themeColor: "#0d9488",
-  width: "device-width",
-  initialScale: 1,
-};
-
+// ---------------------------------------------------------------
+//  METADATA  – drives <title>, <meta>, <link rel="canonical">
+// ---------------------------------------------------------------
 export const metadata: Metadata = {
+  // ── MetadataBase tells Next.js the absolute URL origin ──────
+  metadataBase: new URL(SITE_URL),
+
+  // ── Title ───────────────────────────────────────────────────
+  //  Primary keyword first, brand last – best practice
   title: {
-    default: "Dentistree Dental Clinic | Best Dentist in Nanded City, Pune",
-    template: "%s | Dentistree Dental Clinic"
+    default:
+      "Top Dentist in Nanded City, Shivne & Sinhagad Road | Dentistree Dental Clinic Pune",
+    template: "%s | Dentistree Dental Clinic – Nanded City, Pune",
   },
-  description: "Experience pain-free dentistry at Dentistree Dental Clinic in Nanded City, Pune. Dr. Poonam Bambarkar offers expert Root Canals, Implants, Kids Dentistry & Cosmetic treatments.",
+
+  // ── Description (150–160 chars for Google) ──────────────────
+  description:
+    "Looking for the best dentist near Nanded City, Shivne, Sinhagad Road or Dhayari? Dentistree Dental Clinic offers top dental care in Pune – implants, braces, root canal & more. Book today!",
+
+  // ── Keywords (not a ranking factor alone, but still parsed) ─
   keywords: [
-    "Dentist in Nanded City Pune",
-    "Dental Clinic Nanded City",
-    "Best Dentist in Pune",
-    "Root Canal Treatment Pune",
-    "Dental Implants Pune",
-    "Pediatric Dentist Nanded City",
-    "Cosmetic Dentist Pune",
-    "Teeth Whitening Pune",
-    "Invisalign Provider Pune",
-    "Emergency Dentist Nanded City"
+    // Core "dentist near me" intent
+    "dentist near me",
+    "dentist near Nanded City",
+    "dental clinic near me",
+    "best dentist near me Pune",
+    // Location variants
+    "dentist in Nanded City",
+    "dentist in Shivne",
+    "dentist in Sinhagad Road",
+    "dentist in Dhayari",
+    "dentist in Pune",
+    "dental clinic in Nanded City",
+    "dental clinic in Shivne",
+    "dental clinic in Sinhagad Road",
+    "dental clinic in Dhayari",
+    "dental clinic in Pune",
+    // "Top" variants
+    "top dentist in Nanded City",
+    "top dentist in Shivne",
+    "top dentist in Dhayari",
+    "top dentist in Sinhagad Road",
+    "top dentist Pune",
+    "best dentist in Nanded City",
+    "best dentist in Shivne",
+    "best dentist in Sinhagad Road",
+    "best dentist in Dhayari",
+    "best dental clinic Nanded City",
+    // Brand
+    "Dentistree Dental",
+    "Dentistree Dental Clinic",
+    "Dentistree Nanded City",
+    // Service keywords
+    "teeth whitening Nanded City",
+    "dental implants Nanded City",
+    "braces Nanded City",
+    "root canal Nanded City",
+    "orthodontist Nanded City",
+    "pediatric dentist Nanded City",
+    "smile makeover Nanded City",
   ],
-  authors: [{ name: "Dr. Poonam Bambarkar", url: "https://dentistreepune.com" }],
-  creator: "Dentistree Dental Clinic",
-  metadataBase: new URL("https://dentistreepune.com"), // Replace with actual domain if different
+
+  // ── Canonical URL ──────────────────────────────────────────
+  alternates: {
+    canonical: "/",
+  },
+
+  // ── Open Graph (Facebook, WhatsApp preview) ────────────────
   openGraph: {
     type: "website",
-    locale: "en_IN",
-    url: "https://dentistreepune.com",
+    url: SITE_URL,
     siteName: "Dentistree Dental Clinic",
-    title: "Dentistree Dental Clinic | Top Rated Dentist in Nanded City, Pune",
-    description: "Your trusted family dentist in Nanded City. Specializing in advanced root canals, cosmetic smiles, and gentle pediatric care. Book your visit today!",
+    title:
+      "Top Dentist in Nanded City, Shivne & Sinhagad Road | Dentistree Dental",
+    description:
+      "Best dental clinic near Nanded City, Shivne, Sinhagad Road & Dhayari, Pune. Expert dentists, modern equipment, affordable prices. Book your appointment today!",
     images: [
       {
-        url: "/assests/clinic1.png",
+        url: `${SITE_URL}/og-image.jpg`, // 1200×630px recommended
         width: 1200,
         height: 630,
-        alt: "Dentistree Dental Clinic Interior",
+        alt: "Dentistree Dental Clinic – Best Dentist in Nanded City, Pune",
       },
     ],
+    locale: "en_IN",
   },
+
+  // ── Twitter / X card ──────────────────────────────────────
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Top Dentist in Nanded City, Shivne & Sinhagad Road | Dentistree Dental",
+    description:
+      "Best dental clinic near Nanded City, Shivne, Sinhagad Road & Dhayari, Pune.",
+    images: [`${SITE_URL}/og-image.jpg`],
+  },
+
+  // ── Robots ────────────────────────────────────────────────
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-  icons: {
-    icon: "/assests/logo.png",
-    apple: "/assests/logo.png",
+
+  // ── Verification (add your tokens from GSC / Bing) ────────
+  verification: {
+    google: "YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN", // ← Replace
+    // other: { "msvalidate.01": "YOUR_BING_TOKEN" },
   },
-  manifest: "/site.webmanifest",
+
+  // ── Authors / Publisher ───────────────────────────────────
+  authors: [{ name: "Dentistree Dental Clinic", url: SITE_URL }],
+  creator: "Dentistree Dental Clinic",
+  publisher: "Dentistree Dental Clinic",
+
+  // ── Geo tags for local SEO ────────────────────────────────
+  other: {
+    "geo.region": "IN-MH",
+    "geo.placename": "Nanded City, Pune",
+    "geo.position": "18.4615;73.8145",
+    ICBM: "18.4615, 73.8145",
+    // Language / region
+    language: "English",
+    revisit: "7 days",
+  },
 };
 
+// ---------------------------------------------------------------
+//  ROOT LAYOUT
+// ---------------------------------------------------------------
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-
-  const businessSchema = {
-    "@context": "https://schema.org",
-    "@type": "Dentist",
-    "@id": "https://dentistreepune.com/#localbusiness",
-    "name": "Dentistree Dental Clinic",
-    "image": [
-      "https://dentistreepune.com/assests/clinic1.png",
-      "https://dentistreepune.com/assests/doctor-2.png"
-    ],
-    "telephone": "+918237156777",
-    "priceRange": "₹₹",
-    "url": "https://dentistreepune.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Shop No. 11, R5/10, Nanded City",
-      "addressLocality": "Pune",
-      "addressRegion": "Maharashtra",
-      "postalCode": "411041",
-      "addressCountry": "IN"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 18.4771, // Approximate coords for Nanded City, verify if exact known
-      "longitude": 73.8016
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "10:00",
-        "closes": "21:00"
-      }
-    ],
-    "sameAs": [
-      "https://www.facebook.com/dentistreepune",
-      "https://www.instagram.com/dentistreepune"
-    ]
-  };
+}) {
+  // Generate schemas once at build / request time
+  const localBusinessSchema = generateLocalBusinessSchema();
+  const faqSchema = generateFAQSchema();
 
   return (
     <html lang="en">
       <head>
-        <JsonLd data={businessSchema} />
+        {/* ── Structured Data (JSON-LD) ───────────────────── */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqSchema),
+          }}
+        />
+
+        {/* ── Preconnect for performance (also a ranking signal) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+
+        {/* ── Favicon ────────────────────────────────────── */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
-      >
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

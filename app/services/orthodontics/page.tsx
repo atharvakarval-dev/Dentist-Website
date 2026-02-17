@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Straight Teeth, No Secrets | Expert Orthodontics",
         description: "From invisible aligners to traditional braces, we design smiles that last a lifetime. Discover your perfect fit.",
-        images: ["/assests/invisible-braces.jpg"]
+        images: ["/assets/invisible-braces.jpg"]
     }
 }
 
@@ -18,7 +18,7 @@ export default function OrthodonticsPage() {
         "Orthodontics & Aligners",
         "Correction of misaligned teeth using braces and clear aligners.",
         "/services/orthodontics",
-        "/assests/invisible-braces.jpg"
+        "/assets/invisible-braces.jpg"
     )
 
     const faqSchema = generateFaqSchema([
@@ -57,9 +57,9 @@ export default function OrthodonticsPage() {
 
     return (
         <ServicePageLayout
-            title="Orthodontics & Aligners"
+            title="Orthodontics & Aligners in Nanded City, Pune"
             subtitle="Straighten your smile your way. Choose from invisible aligners or precision braces."
-            heroImage="/assests/invisible-braces.jpg"
+            heroImage="/assets/invisible-braces.jpg"
             jsonLd={combinedSchema}
             overview="Orthodontics is about more than just a pretty smile—it's about a healthy bite that lasts a lifetime. Misaligned teeth can lead to jaw pain, difficulty cleaning, and uneven wear. At Dentistree, we combine **digital precision** with clinical expertise to create smiles that are balanced, functional, and beautiful. Whether you are a teen wanting 'cool' colors or a professional seeking a discreet solution like **Invisalign**, we have the technology to deliver results faster and more comfortably."
             benefits={[

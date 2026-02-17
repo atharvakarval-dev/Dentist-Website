@@ -149,7 +149,7 @@ const testimonials = [
         tempId: 28,
         testimonial: "A brave young patient who trusted us for his check-up. We love making dental visits fun and comfortable for kids!",
         by: "Happy Little Patient",
-        image: "/assests/client-10.jpeg"
+        image: "/assets/client-10.jpeg"
     }
 ];
 

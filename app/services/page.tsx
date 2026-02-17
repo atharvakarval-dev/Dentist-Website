@@ -36,35 +36,35 @@ const galleryItems: FocusRailItem[] = [
         id: 1,
         title: "Modern Treatment Room",
         description: "State-of-the-art dental equipment",
-        imageSrc: "/assests/clinic1.png",
+        imageSrc: "/assets/clinic1.png",
         meta: "Facility",
     },
     {
         id: 2,
         title: "Patient Comfort",
         description: "Relaxing waiting area",
-        imageSrc: "/assests/Clinic2.png",
+        imageSrc: "/assets/Clinic2.png",
         meta: "Facility",
     },
     {
         id: 3,
         title: "Expert Care",
         description: "Dr. Poonam Bambarkar",
-        imageSrc: "/assests/client-10.jpeg",
+        imageSrc: "/assets/client-10.jpeg",
         meta: "Team",
     },
     {
         id: 4,
         title: "Happy Smiles",
         description: "Patient transformations",
-        imageSrc: "/assests/Patient.png",
+        imageSrc: "/assets/Patient.png",
         meta: "Results",
     },
     {
         id: 5,
         title: "Advanced Technology",
         description: "Digital diagnostics",
-        imageSrc: "/assests/client-6.png",
+        imageSrc: "/assets/client-6.png",
         meta: "Tech",
     },
 ]
@@ -407,7 +407,7 @@ export default function ServicesPage() {
                                 className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-teal-900/20 bg-white aspect-[4/3] ring-1 ring-slate-100/50"
                             >
                                 <Image
-                                    src="/assests/invisible-braces.jpg"
+                                    src="/assets/invisible-braces.jpg"
                                     alt="Clear Aligner Detail"
                                     fill
                                     className="object-cover"
@@ -456,7 +456,7 @@ export default function ServicesPage() {
                             >
                                 <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-500 z-10" />
                                 <video
-                                    src="/assests/clinic-video-1.mp4"
+                                    src="/assets/clinic-video-1.mp4"
                                     autoPlay
                                     muted
                                     loop
@@ -483,7 +483,7 @@ export default function ServicesPage() {
                                 >
                                     <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-500 z-10" />
                                     <video
-                                        src="/assests/clinic-video-2.mp4"
+                                        src="/assets/clinic-video-2.mp4"
                                         autoPlay
                                         muted
                                         loop
@@ -505,7 +505,7 @@ export default function ServicesPage() {
                                 >
                                     <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-500 z-10" />
                                     <video
-                                        src="/assests/clinic-video-3.mp4"
+                                        src="/assets/clinic-video-3.mp4"
                                         autoPlay
                                         muted
                                         loop
@@ -557,7 +557,7 @@ export default function ServicesPage() {
                             <div className="lg:order-2 flex flex-col gap-8">
                                 <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border border-white/10">
                                     <Image
-                                        src="/assests/2025-08-13.webp" // Tech image
+                                        src="/assets/2025-08-13.webp" // Tech image
                                         alt="Advanced Dental Technology"
                                         fill
                                         className="object-cover"

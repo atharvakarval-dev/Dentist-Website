@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Permanent Solution for Missing Teeth | Expert Implantology",
         description: "Regain 100% created chewing function and a natural smile with our advanced dental implant solutions.",
-        images: ["/assests/client-6.png"]
+        images: ["/assets/client-6.png"]
     }
 }
 
@@ -18,7 +18,7 @@ export default function ImplantsPage() {
         "Dental Implants",
         "Surgical placement of dental implants to replace missing teeth.",
         "/services/dental-implants",
-        "/assests/client-6.png"
+        "/assets/client-6.png"
     )
 
     const faqSchema = generateFaqSchema([
@@ -57,9 +57,9 @@ export default function ImplantsPage() {
 
     return (
         <ServicePageLayout
-            title="Dental Implants"
+            title="Dental Implants in Nanded City, Pune"
             subtitle="The next best thing to your natural teeth. Eat, speak, and smile with confidence again."
-            heroImage="/assests/client-8.png"
+            heroImage="/assets/client-8.png"
             jsonLd={combinedSchema}
             overview="Missing teeth can affect more than just your smile—they can impact your ability to chew, your speech, and even cause bone loss in your jaw. At Dentistree, we provide **state-of-the-art dental implants** that are the gold standard for tooth replacement. Unlike dentures that can slip or bridges that require grinding down healthy teeth, implants are anchored directly into your jawbone, stimulating it just like a natural tooth root. The result is a replacement that looks, feels, and functions exactly like your own tooth."
             benefits={[

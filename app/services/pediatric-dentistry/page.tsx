@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Happy Smiles Start Here | Pediatric Dentistry",
         description: "We make dental visits fun! Discover our gentle, child-focused approach to oral health.",
-        images: ["/assests/children-1.png"]
+        images: ["/assets/children-1.png"]
     }
 }
 
@@ -18,7 +18,7 @@ export default function PediatricPage() {
         "Pediatric Dentistry",
         "Dental care specializing in children from infancy through the teen years.",
         "/services/pediatric-dentistry",
-        "/assests/children-1.png"
+        "/assets/children-1.png"
     )
 
     const faqSchema = generateFaqSchema([
@@ -57,9 +57,9 @@ export default function PediatricPage() {
 
     return (
         <ServicePageLayout
-            title="Pediatric Dentistry"
+            title="Pediatric Dentistry in Nanded City, Pune"
             subtitle="Building a foundation of trust and healthy habits for your child's smile."
-            heroImage="/assests/children-1.png"
+            heroImage="/assets/children-1.png"
             imageAspect="aspect-square"
             jsonLd={combinedSchema}
             overview="We understand that a child's first experiences with the dentist can shape their attitude towards oral health for life. That's why at Dentistree, we have created a **dental home** designed specifically for kids. From our welcoming environment to our gentle, patient team, everything is focused on making your child feel safe, comfortable, and special. We don't just treat teeth; we treat children."

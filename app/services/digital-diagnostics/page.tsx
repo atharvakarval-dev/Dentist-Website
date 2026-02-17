@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "See What We See | Advanced Digital Diagnostics",
         description: "Precision is key. Our digital X-rays provide instant, high-definition images with 90% less radiation.",
-        images: ["/assests/2025-08-13.webp"]
+        images: ["/assets/2025-08-13.webp"]
     }
 }
 
@@ -18,7 +18,7 @@ export default function DiagnosticsPage() {
         "Digital Diagnostics (X-Ray)",
         "Advanced digital imaging for dental diagnosis including RVG and OPG.",
         "/services/digital-diagnostics",
-        "/assests/2025-08-13.webp"
+        "/assets/2025-08-13.webp"
     )
 
     const faqSchema = generateFaqSchema([
@@ -53,9 +53,9 @@ export default function DiagnosticsPage() {
 
     return (
         <ServicePageLayout
-            title="Digital X-Ray & Diagnostics"
+            title="Digital X-Ray & Diagnostics in Nanded City, Pune"
             subtitle="Crystal clear insights for precise treatment. Low radiation, instant results."
-            heroImage="/assests/2025-08-13.webp"
+            heroImage="/assets/2025-08-13.webp"
             jsonLd={combinedSchema}
             overview="Great treatment begins with a great diagnosis. At Dentistree, we have invested in **cutting-edge digital imaging technology** because we believe you deserve the safest and most accurate care possible. Unlike old film X-rays that required developing chemicals and higher radiation, our digital sensors (RVG) provide instant, high-definition images. This allows us to detect even the smallest cavities or hidden infections early, saving you from more complex (and expensive) treatments later."
             benefits={[

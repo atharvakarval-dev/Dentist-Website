@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Comfortable, Natural-Looking Dentures | Dentistree",
         description: "Modern dentures aren't just functional—they are beautiful. Discover our range of comfortable, custom-fitted solutions.",
-        images: ["/assests/client-7.png"]
+        images: ["/assets/client-7.png"]
     }
 }
 
@@ -18,7 +18,7 @@ export default function DenturesPage() {
         "Full & Partial Dentures",
         "Custom-fabricated prosthetics for replacing missing teeth.",
         "/services/full-partial-dentures",
-        "/assests/client-7.png"
+        "/assets/client-7.png"
     )
 
     const faqSchema = generateFaqSchema([
@@ -53,9 +53,9 @@ export default function DenturesPage() {
 
     return (
         <ServicePageLayout
-            title="Full / Partial Denture"
+            title="Full / Partial Dentures in Nanded City, Pune"
             subtitle="Custom-crafted dentures that fit comfortably, look natural, and restore your ability to enjoy life."
-            heroImage="/assests/client-7.png"
+            heroImage="/assets/client-7.png"
             jsonLd={combinedSchema}
             overview="Losing teeth can be life-changing, but restoring them should be life-affirming. At Dentistree, we specialize in creating dentures that don't just 'fill the gap' but actively support your facial muscles and restore your chewing function. Whether you need a full set or just a partial to replace a few teeth, we offer **Biocompatible** and **Flexible** options that eliminate the bulk and discomfort associated with old-fashioned dentures."
             benefits={[
