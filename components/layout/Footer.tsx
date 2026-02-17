@@ -36,11 +36,15 @@ export default function Footer() {
                     <div>
                         <h4 className="text-lg font-semibold mb-4 text-white">Services</h4>
                         <ul className="space-y-2">
-                            <li><span className="text-slate-400">Preventive Dentistry</span></li>
-                            <li><span className="text-slate-400">Root Canal Treatment</span></li>
-                            <li><span className="text-slate-400">Dental Implants</span></li>
-                            <li><span className="text-slate-400">Orthodontics Braces and Aligners</span></li>
-                            <li><span className="text-slate-400">Pediatric Dentistry</span></li>
+                            <li><Link href="/services/root-canal-treatment" className="text-slate-400 hover:text-primary transition-colors">Root Canal Treatment</Link></li>
+                            <li><Link href="/services/restorative" className="text-slate-400 hover:text-primary transition-colors">Fillings, Crowns & Bridges</Link></li>
+                            <li><Link href="/services/cosmetic-dentistry" className="text-slate-400 hover:text-primary transition-colors">Cosmetic Dentistry</Link></li>
+                            <li><Link href="/services/dental-implants" className="text-slate-400 hover:text-primary transition-colors">Dental Implants</Link></li>
+                            <li><Link href="/services/orthodontics" className="text-slate-400 hover:text-primary transition-colors">Orthodontics & Braces</Link></li>
+                            <li><Link href="/services/pediatric-dentistry" className="text-slate-400 hover:text-primary transition-colors">Pediatric Dentistry</Link></li>
+                            <li><Link href="/services/extraction-replacement" className="text-slate-400 hover:text-primary transition-colors">Extraction & Replacement</Link></li>
+                            <li><Link href="/services/full-partial-dentures" className="text-slate-400 hover:text-primary transition-colors">Full / Partial Denture</Link></li>
+                            <li><Link href="/services/digital-diagnostics" className="text-slate-400 hover:text-primary transition-colors">Digital X-Ray</Link></li>
                         </ul>
                     </div>
 
