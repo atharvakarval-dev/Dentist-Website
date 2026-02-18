@@ -103,7 +103,7 @@ export function Navbar() {
                                 transition={{ type: "spring", stiffness: 400, damping: 15 }}
                             >
                                 <Image
-                                    src="/assests/logo.png"
+                                    src="/assets/logo.png"
                                     alt="Dentistree Logo"
                                     width={50}
                                     height={50}
@@ -218,7 +218,7 @@ export function Navbar() {
                             <div className="flex items-center justify-between p-4 border-b border-slate-100 flex-shrink-0">
                                 <Link href="/" className="flex items-center gap-2" onClick={toggleMenu}>
                                     <Image
-                                        src="/assests/logo.png"
+                                        src="/assets/logo.png"
                                         alt="Dentistree Logo"
                                         width={40}
                                         height={40}

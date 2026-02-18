@@ -11,7 +11,7 @@ export default function Footer() {
                         <Link href="/" className="inline-block mb-4">
                             <div className="relative h-16 w-48">
                                 <Image
-                                    src="/assests/logo.png"
+                                    src="/assets/logo.png"
                                     alt="Dentistree Dental Clinic - Best Dentist in Nanded City"
                                     fill
                                     className="object-contain"
