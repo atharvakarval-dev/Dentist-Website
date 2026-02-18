@@ -124,6 +124,13 @@ export const metadata: Metadata = {
     },
   },
 
+  // ── Favicon / Icons ───────────────────────────────────────
+  icons: {
+    icon: "/assets/logo-2.png",
+    shortcut: "/assets/logo-2.png",
+    apple: "/assets/logo-2.png",
+  },
+
   // ── Verification (add your tokens from GSC) ───────────────
   verification: {
     google: "YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN_HERE", // ← REPLACE THIS with your actual GSC token
@@ -183,10 +190,6 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-
-        {/* ── Favicon ────────────────────────────────────── */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
