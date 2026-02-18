@@ -58,7 +58,7 @@ export default function AboutPage() {
         "name": "Dr. Poonam Bambarkar",
         "jobTitle": "Chief Dentist & Cosmetic Specialist",
         "url": "https://dentistreepune.com/about",
-        "image": "https://dentistreepune.com/assests/doctor.png",
+        "image": "https://dentistreepune.com/assets/doctor.png",
         "worksFor": {
             "@type": "Dentist",
             "name": "Dentistree Dental Clinic"
@@ -208,7 +208,7 @@ export default function AboutPage() {
                                 </p>
                                 <footer className="flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-full bg-slate-200 overflow-hidden relative">
-                                        <Image src="/assests/doctor.png" fill alt="Dr. Poonam" className="object-cover" />
+                                        <Image src="/assets/doctor.png" fill alt="Dr. Poonam" className="object-cover" />
                                     </div>
                                     <div className="text-sm font-semibold text-slate-800">
                                         Dr. Poonam Bambarkar <span className="text-slate-400 font-normal ml-1"></span>
@@ -237,7 +237,7 @@ export default function AboutPage() {
                             >
                                 <div className="aspect-[4/5] relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-teal-900/10">
                                     <Image
-                                        src="/assests/doctor.png"
+                                        src="/assets/doctor.png"
                                         alt="Dr. Poonam Bambarkar"
                                         fill
                                         className="object-cover"
@@ -465,7 +465,7 @@ export default function AboutPage() {
                                 <div className="space-y-4 translate-y-8">
                                     <div className="aspect-[3/4] relative rounded-2xl overflow-hidden shadow-lg">
                                         <Image
-                                            src="/assests/children-1.png"
+                                            src="/assets/children-1.png"
                                             alt="Child at dental camp"
                                             fill
                                             className="object-cover hover:scale-105 transition-transform duration-700"
@@ -483,7 +483,7 @@ export default function AboutPage() {
                                     </div>
                                     <div className="aspect-[3/4] relative rounded-2xl overflow-hidden shadow-lg">
                                         <Image
-                                            src="/assests/WhatsApp Image 2026-01-20 at 12.43.45 AM (1).jpeg"
+                                            src="/assets/WhatsApp Image 2026-01-20 at 12.43.45 AM (1).jpeg"
                                             alt="Community outreach"
                                             fill
                                             className="object-cover hover:scale-105 transition-transform duration-700"
