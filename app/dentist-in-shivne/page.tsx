@@ -1,292 +1,618 @@
 "use client"
 
 import { useRef } from "react"
-import Link from "next/link"
 import Image from "next/image"
+import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
+import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
 import Footer from "@/components/layout/Footer"
-import { Button } from "@/components/ui/button"
 import {
     MapPin,
     Phone,
-    ArrowRight,
     Star,
     Sparkles,
-    Shield,
     Clock,
     Check,
-    Calendar,
-    Users,
-    Heart,
-    Award
+    Award,
+    ChevronRight,
+    CalendarCheck,
 } from "lucide-react"
+import { JsonLd } from "@/components/seo/json-ld"
+import { ReviewsSection } from "@/components/reviews-section"
+import { FAQSection } from "@/components/faq-section"
+import { AppointmentForm } from "@/components/appointment-form"
 
-// --- Components ---
+// ─────────────────────────────────────────────────────────────────────────────
+// Constants
+// ─────────────────────────────────────────────────────────────────────────────
 
-function SectionHeader({
-    label,
-    title,
-    subtitle,
-    center = false,
-    light = false
-}: {
-    label: string,
-    title: React.ReactNode,
-    subtitle?: string,
-    center?: boolean,
+const CLINIC = {
+    name: "Dentistree Dental Clinic",
+    address: "Ingale Plaza, Shop No. 1, Next to Uttam Sweets, Nanded City Road, Sinhagad Road",
+    locality: "Pune",
+    postalCode: "411068",
+    phone: "+918237156777",
+    phoneDisplay: "+91 82371 56777",
+    email: "info@dentistreedental.com",
+    url: "https://dentistreedental.com/dentist-in-shivne",
+    lat: 18.4735,
+    lng: 73.8235,
+    hours: { opens: "10:00", closes: "21:00" },
+    mapsUrl: "https://maps.google.com/?q=Dentistree+Dental+Clinic+Nanded+City+Pune+411068",
+} as const
+
+const SERVICES = [
+    "Root Canal Treatment — advanced rotary tech, single-sitting",
+    "Dental Implants — restore your smile permanently",
+    "Fillings, Crowns & Bridges — natural-looking restorations",
+    "Kids Dentistry — fun & fear-free care for 450+ happy children",
+    "Orthodontics — invisible & metal braces",
+    "Cosmetic Dentistry — veneers & whitening",
+] as const
+
+const FEATURES = [
+    {
+        icon: Clock,
+        title: "Open 7 Days, Zero Wait",
+        description:
+            "Mon – Sun, 10 am to 9 pm. We are just a short drive from Shivne, offering flexible slots for busy professionals and families.",
+    },
+    {
+        icon: Award,
+        title: "15+ Years of Expertise",
+        description:
+            "Dr. Poonam Bambarkar (BDS) brings 15+ years of precision dentistry — ensuring top-tier care for our Shivne patients.",
+    },
+    {
+        icon: Sparkles,
+        title: "100% Sterile Facility",
+        description:
+            "Hospital-grade sterilisation exceeding safety standards. Why settle for less when premium care is just minutes away?",
+    },
+] as const
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Structured Data
+// ─────────────────────────────────────────────────────────────────────────────
+
+const shivneSchema = {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    name: CLINIC.name,
+    image: "https://dentistreedental.com/assets/Clinic2.png",
+    "@id": CLINIC.url,
+    url: CLINIC.url,
+    telephone: CLINIC.phone,
+    email: CLINIC.email,
+    address: {
+        "@type": "PostalAddress",
+        streetAddress: CLINIC.address,
+        addressLocality: CLINIC.locality,
+        postalCode: CLINIC.postalCode,
+        addressCountry: "IN",
+    },
+    geo: {
+        "@type": "GeoCoordinates",
+        latitude: CLINIC.lat,
+        longitude: CLINIC.lng,
+    },
+    openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: CLINIC.hours.opens,
+        closes: CLINIC.hours.closes,
+    },
+    priceRange: "₹₹",
+    description:
+        "Best Dentist near Shivne Pune. Dr. Poonam Bambarkar offers painless root canals, implants, and kids dentistry just minutes from Shivne at Nanded City.",
+    aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "5.0",
+        reviewCount: "30",
+        bestRating: "5",
+    },
+    hasMap: CLINIC.mapsUrl,
+    medicalSpecialty: "Dentistry",
+}
+
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://dentistreedental.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Dentist in Pune",
+            "item": "https://dentistreedental.com/dentist-in-pune"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Shivne",
+            "item": CLINIC.url
+        }
+    ]
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Sub-components (Reused from Nanded City Pattern)
+// ─────────────────────────────────────────────────────────────────────────────
+
+interface SectionHeaderProps {
+    label: string
+    title: React.ReactNode
+    subtitle?: string
+    center?: boolean
     light?: boolean
-}) {
+}
+
+function SectionHeader({ label, title, subtitle, center = false, light = false }: SectionHeaderProps) {
     return (
-        <div className={`mb-12 ${center ? "text-center mx-auto max-w-3xl" : "max-w-2xl"}`}>
+        <header className={`mb-12 ${center ? "text-center mx-auto max-w-3xl" : "max-w-2xl"}`}>
             <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase mb-6 ${light
+                viewport={{ once: true, margin: "-60px" }}
+                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase mb-5 ${light
                     ? "bg-white/10 text-white border border-white/20"
                     : "bg-teal-50 text-teal-700 border border-teal-100"
                     }`}
             >
-                {light ? <Star className="w-3 h-3 text-dental-gold" /> : <Sparkles className="w-3 h-3 text-dental-teal" />}
+                {light ? (
+                    <Star className="w-3 h-3 text-dental-gold" aria-hidden="true" />
+                ) : (
+                    <Sparkles className="w-3 h-3 text-dental-teal" aria-hidden="true" />
+                )}
                 {label}
             </motion.div>
+
             <motion.h2
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className={`font-display text-4xl md:text-5xl font-medium leading-[1.1] mb-6 ${light ? "text-white" : "text-dental-charcoal"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ delay: 0.08 }}
+                className={`font-display text-4xl md:text-5xl font-medium leading-[1.1] mb-5 ${light ? "text-white" : "text-dental-charcoal"
                     }`}
             >
                 {title}
             </motion.h2>
+
             {subtitle && (
                 <motion.p
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                    className={`text-lg leading-relaxed ${light ? "text-white/80" : "text-slate-600"
-                        }`}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ delay: 0.16 }}
+                    className={`text-lg leading-relaxed ${light ? "text-white/75" : "text-slate-600"}`}
                 >
                     {subtitle}
                 </motion.p>
             )}
-        </div>
+        </header>
     )
 }
 
-function FeatureCard({ icon: Icon, title, description }: { icon: any, title: string, description: string }) {
+interface FeatureCardProps {
+    icon: React.ElementType
+    title: string
+    description: string
+    index: number
+}
+
+function FeatureCard({ icon: Icon, title, description, index }: FeatureCardProps) {
     return (
-        <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group">
-            <div className="w-12 h-12 rounded-2xl bg-teal-50 flex items-center justify-center mb-6 group-hover:bg-dental-teal group-hover:text-white transition-colors">
-                <Icon className="w-6 h-6 text-dental-teal group-hover:text-white transition-colors" />
+        <motion.article
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ delay: index * 0.1 }}
+            className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group"
+        >
+            <div
+                className="w-12 h-12 rounded-2xl bg-teal-50 flex items-center justify-center mb-6 group-hover:bg-dental-teal transition-colors duration-300"
+                aria-hidden="true"
+            >
+                <Icon className="w-6 h-6 text-dental-teal group-hover:text-white transition-colors duration-300" />
             </div>
+
             <h3 className="font-display text-xl font-semibold text-dental-charcoal mb-3">{title}</h3>
             <p className="text-slate-600 leading-relaxed">{description}</p>
-        </div>
+        </motion.article>
     )
 }
 
+function PrimaryCta({ children, href }: { children: React.ReactNode; href: string }) {
+    return (
+        <Button
+            size="lg"
+            className="rounded-full h-14 px-8 text-base font-semibold bg-dental-teal text-white hover:bg-teal-700 shadow-[0_12px_40px_-8px_rgba(13,148,136,0.45)] transition-all duration-300 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-dental-teal focus-visible:ring-offset-2"
+            asChild
+        >
+            <Link href={href}>
+                <CalendarCheck className="w-4 h-4 mr-2" aria-hidden="true" />
+                {children}
+            </Link>
+        </Button>
+    )
+}
+
+function SecondaryCta({ children, href, tel }: { children: React.ReactNode; href: string; tel?: boolean }) {
+    return (
+        <Button
+            variant="outline"
+            size="lg"
+            className="rounded-full h-14 px-8 text-base font-semibold border-2 border-slate-200 text-dental-slate hover:border-dental-teal hover:text-dental-teal bg-transparent hover:bg-teal-50/50 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-dental-teal focus-visible:ring-offset-2"
+            asChild
+        >
+            <Link href={href} aria-label={tel ? `Call Dentistree at ${CLINIC.phoneDisplay}` : undefined}>
+                {tel && <Phone className="w-4 h-4 mr-2" aria-hidden="true" />}
+                {children}
+            </Link>
+        </Button>
+    )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Page
+// ─────────────────────────────────────────────────────────────────────────────
+
 export default function ShivnePage() {
+    const heroRef = useRef<HTMLElement>(null)
     const { scrollY } = useScroll()
-    const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
-    const heroY = useTransform(scrollY, [0, 400], [0, 100])
+
+    const heroOpacity = useTransform(scrollY, [0, 360], [1, 0])
+    const heroY = useTransform(scrollY, [0, 360], [0, 80])
 
     return (
         <div className="bg-dental-cream min-h-screen flex flex-col font-sans">
+            <JsonLd data={shivneSchema} />
+            <JsonLd data={breadcrumbSchema} />
+
+            <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[200] bg-white px-4 py-2 rounded-lg shadow-lg text-dental-teal font-semibold"
+            >
+                Skip to main content
+            </a>
+
             <Navbar />
 
-            <main className="flex-1">
+            <main id="main-content" className="flex-1">
 
-                {/* === HERO SECTION === */}
-                <section className="relative pt-32 lg:pt-48 pb-20 lg:pb-32 overflow-hidden">
+                {/* ═══════════════════════════════════════════════════════════
+                    HERO
+                ════════════════════════════════════════════════════════════ */}
+                <section
+                    ref={heroRef}
+                    aria-label="Hero — Dentistree near Shivne"
+                    className="relative pt-32 lg:pt-48 pb-20 lg:pb-32 overflow-hidden"
+                >
+                    <div
+                        className="absolute inset-0 pointer-events-none"
+                        aria-hidden="true"
+                        style={{
+                            background:
+                                "radial-gradient(ellipse 80% 60% at 60% -10%, rgba(13,148,136,0.07) 0%, transparent 70%)",
+                        }}
+                    />
+
                     <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
                         <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+                            {/* ── Left copy ── */}
                             <motion.div style={{ opacity: heroOpacity, y: heroY }}>
-                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-100 text-dental-teal text-xs font-semibold uppercase tracking-wide mb-6">
-                                    <MapPin className="w-3 h-3" />
-                                    Just a short drive from Shivne
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-100 text-dental-teal text-xs font-semibold uppercase tracking-widest mb-6">
+                                    <MapPin className="w-3 h-3" aria-hidden="true" />
+                                    <span>Premium Care Near Shivne</span>
                                 </div>
-                                <h1 className="font-display text-5xl md:text-7xl font-medium text-dental-charcoal mb-6 tracking-tight leading-[1.1]">
-                                    Top-Rated <br />
-                                    Dental Clinic Near <br />
-                                    <span className="text-dental-teal italic">Shivne</span>
+
+                                <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium text-dental-charcoal mb-6 tracking-tight leading-[1.1]">
+                                    Top Dentist <br />
+                                    <span className="text-3xl md:text-4xl lg:text-5xl block mt-2 mb-2 font-normal text-slate-500">Just minutes from</span>
+                                    <em className="not-italic text-dental-teal">Shivne</em>
                                 </h1>
-                                <p className="text-xl text-slate-600 max-w-lg leading-relaxed mb-10">
-                                    Trusted by hundreds of families in Shivne. Dr. Poonam Bambarkar provides expert, affordable, and painless dental care just minutes away.
+
+                                <p className="text-xl text-slate-600 max-w-lg leading-relaxed mb-4">
+                                    Visit <strong>Dr. Poonam Bambarkar</strong> at Dentistree Dental Clinic. We provide gold-standard dental treatments for Shivne residents in a modern, 100% sterile facility nearby in Nanded City.
                                 </p>
+
+                                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-10 text-sm text-slate-500">
+                                    <span className="flex items-center gap-1 font-semibold text-amber-500">
+                                        <Star className="w-4 h-4 fill-current" aria-hidden="true" />
+                                        5.0
+                                    </span>
+                                    <span aria-hidden="true" className="text-slate-300">|</span>
+                                    <span>30+ Google reviews</span>
+                                    <span aria-hidden="true" className="text-slate-300">|</span>
+                                    <span>Painless Treatments</span>
+                                </div>
+
                                 <div className="flex flex-col sm:flex-row gap-4">
-                                    <Button size="lg" className="rounded-full h-14 px-8 text-lg bg-dental-teal text-white hover:bg-teal-700 shadow-[0_10px_40px_-10px_rgba(13,148,136,0.5)] transition-all duration-300 hover:-translate-y-1" asChild>
-                                        <Link href="/contact">Book Appointment</Link>
-                                    </Button>
-                                    <Button variant="outline" size="lg" className="rounded-full h-14 px-8 text-lg border-2 border-slate-200 text-dental-slate hover:border-dental-teal hover:text-dental-teal bg-transparent hover:bg-teal-50/50 transition-colors duration-300" asChild>
-                                        <Link href="tel:+918237156777">
-                                            <Phone className="w-5 h-5 mr-2" />
-                                            +91 82371 56777
-                                        </Link>
-                                    </Button>
+                                    <PrimaryCta href="#appointment-form">Book Consultation</PrimaryCta>
+                                    <SecondaryCta href={`tel:${CLINIC.phone}`} tel>
+                                        {CLINIC.phoneDisplay}
+                                    </SecondaryCta>
                                 </div>
                             </motion.div>
 
+                            {/* ── Right image ── */}
                             <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.8 }}
+                                initial={{ opacity: 0, scale: 0.97, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
                                 className="relative lg:h-[600px] rounded-[2.5rem] overflow-hidden shadow-2xl shadow-teal-900/10"
                             >
                                 <Image
-                                    src="/assets/Patient.png"
-                                    alt="Happy Patient from Shivne"
+                                    src="/assets/Clinic2.png"
+                                    alt="Interior of Dentistree Dental Clinic"
                                     fill
                                     className="object-cover"
                                     priority
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
-                                <div className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/50">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-full bg-dental-teal/10 flex items-center justify-center flex-shrink-0">
-                                            <Clock className="w-6 h-6 text-dental-teal" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent" aria-hidden="true" />
+
+                                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-lg border border-white/50">
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-full bg-dental-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                            <MapPin className="w-5 h-5 text-dental-teal" aria-hidden="true" />
                                         </div>
-                                        <div>
-                                            <p className="font-bold text-dental-charcoal">Quick Access</p>
-                                            <p className="text-sm text-slate-600">5-10 mins from Shivne via Main Road</p>
-                                        </div>
+                                        <address className="not-italic">
+                                            <p className="font-bold text-dental-charcoal leading-tight">
+                                                {CLINIC.name}
+                                            </p>
+                                            <p className="text-sm text-slate-500 mt-0.5">
+                                                Ingale Plaza, Shop No. 1 — Nanded City Road
+                                            </p>
+                                        </address>
                                     </div>
                                 </div>
                             </motion.div>
+
                         </div>
                     </div>
                 </section>
 
-                {/* === WHY CHOOSE US === */}
-                <section className="py-24 bg-white relative">
+                {/* ═══════════════════════════════════════════════════════════
+                    WHY CHOOSE US
+                ════════════════════════════════════════════════════════════ */}
+                <section aria-labelledby="features-heading" className="py-24 bg-white relative">
                     <div className="container px-4 md:px-6">
                         <SectionHeader
                             center
-                            label="Worth the Drive"
-                            title="Why Shivne Residents Choose Us"
-                            subtitle="We are the preferred dental experts for families in Shivne looking for high-quality treatment."
+                            label="Serving Shivne"
+                            title={
+                                <span id="features-heading">
+                                    Why Shivne Families Choose Us
+                                </span>
+                            }
+                            subtitle="World-class dental care doesn't have to be far. Experience ethical, affordable, and high-quality dentistry just a few minutes from your home."
                         />
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <FeatureCard
-                                icon={Shield}
-                                title="Trusted Quality"
-                                description="We use only ISO certified materials and follow strict sterilization for your safety."
-                            />
-                            <FeatureCard
-                                icon={Users}
-                                title="Family Focused"
-                                description="A friendly environment where both kids and grandparents feel comfortable."
-                            />
-                            <FeatureCard
-                                icon={Check}
-                                title="Transparent Pricing"
-                                description="No hidden costs. We provide clear treatment plans and affordable options."
-                            />
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8" role="list">
+                            {FEATURES.map((f, i) => (
+                                <FeatureCard key={f.title} {...f} index={i} />
+                            ))}
                         </div>
                     </div>
                 </section>
 
-                {/* === SERVICES HIGHLIGHT === */}
-                <section className="py-24 bg-dental-cream">
+                {/* ═══════════════════════════════════════════════════════════
+                    SERVICES HIGHLIGHT
+                ════════════════════════════════════════════════════════════ */}
+                <section aria-labelledby="services-heading" className="py-24 bg-dental-cream">
                     <div className="container px-4 md:px-6">
                         <div className="grid lg:grid-cols-2 gap-16 items-center">
+
                             <div>
                                 <SectionHeader
                                     label="Expert Treatments"
                                     title={
                                         <>
-                                            Complete Dental Solutions <br />
-                                            <span className="text-dental-teal">Nearby</span>
+                                            <span id="services-heading">Complete Dental Solutions</span>
                                         </>
                                     }
-                                    subtitle="Don't compromise on your oral health. Get the best treatment just a short distance from your home in Shivne."
+                                    subtitle="From pediatric care to advanced implants, we cover all your dental needs under one roof."
                                 />
-                                <div className="space-y-6">
-                                    {[
-                                        "Dental Implants - Advanced solutions for missing teeth",
-                                        "Root Canal Treatment - Pain-free and effective",
-                                        "Orthodontics - Straighten teeth with invisible braces",
-                                        "Teeth Whitening - Get a sparkling white smile",
-                                        "Pediatric Dentistry - Specialized care for little ones"
-                                    ].map((item, i) => (
-                                        <div key={i} className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100">
-                                            <div className="w-8 h-8 rounded-full bg-teal-50 flex items-center justify-center flex-shrink-0">
+
+                                <ul className="space-y-3" aria-label="Our dental services">
+                                    {SERVICES.map((item, i) => (
+                                        <motion.li
+                                            key={i}
+                                            initial={{ opacity: 0, x: -16 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true, margin: "-40px" }}
+                                            transition={{ delay: i * 0.07 }}
+                                            className="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-teal-100 hover:shadow-md transition-all duration-200"
+                                        >
+                                            <span
+                                                className="w-8 h-8 rounded-full bg-teal-50 flex items-center justify-center flex-shrink-0"
+                                                aria-hidden="true"
+                                            >
                                                 <Check className="w-4 h-4 text-dental-teal" strokeWidth={3} />
-                                            </div>
+                                            </span>
                                             <span className="font-medium text-dental-charcoal">{item}</span>
-                                        </div>
+                                        </motion.li>
                                     ))}
-                                </div>
+                                </ul>
+
                                 <div className="mt-10">
-                                    <Button size="lg" variant="outline" className="rounded-full px-8 border-dental-teal text-dental-teal hover:bg-dental-teal hover:text-white transition-all" asChild>
-                                        <Link href="/services">See Full Service List</Link>
+                                    <Button
+                                        size="lg"
+                                        variant="outline"
+                                        className="rounded-full px-8 border-dental-teal text-dental-teal hover:bg-dental-teal hover:text-white transition-all duration-300 focus-visible:ring-2 focus-visible:ring-dental-teal focus-visible:ring-offset-2"
+                                        asChild
+                                    >
+                                        <Link href="/services">
+                                            Explore All Treatments
+                                            <ChevronRight className="w-4 h-4 ml-1" aria-hidden="true" />
+                                        </Link>
                                     </Button>
                                 </div>
                             </div>
-                            <div className="relative">
+
+                            <div className="relative" aria-hidden="true">
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-4 translate-y-8">
                                         <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
-                                            <Image src="/assets/client-6.png" alt="Advanced Tech" fill className="object-cover" />
+                                            <Image
+                                                src="/assets/client-10.jpeg"
+                                                alt=""
+                                                fill
+                                                loading="lazy"
+                                                className="object-cover"
+                                                sizes="(max-width: 1024px) 50vw, 25vw"
+                                            />
                                         </div>
                                         <div className="relative h-48 rounded-2xl overflow-hidden shadow-lg">
-                                            <Image src="/assets/root-canal.jpg" alt="Root Canal" fill className="object-cover" />
+                                            <Image
+                                                src="/assets/invisible-braces.jpg"
+                                                alt=""
+                                                fill
+                                                loading="lazy"
+                                                className="object-cover"
+                                                sizes="(max-width: 1024px) 50vw, 25vw"
+                                            />
                                         </div>
                                     </div>
                                     <div className="space-y-4">
                                         <div className="relative h-48 rounded-2xl overflow-hidden shadow-lg">
-                                            <Image src="/assets/clinic1.png" alt="Clinic" fill className="object-cover" />
+                                            <Image
+                                                src="/assets/Patient.png"
+                                                alt=""
+                                                fill
+                                                loading="lazy"
+                                                className="object-cover"
+                                                sizes="(max-width: 1024px) 50vw, 25vw"
+                                            />
                                         </div>
                                         <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
-                                            <Image src="/assets/invisible-braces.jpg" alt="Beautiful Smile" fill className="object-cover" />
+                                            <Image
+                                                src="/assets/clinic1.png"
+                                                alt=""
+                                                fill
+                                                loading="lazy"
+                                                className="object-cover"
+                                                sizes="(max-width: 1024px) 50vw, 25vw"
+                                            />
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </section>
 
-                {/* === CTA / LOCATION === */}
-                <section className="py-24 bg-dental-charcoal relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-dental-charcoal to-slate-900 z-0" />
-                    <div className="container relative z-10 px-4 text-center">
-                        <div className="max-w-3xl mx-auto">
-                            <h2 className="font-display text-4xl md:text-5xl text-white mb-8">
-                                Visit Our Clinic from Shivne
-                            </h2>
-                            <p className="text-xl text-slate-300 mb-12">
-                                We are conveniently located at Nanded City, easily accessible via the main road.
-                            </p>
+                {/* ═══════════════════════════════════════════════════════════
+                    REVIEWS
+                ════════════════════════════════════════════════════════════ */}
+                <ReviewsSection />
 
-                            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/10 mb-12 text-left flex flex-col md:flex-row gap-8 items-center justify-between">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-dental-teal flex items-center justify-center text-white">
-                                        <MapPin className="w-6 h-6" />
+                {/* ═══════════════════════════════════════════════════════════
+                    FAQ
+                ════════════════════════════════════════════════════════════ */}
+                <FAQSection />
+
+                {/* ═══════════════════════════════════════════════════════════
+                     LOCATION / APPOINTMENT
+                ════════════════════════════════════════════════════════════ */}
+                <section
+                    id="appointment-form"
+                    aria-labelledby="cta-heading"
+                    className="py-24 bg-dental-charcoal relative overflow-hidden"
+                >
+                    <div
+                        className="absolute inset-0 bg-gradient-to-br from-dental-charcoal to-slate-900"
+                        aria-hidden="true"
+                    />
+                    <div
+                        className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-10"
+                        style={{ background: "radial-gradient(circle, #0d9488 0%, transparent 70%)" }}
+                        aria-hidden="true"
+                    />
+
+                    <div className="container relative z-10 px-4">
+                        <div className="grid lg:grid-cols-2 gap-16 items-start">
+                            {/* Left: Content & Location */}
+                            <div className="text-left">
+                                <motion.h2
+                                    id="cta-heading"
+                                    initial={{ opacity: 0, y: 16 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    className="font-display text-4xl md:text-5xl text-white font-medium mb-5 leading-[1.15]"
+                                >
+                                    Your Dentist Near <br className="hidden sm:block" />
+                                    Shivne, Pune
+                                </motion.h2>
+
+                                <motion.p
+                                    initial={{ opacity: 0, y: 16 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.1 }}
+                                    className="text-xl text-slate-300 mb-12 leading-relaxed"
+                                >
+                                    Just a quick drive from Shivne. We are located at R&nbsp;B Ingale Plaza, likely on your daily route.
+                                </motion.p>
+
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.15 }}
+                                    className="bg-white/10 backdrop-blur-md rounded-3xl p-7 border border-white/10 mb-12 text-left flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between"
+                                >
+                                    <div className="flex items-start gap-4">
+                                        <div
+                                            className="w-12 h-12 rounded-full bg-dental-teal flex items-center justify-center text-white flex-shrink-0 mt-0.5"
+                                            aria-hidden="true"
+                                        >
+                                            <MapPin className="w-5 h-5" />
+                                        </div>
+                                        <address className="not-italic">
+                                            <p className="text-white font-semibold text-lg leading-tight">
+                                                {CLINIC.name}
+                                            </p>
+                                            <p className="text-slate-300 text-sm mt-1">
+                                                Ingale Plaza, Shop No. 1, Nanded City Road
+                                            </p>
+                                            <p className="text-slate-400 text-sm mt-0.5">
+                                                Mon – Sun · 10:00 am – 9:00 pm
+                                            </p>
+                                        </address>
                                     </div>
-                                    <div>
-                                        <p className="text-white font-semibold text-lg">Dentistree Dental Hospital</p>
-                                        <p className="text-slate-300">R B Ingale Plaza, Nanded City, Pune</p>
-                                    </div>
-                                </div>
-                                <Button className="bg-white text-dental-teal hover:bg-teal-50 rounded-full px-8 h-12" asChild>
-                                    <Link href="https://maps.google.com/?q=Dentistree+Clinic+Pune" target="_blank">
-                                        Get Directions
-                                    </Link>
-                                </Button>
+                                    <Button
+                                        className="bg-white text-dental-teal hover:bg-teal-50 rounded-full px-7 h-11 font-semibold flex-shrink-0 transition-colors"
+                                        asChild
+                                    >
+                                        <Link
+                                            href={CLINIC.mapsUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            Get Directions
+                                            <ChevronRight className="w-4 h-4 ml-1" aria-hidden="true" />
+                                        </Link>
+                                    </Button>
+                                </motion.div>
                             </div>
 
-                            <Button size="lg" className="h-16 rounded-full px-12 text-xl bg-dental-teal text-white hover:bg-teal-600 shadow-2xl shadow-teal-900/50" asChild>
-                                <Link href="/contact">Book Your Visit Now</Link>
-                            </Button>
+                            <div className="bg-white p-8 rounded-3xl shadow-xl">
+                                <h3 className="text-2xl font-bold text-dental-charcoal mb-6">Request Callback</h3>
+                                <AppointmentForm />
+                            </div>
                         </div>
                     </div>
                 </section>
-
             </main>
             <Footer />
         </div>
