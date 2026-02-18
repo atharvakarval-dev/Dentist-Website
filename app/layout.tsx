@@ -78,7 +78,7 @@ export const metadata: Metadata = {
 
   // ── Canonical URL ──────────────────────────────────────────
   alternates: {
-    canonical: "/",
+    canonical: "./",
   },
 
   // ── Open Graph (Facebook, WhatsApp preview) ────────────────
@@ -124,9 +124,9 @@ export const metadata: Metadata = {
     },
   },
 
-  // ── Verification (add your tokens from GSC / Bing) ────────
+  // ── Verification (add your tokens from GSC) ───────────────
   verification: {
-    google: "YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN", // ← Replace
+    google: "YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN_HERE", // ← REPLACE THIS with your actual GSC token
     // other: { "msvalidate.01": "YOUR_BING_TOKEN" },
   },
 

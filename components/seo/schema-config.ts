@@ -33,12 +33,10 @@ export const SOCIAL_PROFILES = [
     "https://www.facebook.com/dentistreedental",
     "https://www.instagram.com/dentistreedental",
     "https://www.justdial.com/Pune/Dentistree-Dental-Clinic-Near-By-Nanded-City-Destination-Centre-And-Besides-Uttam-Sweets-Hotel-Aura-Celestia-Nanded-City/020PXX20-XX20-231224220432-B3L8_BZDET",
-    "https://www.google.com/maps/place/Dentistree+Clinic/@18.4605837,73.7864175,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc29580a5c8612f:0xd16cce358b8cabfd!8m2!3d18.4605837!4d73.7864175!16s%2Fg%2F11w_z2txhd?entry=ttu",
 ];
 
 export const GOOGLE_MAPS_LINK =
-    "https://maps.app.goo.gl/YourGoogleMapsLinkHere"; // ← Replace with real link
-
+    "https://maps.app.goo.gl/6c93zcSuocQUt66p6";
 // ---------------------------------------------------------------
 //  Main schema generator – call this in layout.tsx
 // ---------------------------------------------------------------
