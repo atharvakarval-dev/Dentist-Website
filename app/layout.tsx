@@ -131,9 +131,8 @@ export const metadata: Metadata = {
     apple: "/assets/logo-2.png",
   },
 
-  // ── Verification (add your tokens from GSC) ───────────────
+  // ── Verification (File upload method used: google20558d9f90f4eefe.html) ──
   verification: {
-    google: "YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN_HERE", // ← REPLACE THIS with your actual GSC token
     // other: { "msvalidate.01": "YOUR_BING_TOKEN" },
   },
 
